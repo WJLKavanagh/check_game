@@ -88,10 +88,10 @@ module game
 	[C_B] attack = 5 & b_hea > 0 ->
 			C_acc : (b_hea' = b_hea - C_dmg) & (attack' = 8) + (1-C_acc) : (attack' = 8);
 	[D_A] attack = 6 & a_hea > 0 ->
-			D_acc : (a_hea' = a_hea - D_dmg) & (a_stun' = true) & (attack' = 8) +
+			D_acc : (a_hea' = a_hea - D_dmg) & (a_stun' = true) & (attack' = 8) + 
 			(1-D_acc) : (attack' = 8);
 	[D_B] attack = 7 & b_hea > 0 ->
-			D_acc : (b_hea' = b_hea - D_dmg) & (b_stun' = true) & (attack' = 8) +
+			D_acc : (b_hea' = b_hea - D_dmg) & (b_stun' = true) & (attack' = 8) + 
 			(1-D_acc) : (attack' = 8);
 
 	[next_turn] attack = 8 & turn_clock > 0 & (a_hea > 0 | b_hea > 0) & (c_hea > 0 | d_hea > 0) ->
@@ -104,10 +104,11 @@ init					//MULTIPLE INITIAL STATES
 	( (b_hea > -3 & b_hea < (B_hea-1) ) | b_hea = B_hea) &
 	( (c_hea > -3 & c_hea < (C_hea-1) ) | c_hea = C_hea) &
 	( (d_hea > -3 & d_hea < (D_hea-1) ) | d_hea = D_hea) &
-	attack = 0 & turn_clock = 0 &
+	attack = 0 & turn_clock = 0 |
+	(attack = 0 & turn_clock = 1 & 
 	(a_stun = false & b_stun = false) |
 	(a_stun = false & b_stun = true) |
-	(a_stun = true & b_stun = false)
+	(a_stun = true & b_stun = false) )
 endinit
 
 label "team_1_win" = (a_hea > 0 | b_hea > 0) & (c_hea <= 0 & d_hea <= 0);

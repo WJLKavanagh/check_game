@@ -54,11 +54,25 @@ def populate_states(file, team):
     for line in open(file+".sta", "r").readlines()[1:]:
         values = line.split("(")[1][:-2].split(",")
         if values[5] == "0" and values[4] == str(team):
-            print ",".join(values[:4]) + "," + ",".join(values[-2:])
+            states[line.split("(")[0]] = ",".join(values[:4]) + "," + ",".join(values[-2:])
     return states
 
-def populate_transitions(file):
-    return None
+def against_wizard(characters, team):
+    return (team == 1 and ("W" in characters[2:])) or (team == 2 and ("W") in characters[:2])
+
+def relevant_transition(team, action):
+    pos = ["A","B","C","D"]
+    return (action[0] in pos[(2*team) - 2 : team*2] and action[1] == "_") or action == "team_" + str(team) + "_turn" or action == "next_turn"
+
+def populate_transitions(file, team):
+    transitions = {}
+    tra_f = open(file+".tra", "r")
+    tra_f.readline()
+    for line in tra_f:
+        detail = line.split()
+        if relevant_transition(team, detail[4]):
+            transitions[detail[0]] = [detail[2],detail[4]]
+    return transitions
 
 def find_min_max_damage(characters):
     min_damage = 999
@@ -100,30 +114,60 @@ def is_valid(a,b,c,d,characters):
 def print_guard(a,b,c,d,t):
     print "\t[team_" + str(t) + "_turn]\tturn_clock = " + str(t) + " & attack = 0 & a_hea =",
     print a, "& b_hea =", b, "& c_hea =", c, "& d_hea =", d, "->"
-    return False
 
-def find_command(a,b,c,d,states,transitions):
-    if True:
-        return "A_B"
+def print_wGuard(a,b,c,d,t,s1,s2):
+    chars = ["a","b","c","d"]
+    print "\t[team_" + str(t) + "_turn]\tturn_clock = " + str(t) + " & attack = 0 & a_hea =",
+    print a, "& b_hea =", b, "& c_hea =", c, "& d_hea =", d, "&", chars[t*2-2] + "_stun =", s1,
+    print "&", chars[t*2-1] + "_stun =", s2, "->"
+
+def find_command(a,b,c,d,s1,s2):
+    state_description = ",".join([str(a),str(b),str(c),str(d),s1,s2])
+    state_id = states.keys()[states.values().index(state_description)][:-1]
+    dec_state_id = transitions[state_id][0]
+    return transitions[dec_state_id][1]
+    """if s1 == s2 and s1 == "false":
+        return transitions[dec_state_id][1]
+    if dec_state_id in transitions.keys():
+        return transitions[dec_state_id][1]
+    return None"""
+
+def print_command(command, resets, team):
+    comm_val = 0
+    for elem in s.keys():
+        if s[elem] == command:
+            break
+        comm_val += 1
+    if resets:
+        chars = ["a", "b", "c", "d"]
+        print "\t\t\t\t1 : (attack' =", str(comm_val) + ") & (" +chars[team*2-2] + "_stun' = false) &",
+        print "(" + chars[team*2-1] + "_stun' = false) ;"
     else:
-        return None
-
-def print_command(command):
-    print "\t\t\t\t1 : (attack' = ", command, ");"
+        print "\t\t\t\t1 : (attack' =", str(comm_val) + ") ;"
 
 def print_GuardComm(a,b,c,d,t):
     print_guard(a,b,c,d,t)
-    comm = find_command(a,b,c,d,t)
-    if comm != None:
-        print_command(comm)
+    comm = find_command(a,b,c,d,"false","false")
+    print_command(comm, False, t)
 
 def print_wGuardComms(a,b,c,d,t):
-    return None
+    comm = find_command(a,b,c,d,"false","false")
+    if comm != None:
+        print_wGuard(a,b,c,d,t,"false","false")
+        print_command(comm, True, t)
+    comm = find_command(a,b,c,d,"false","true")
+    if comm != None:
+        print_wGuard(a,b,c,d,t,"false","true")
+        print_command(comm, True, t)
+    comm = find_command(a,b,c,d,"true","false")
+    if comm != None:
+        print_wGuard(a,b,c,d,t,"true","false")
+        print_command(comm, True, t)
 
 def run(characters, file, team):
-    global s, info, minD, maxD
+    global s, info, minD, maxD, states, transitions
     s = {}              # STATE DICTIONARY
-    transitions = populate_transitions(file)
+    transitions = populate_transitions(file,team)
     states = populate_states(file,team)
     status = [0,0]
     info = open("char_info.txt", "r").readlines()
@@ -135,7 +179,7 @@ def run(characters, file, team):
                 for d in range(1-maxD, find_health(characters[3]) +1):
                     if is_valid(a,b,c,d,characters):
                         status[0] += 1
-                        if characters[team*2 - 2] == "W" or characters[team*2 - 1] == "W":
+                        if against_wizard(characters, team):
                             print_wGuardComms(a,b,c,d,team)
                         else:
                             print_GuardComm(a,b,c,d,team)
@@ -143,5 +187,4 @@ def run(characters, file, team):
                         status[1] += 1
     print "//", status
 
-
-run(["K","A","K","A"], "tmp", 1)
+# run(["K", "A", "K", "W"], "tmp", 1)

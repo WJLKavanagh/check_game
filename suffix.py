@@ -260,15 +260,20 @@ def run(characters, multiple):
         print "init\t\t\t\t\t//MULTIPLE INITIAL STATES"
         for ch in ['a','b','c','d']:
             print "\t" + multiple_initial_health(ch) + " &"
-        print "\tattack = 0 & turn_clock = 0 &"
+        print "\tattack = 0 & turn_clock = 0 |"
         if "W" in team_2:
+            print "\t(attack = 0 & turn_clock = 1 & "
             print "\t(a_stun = false & b_stun = false) |"
             print "\t(a_stun = false & b_stun = true) |"
-            print "\t(a_stun = false & b_stun = false)"
+            print "\t(a_stun = true & b_stun = false) )"
+        else:
+            print "\t(attack = 0 & turn_clock = 1) |"
         if "W" in team_1:
+            print "\t(attack = 0 & turn_clock = 2 & "
             print "\t(c_stun = false & d_stun = false) | "
             print "\t(c_stun = false & d_stun = true) | "
-            print "\t(c_stun = true & d_stun = false)"
+            print "\t(c_stun = true & d_stun = false) )"
+            print "\t(attack = 0 & turn_clock = 2) "
 
     else:
         print "init\t\t\t\t\t//SINGLE INITIAL STATE"
