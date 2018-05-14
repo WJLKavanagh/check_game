@@ -1,0 +1,7 @@
+Pmax=? [ F "team_1_win" ]
+
+Pmax=? [ F "team_2_win" ]
+
+Pmin=? [F "deadlock" & !"team_1_win" & !"team_2_win"]
+
+Pmax=? [F "deadlock" & !"team_1_win" & !"team_2_win"]

@@ -1,0 +1,5 @@
+P=? [ F "team_1_win" ]
+
+P=? [ F "team_2_win" ]
+
+P=? [ F "team_1_win"] + P=? [F "team_2_win"]

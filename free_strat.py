@@ -1,0 +1,127 @@
+import sys
+
+def run(characters, team):
+    info = open("char_info.txt", "r").readlines()
+    chars = []
+    s = {}              # STATE DICTIONARY
+
+    def find_char(act):
+        global chars
+        pos = act[0]
+        if pos == "A":
+            return chars[0]
+        elif pos == "B":
+            return chars[1]
+        elif pos == "C":
+            return chars[2]
+        elif pos == "D":
+            return chars[3]
+
+    team_1 = [characters[0], characters[1]]
+    team_2 = [characters[2], characters[3]]
+
+    for c in team_1:
+        chars += [c]
+    for c in team_2:
+        chars += [c]
+
+    states = 1
+    for entry in chars:
+        if entry == "A":
+            states += 1
+        elif entry == "W":
+            states += 2
+        elif entry == "P":
+            states += 3
+        elif entry == "K":
+            states += 2
+        elif entry == "U":
+            states += 3
+    s[0] = "none"
+    curr = 1
+    L_p = 0
+    L = ["A","B","C","D"]
+    for i in range(len(L)):
+        if chars[i] == "A":
+            s[curr] = L[i] + "_opp"
+            curr += 1
+            L_p += 1
+        elif chars[i] == "W" or chars[i] == "U" or chars[i] == "K" or chars[i] == "P":
+            if L_p <= 2:
+                s[curr] = L[i] + "_C"
+                s[curr+1] = L[i] + "_D"
+            else:
+                s[curr] = L[i] + "_A"
+                s[curr+1] = L[i] + "_B"
+            curr+=2
+            L_p+=2
+    standard_states = curr
+
+    for c in chars:
+        if c == "P":         # Princesses require individual healing states
+            s[curr] = L[chars.index(c)] + "_heal"
+            curr += 1
+
+    if "U" in team_2:        # Unicorns require dot calc.
+        s[curr] = "team_1_DoT"
+        curr += 1
+    if "U" in team_1:
+        s[curr] = "team_2_DoT"
+        curr += 1
+    s[states] = "next_turn"
+    #state dict FINISHED
+
+    first_t2 = -1
+    for i in range(len(s.values())):
+        if s.values()[i][0] == "C":
+            first_t2 = i
+            break;
+
+    def act_start(b):
+        if not b:
+            print "\t[team_1_turn] turn_clock = 1 & attack = 0 &",
+        else:
+            print "\t[team_2_turn] turn_clock = 2 & attack = 0 &",
+
+    def find_index(a):
+        for i in s.keys():
+            if s[i] == a:
+                return i
+
+    def generate_moves(team, opps, n):
+        start = 1
+        possible_actions = s.values()[start:first_t2]
+        op = [2,3]
+        if n == 2:
+            start = first_t2
+            possible_actions = s.values()[first_t2:standard_states]
+            op = [0,1]
+        Cs = ["A", "B", "C", "D"]
+        for act in possible_actions:
+            act_start(n == 2)
+            if act[-3:] != "opp":
+                if "W" in opps:
+                    print act[0].lower() + "_hea > 0 & " + act[0].lower()  + "_stun = false & " + act[-1].lower() + "_hea > 0 ->"
+                else:
+                    print act[0].lower() + "_hea > 0 & " + act[-1].lower() + "_hea > 0 ->"
+            else:
+                if "W" in opps:
+                    print act[0].lower() + "_hea > 0 & " + act[0].lower()  + "_stun = false & (" + Cs[op[0]].lower() + "_hea > 0 | " + Cs[op[1]].lower() + "_hea > 0) ->"
+                else:
+                    print act[0].lower() + "_hea > 0 & (" + Cs[op[0]].lower() + "_hea > 0 | " + Cs[op[1]].lower() + "_hea > 0) ->"
+            if "W" in opps:
+                print "\t\t\t\t(attack' = " + str(find_index(act)) + ") & (" + Cs[2*(n-1)].lower() + "_stun' = false) & (" + Cs[2*(n-1)+1].lower() + "_stun' = false) ;"
+            else:
+                print "\t\t\t\t(attack' = " + str(find_index(act)) + ") ;"
+        if "W" in opps:
+            fr = [possible_actions[0], possible_actions[2]]
+            act_start(n==2)
+            print "(" + fr[0][0].lower() + "_hea <= 0 | " + fr[0][0].lower() + "_stun  = true) &",
+            print "(" + fr[1][0].lower() + "_hea <= 0 | " + fr[1][0].lower() + "_stun = true) ->\n\t\t\t\t",
+            print "(attack' = " + str(states) + ") & (" + Cs[2*(n-1)].lower() + "_stun' = false) & (" + Cs[2*(n-1)+1].lower() + "_stun' = false) ;"
+    if team == 2:
+        generate_moves(team_2, team_1, 2)
+    else:
+        generate_moves(team_1, team_2, 1)
+
+    print
