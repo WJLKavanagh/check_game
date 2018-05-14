@@ -1,4 +1,5 @@
 tmp.*
 FE*
 FN*
-seed_*
+seed.prism
+seed_mul.prism
