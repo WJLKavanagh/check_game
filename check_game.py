@@ -35,10 +35,10 @@ def optimality(characters):
     suffix.run(characters, False)
 
     sys.stdout=sys.__stdout__
-    os.system("../../../../../../usr/prism-games/prism-games-2.0.beta3-linux64/bin/prism -cuddmaxmem 4g smg.prism smg_props.props -prop 4 -s > log.txt")
+    os.system("~/Documents/Applications/prism-games-2.0.beta3-linux64/bin/prism -cuddmaxmem 4g smg.prism smg_props.props -prop 4 -s > log.txt")
     p1_opt = find_prev_result()
     print "Optimal strategy for player one guarentees:", p1_opt
-    os.system("../../../../../../usr/prism-games/prism-games-2.0.beta3-linux64/bin/prism -cuddmaxmem 4g smg.prism smg_props.props -prop 5 -s > log.txt")
+    os.system("~/Documents/Applications/prism-games-2.0.beta3-linux64/bin/prism -cuddmaxmem 4g smg.prism smg_props.props -prop 5 -s > log.txt")
     p2_opt = find_prev_result()
     print "Optimal strategy for player two guarentees:", p2_opt
     return p1_opt, p2_opt

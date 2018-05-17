@@ -10227,7 +10227,7 @@ module game
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 4 & b_hea = 4 & c_hea = 3 & d_hea = 3 ->
 				1 : (attack' = 6) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 4 & b_hea = 4 & c_hea = 3 & d_hea = 4 ->
-				1 : (attack' = 7) ;
+				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 4 & b_hea = 4 & c_hea = 3 & d_hea = 5 ->
 				1 : (attack' = 6) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 4 & b_hea = 4 & c_hea = 3 & d_hea = 7 ->
@@ -10425,7 +10425,7 @@ module game
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 4 & b_hea = 5 & c_hea = 3 & d_hea = 3 ->
 				1 : (attack' = 6) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 4 & b_hea = 5 & c_hea = 3 & d_hea = 4 ->
-				1 : (attack' = 6) ;
+				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 4 & b_hea = 5 & c_hea = 3 & d_hea = 5 ->
 				1 : (attack' = 6) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 4 & b_hea = 5 & c_hea = 3 & d_hea = 7 ->
@@ -10537,7 +10537,7 @@ module game
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 4 & b_hea = 5 & c_hea = 10 & d_hea = 5 ->
 				1 : (attack' = 6) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 4 & b_hea = 5 & c_hea = 10 & d_hea = 7 ->
-				1 : (attack' = 6) ;
+				1 : (attack' = 7) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 4 & b_hea = 7 & c_hea = -2 & d_hea = 1 ->
 				1 : (attack' = 6) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 4 & b_hea = 7 & c_hea = -2 & d_hea = 2 ->
@@ -10659,7 +10659,7 @@ module game
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 4 & b_hea = 7 & c_hea = 5 & d_hea = 3 ->
 				1 : (attack' = 6) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 4 & b_hea = 7 & c_hea = 5 & d_hea = 4 ->
-				1 : (attack' = 6) ;
+				1 : (attack' = 7) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 4 & b_hea = 7 & c_hea = 5 & d_hea = 5 ->
 				1 : (attack' = 6) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 4 & b_hea = 7 & c_hea = 5 & d_hea = 7 ->
@@ -10677,7 +10677,7 @@ module game
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 4 & b_hea = 7 & c_hea = 6 & d_hea = 3 ->
 				1 : (attack' = 6) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 4 & b_hea = 7 & c_hea = 6 & d_hea = 4 ->
-				1 : (attack' = 6) ;
+				1 : (attack' = 7) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 4 & b_hea = 7 & c_hea = 6 & d_hea = 5 ->
 				1 : (attack' = 6) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 4 & b_hea = 7 & c_hea = 6 & d_hea = 7 ->
@@ -12009,7 +12009,7 @@ module game
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 5 & b_hea = 4 & c_hea = 3 & d_hea = 3 ->
 				1 : (attack' = 6) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 5 & b_hea = 4 & c_hea = 3 & d_hea = 4 ->
-				1 : (attack' = 7) ;
+				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 5 & b_hea = 4 & c_hea = 3 & d_hea = 5 ->
 				1 : (attack' = 6) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 5 & b_hea = 4 & c_hea = 3 & d_hea = 7 ->
@@ -12079,7 +12079,7 @@ module game
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 5 & b_hea = 4 & c_hea = 7 & d_hea = 2 ->
 				1 : (attack' = 6) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 5 & b_hea = 4 & c_hea = 7 & d_hea = 3 ->
-				1 : (attack' = 6) ;
+				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 5 & b_hea = 4 & c_hea = 7 & d_hea = 4 ->
 				1 : (attack' = 7) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 5 & b_hea = 4 & c_hea = 7 & d_hea = 5 ->
@@ -12119,7 +12119,7 @@ module game
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 5 & b_hea = 4 & c_hea = 10 & d_hea = 4 ->
 				1 : (attack' = 7) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 5 & b_hea = 4 & c_hea = 10 & d_hea = 5 ->
-				1 : (attack' = 4) ;
+				1 : (attack' = 6) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 5 & b_hea = 4 & c_hea = 10 & d_hea = 7 ->
 				1 : (attack' = 7) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 5 & b_hea = 5 & c_hea = -2 & d_hea = 1 ->
@@ -12205,7 +12205,7 @@ module game
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 5 & b_hea = 5 & c_hea = 3 & d_hea = 2 ->
 				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 5 & b_hea = 5 & c_hea = 3 & d_hea = 3 ->
-				1 : (attack' = 6) ;
+				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 5 & b_hea = 5 & c_hea = 3 & d_hea = 4 ->
 				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 5 & b_hea = 5 & c_hea = 3 & d_hea = 5 ->
@@ -12459,7 +12459,7 @@ module game
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 5 & b_hea = 7 & c_hea = 6 & d_hea = 3 ->
 				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 5 & b_hea = 7 & c_hea = 6 & d_hea = 4 ->
-				1 : (attack' = 4) ;
+				1 : (attack' = 7) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 5 & b_hea = 7 & c_hea = 6 & d_hea = 5 ->
 				1 : (attack' = 6) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 5 & b_hea = 7 & c_hea = 6 & d_hea = 7 ->
@@ -14083,7 +14083,7 @@ module game
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 6 & b_hea = 5 & c_hea = 8 & d_hea = 5 ->
 				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 6 & b_hea = 5 & c_hea = 8 & d_hea = 7 ->
-				1 : (attack' = 7) ;
+				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 6 & b_hea = 5 & c_hea = 10 & d_hea = -2 ->
 				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 6 & b_hea = 5 & c_hea = 10 & d_hea = -1 ->
@@ -14241,7 +14241,7 @@ module game
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 6 & b_hea = 7 & c_hea = 6 & d_hea = 3 ->
 				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 6 & b_hea = 7 & c_hea = 6 & d_hea = 4 ->
-				1 : (attack' = 4) ;
+				1 : (attack' = 5) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 6 & b_hea = 7 & c_hea = 6 & d_hea = 5 ->
 				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 6 & b_hea = 7 & c_hea = 6 & d_hea = 7 ->
@@ -15391,7 +15391,7 @@ module game
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 7 & b_hea = 3 & c_hea = 4 & d_hea = 2 ->
 				1 : (attack' = 5) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 7 & b_hea = 3 & c_hea = 4 & d_hea = 3 ->
-				1 : (attack' = 6) ;
+				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 7 & b_hea = 3 & c_hea = 4 & d_hea = 4 ->
 				1 : (attack' = 5) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 7 & b_hea = 3 & c_hea = 4 & d_hea = 5 ->
@@ -15593,7 +15593,7 @@ module game
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 7 & b_hea = 4 & c_hea = 4 & d_hea = 4 ->
 				1 : (attack' = 7) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 7 & b_hea = 4 & c_hea = 4 & d_hea = 5 ->
-				1 : (attack' = 7) ;
+				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 7 & b_hea = 4 & c_hea = 4 & d_hea = 7 ->
 				1 : (attack' = 7) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 7 & b_hea = 4 & c_hea = 5 & d_hea = -2 ->
@@ -15603,9 +15603,9 @@ module game
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 7 & b_hea = 4 & c_hea = 5 & d_hea = 0 ->
 				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 7 & b_hea = 4 & c_hea = 5 & d_hea = 1 ->
-				1 : (attack' = 6) ;
+				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 7 & b_hea = 4 & c_hea = 5 & d_hea = 2 ->
-				1 : (attack' = 6) ;
+				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 7 & b_hea = 4 & c_hea = 5 & d_hea = 3 ->
 				1 : (attack' = 6) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 7 & b_hea = 4 & c_hea = 5 & d_hea = 4 ->
@@ -15621,13 +15621,13 @@ module game
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 7 & b_hea = 4 & c_hea = 6 & d_hea = 0 ->
 				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 7 & b_hea = 4 & c_hea = 6 & d_hea = 1 ->
-				1 : (attack' = 6) ;
+				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 7 & b_hea = 4 & c_hea = 6 & d_hea = 2 ->
-				1 : (attack' = 6) ;
+				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 7 & b_hea = 4 & c_hea = 6 & d_hea = 3 ->
 				1 : (attack' = 6) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 7 & b_hea = 4 & c_hea = 6 & d_hea = 4 ->
-				1 : (attack' = 7) ;
+				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 7 & b_hea = 4 & c_hea = 6 & d_hea = 5 ->
 				1 : (attack' = 6) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 7 & b_hea = 4 & c_hea = 6 & d_hea = 7 ->
@@ -15665,7 +15665,7 @@ module game
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 7 & b_hea = 4 & c_hea = 8 & d_hea = 4 ->
 				1 : (attack' = 7) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 7 & b_hea = 4 & c_hea = 8 & d_hea = 5 ->
-				1 : (attack' = 6) ;
+				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 7 & b_hea = 4 & c_hea = 8 & d_hea = 7 ->
 				1 : (attack' = 7) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 7 & b_hea = 4 & c_hea = 10 & d_hea = -2 ->
@@ -15791,7 +15791,7 @@ module game
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 7 & b_hea = 5 & c_hea = 4 & d_hea = 4 ->
 				1 : (attack' = 7) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 7 & b_hea = 5 & c_hea = 4 & d_hea = 5 ->
-				1 : (attack' = 7) ;
+				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 7 & b_hea = 5 & c_hea = 4 & d_hea = 7 ->
 				1 : (attack' = 7) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 7 & b_hea = 5 & c_hea = 5 & d_hea = -2 ->
@@ -15801,11 +15801,11 @@ module game
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 7 & b_hea = 5 & c_hea = 5 & d_hea = 0 ->
 				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 7 & b_hea = 5 & c_hea = 5 & d_hea = 1 ->
-				1 : (attack' = 6) ;
+				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 7 & b_hea = 5 & c_hea = 5 & d_hea = 2 ->
-				1 : (attack' = 6) ;
+				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 7 & b_hea = 5 & c_hea = 5 & d_hea = 3 ->
-				1 : (attack' = 6) ;
+				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 7 & b_hea = 5 & c_hea = 5 & d_hea = 4 ->
 				1 : (attack' = 7) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 7 & b_hea = 5 & c_hea = 5 & d_hea = 5 ->
@@ -15819,17 +15819,17 @@ module game
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 7 & b_hea = 5 & c_hea = 6 & d_hea = 0 ->
 				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 7 & b_hea = 5 & c_hea = 6 & d_hea = 1 ->
-				1 : (attack' = 6) ;
+				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 7 & b_hea = 5 & c_hea = 6 & d_hea = 2 ->
-				1 : (attack' = 6) ;
+				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 7 & b_hea = 5 & c_hea = 6 & d_hea = 3 ->
 				1 : (attack' = 6) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 7 & b_hea = 5 & c_hea = 6 & d_hea = 4 ->
-				1 : (attack' = 7) ;
+				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 7 & b_hea = 5 & c_hea = 6 & d_hea = 5 ->
 				1 : (attack' = 6) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 7 & b_hea = 5 & c_hea = 6 & d_hea = 7 ->
-				1 : (attack' = 5) ;
+				1 : (attack' = 7) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 7 & b_hea = 5 & c_hea = 7 & d_hea = -2 ->
 				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 7 & b_hea = 5 & c_hea = 7 & d_hea = -1 ->
@@ -15845,7 +15845,7 @@ module game
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 7 & b_hea = 5 & c_hea = 7 & d_hea = 4 ->
 				1 : (attack' = 7) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 7 & b_hea = 5 & c_hea = 7 & d_hea = 5 ->
-				1 : (attack' = 7) ;
+				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 7 & b_hea = 5 & c_hea = 7 & d_hea = 7 ->
 				1 : (attack' = 7) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 7 & b_hea = 5 & c_hea = 8 & d_hea = -2 ->
@@ -15863,7 +15863,7 @@ module game
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 7 & b_hea = 5 & c_hea = 8 & d_hea = 4 ->
 				1 : (attack' = 7) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 7 & b_hea = 5 & c_hea = 8 & d_hea = 5 ->
-				1 : (attack' = 6) ;
+				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 7 & b_hea = 5 & c_hea = 8 & d_hea = 7 ->
 				1 : (attack' = 7) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 7 & b_hea = 5 & c_hea = 10 & d_hea = -2 ->
@@ -15881,7 +15881,7 @@ module game
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 7 & b_hea = 5 & c_hea = 10 & d_hea = 4 ->
 				1 : (attack' = 7) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 7 & b_hea = 5 & c_hea = 10 & d_hea = 5 ->
-				1 : (attack' = 6) ;
+				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 7 & b_hea = 5 & c_hea = 10 & d_hea = 7 ->
 				1 : (attack' = 7) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 7 & b_hea = 7 & c_hea = -2 & d_hea = 1 ->
@@ -16057,7 +16057,7 @@ module game
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 7 & b_hea = 7 & c_hea = 8 & d_hea = 2 ->
 				1 : (attack' = 6) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 7 & b_hea = 7 & c_hea = 8 & d_hea = 3 ->
-				1 : (attack' = 6) ;
+				1 : (attack' = 7) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 7 & b_hea = 7 & c_hea = 8 & d_hea = 4 ->
 				1 : (attack' = 7) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 7 & b_hea = 7 & c_hea = 8 & d_hea = 5 ->
@@ -16071,17 +16071,17 @@ module game
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 7 & b_hea = 7 & c_hea = 10 & d_hea = 0 ->
 				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 7 & b_hea = 7 & c_hea = 10 & d_hea = 1 ->
-				1 : (attack' = 6) ;
+				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 7 & b_hea = 7 & c_hea = 10 & d_hea = 2 ->
-				1 : (attack' = 6) ;
+				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 7 & b_hea = 7 & c_hea = 10 & d_hea = 3 ->
 				1 : (attack' = 6) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 7 & b_hea = 7 & c_hea = 10 & d_hea = 4 ->
 				1 : (attack' = 7) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 7 & b_hea = 7 & c_hea = 10 & d_hea = 5 ->
-				1 : (attack' = 6) ;
+				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 7 & b_hea = 7 & c_hea = 10 & d_hea = 7 ->
-				1 : (attack' = 6) ;
+				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 8 & b_hea = -2 & c_hea = -2 & d_hea = 1 ->
 				1 : (attack' = 6) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 8 & b_hea = -2 & c_hea = -2 & d_hea = 2 ->
@@ -17241,9 +17241,9 @@ module game
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 8 & b_hea = 3 & c_hea = 8 & d_hea = 0 ->
 				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 8 & b_hea = 3 & c_hea = 8 & d_hea = 1 ->
-				1 : (attack' = 6) ;
+				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 8 & b_hea = 3 & c_hea = 8 & d_hea = 2 ->
-				1 : (attack' = 6) ;
+				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 8 & b_hea = 3 & c_hea = 8 & d_hea = 3 ->
 				1 : (attack' = 6) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 8 & b_hea = 3 & c_hea = 8 & d_hea = 4 ->
@@ -17403,9 +17403,9 @@ module game
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 8 & b_hea = 4 & c_hea = 6 & d_hea = 0 ->
 				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 8 & b_hea = 4 & c_hea = 6 & d_hea = 1 ->
-				1 : (attack' = 6) ;
+				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 8 & b_hea = 4 & c_hea = 6 & d_hea = 2 ->
-				1 : (attack' = 6) ;
+				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 8 & b_hea = 4 & c_hea = 6 & d_hea = 3 ->
 				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 8 & b_hea = 4 & c_hea = 6 & d_hea = 4 ->
@@ -17425,7 +17425,7 @@ module game
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 8 & b_hea = 4 & c_hea = 7 & d_hea = 2 ->
 				1 : (attack' = 7) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 8 & b_hea = 4 & c_hea = 7 & d_hea = 3 ->
-				1 : (attack' = 6) ;
+				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 8 & b_hea = 4 & c_hea = 7 & d_hea = 4 ->
 				1 : (attack' = 7) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 8 & b_hea = 4 & c_hea = 7 & d_hea = 5 ->
@@ -17439,9 +17439,9 @@ module game
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 8 & b_hea = 4 & c_hea = 8 & d_hea = 0 ->
 				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 8 & b_hea = 4 & c_hea = 8 & d_hea = 1 ->
-				1 : (attack' = 6) ;
+				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 8 & b_hea = 4 & c_hea = 8 & d_hea = 2 ->
-				1 : (attack' = 6) ;
+				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 8 & b_hea = 4 & c_hea = 8 & d_hea = 3 ->
 				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 8 & b_hea = 4 & c_hea = 8 & d_hea = 4 ->
@@ -17457,9 +17457,9 @@ module game
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 8 & b_hea = 4 & c_hea = 10 & d_hea = 0 ->
 				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 8 & b_hea = 4 & c_hea = 10 & d_hea = 1 ->
-				1 : (attack' = 6) ;
+				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 8 & b_hea = 4 & c_hea = 10 & d_hea = 2 ->
-				1 : (attack' = 6) ;
+				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 8 & b_hea = 4 & c_hea = 10 & d_hea = 3 ->
 				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 8 & b_hea = 4 & c_hea = 10 & d_hea = 4 ->
@@ -17587,7 +17587,7 @@ module game
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 8 & b_hea = 5 & c_hea = 5 & d_hea = 2 ->
 				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 8 & b_hea = 5 & c_hea = 5 & d_hea = 3 ->
-				1 : (attack' = 6) ;
+				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 8 & b_hea = 5 & c_hea = 5 & d_hea = 4 ->
 				1 : (attack' = 7) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 8 & b_hea = 5 & c_hea = 5 & d_hea = 5 ->
@@ -17601,9 +17601,9 @@ module game
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 8 & b_hea = 5 & c_hea = 6 & d_hea = 0 ->
 				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 8 & b_hea = 5 & c_hea = 6 & d_hea = 1 ->
-				1 : (attack' = 6) ;
+				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 8 & b_hea = 5 & c_hea = 6 & d_hea = 2 ->
-				1 : (attack' = 6) ;
+				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 8 & b_hea = 5 & c_hea = 6 & d_hea = 3 ->
 				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 8 & b_hea = 5 & c_hea = 6 & d_hea = 4 ->
@@ -17611,7 +17611,7 @@ module game
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 8 & b_hea = 5 & c_hea = 6 & d_hea = 5 ->
 				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 8 & b_hea = 5 & c_hea = 6 & d_hea = 7 ->
-				1 : (attack' = 5) ;
+				1 : (attack' = 7) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 8 & b_hea = 5 & c_hea = 7 & d_hea = -2 ->
 				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 8 & b_hea = 5 & c_hea = 7 & d_hea = -1 ->
@@ -17623,7 +17623,7 @@ module game
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 8 & b_hea = 5 & c_hea = 7 & d_hea = 2 ->
 				1 : (attack' = 7) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 8 & b_hea = 5 & c_hea = 7 & d_hea = 3 ->
-				1 : (attack' = 6) ;
+				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 8 & b_hea = 5 & c_hea = 7 & d_hea = 4 ->
 				1 : (attack' = 7) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 8 & b_hea = 5 & c_hea = 7 & d_hea = 5 ->
@@ -17637,9 +17637,9 @@ module game
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 8 & b_hea = 5 & c_hea = 8 & d_hea = 0 ->
 				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 8 & b_hea = 5 & c_hea = 8 & d_hea = 1 ->
-				1 : (attack' = 6) ;
+				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 8 & b_hea = 5 & c_hea = 8 & d_hea = 2 ->
-				1 : (attack' = 6) ;
+				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 8 & b_hea = 5 & c_hea = 8 & d_hea = 3 ->
 				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 8 & b_hea = 5 & c_hea = 8 & d_hea = 4 ->
@@ -17655,15 +17655,15 @@ module game
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 8 & b_hea = 5 & c_hea = 10 & d_hea = 0 ->
 				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 8 & b_hea = 5 & c_hea = 10 & d_hea = 1 ->
-				1 : (attack' = 6) ;
+				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 8 & b_hea = 5 & c_hea = 10 & d_hea = 2 ->
-				1 : (attack' = 6) ;
+				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 8 & b_hea = 5 & c_hea = 10 & d_hea = 3 ->
 				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 8 & b_hea = 5 & c_hea = 10 & d_hea = 4 ->
 				1 : (attack' = 7) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 8 & b_hea = 5 & c_hea = 10 & d_hea = 5 ->
-				1 : (attack' = 7) ;
+				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 8 & b_hea = 5 & c_hea = 10 & d_hea = 7 ->
 				1 : (attack' = 7) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 8 & b_hea = 7 & c_hea = -2 & d_hea = 1 ->
@@ -17809,7 +17809,7 @@ module game
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 8 & b_hea = 7 & c_hea = 6 & d_hea = 5 ->
 				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 8 & b_hea = 7 & c_hea = 6 & d_hea = 7 ->
-				1 : (attack' = 7) ;
+				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 8 & b_hea = 7 & c_hea = 7 & d_hea = -2 ->
 				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 8 & b_hea = 7 & c_hea = 7 & d_hea = -1 ->
@@ -17853,9 +17853,9 @@ module game
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 8 & b_hea = 7 & c_hea = 10 & d_hea = 0 ->
 				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 8 & b_hea = 7 & c_hea = 10 & d_hea = 1 ->
-				1 : (attack' = 6) ;
+				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 8 & b_hea = 7 & c_hea = 10 & d_hea = 2 ->
-				1 : (attack' = 6) ;
+				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 8 & b_hea = 7 & c_hea = 10 & d_hea = 3 ->
 				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 8 & b_hea = 7 & c_hea = 10 & d_hea = 4 ->
@@ -17863,7 +17863,7 @@ module game
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 8 & b_hea = 7 & c_hea = 10 & d_hea = 5 ->
 				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 8 & b_hea = 7 & c_hea = 10 & d_hea = 7 ->
-				1 : (attack' = 7) ;
+				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 10 & b_hea = -2 & c_hea = -2 & d_hea = 1 ->
 				1 : (attack' = 6) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 10 & b_hea = -2 & c_hea = -2 & d_hea = 2 ->
@@ -19009,7 +19009,7 @@ module game
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 10 & b_hea = 3 & c_hea = 7 & d_hea = 2 ->
 				1 : (attack' = 5) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 10 & b_hea = 3 & c_hea = 7 & d_hea = 3 ->
-				1 : (attack' = 6) ;
+				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 10 & b_hea = 3 & c_hea = 7 & d_hea = 4 ->
 				1 : (attack' = 5) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 10 & b_hea = 3 & c_hea = 7 & d_hea = 5 ->
@@ -19045,7 +19045,7 @@ module game
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 10 & b_hea = 3 & c_hea = 10 & d_hea = 2 ->
 				1 : (attack' = 5) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 10 & b_hea = 3 & c_hea = 10 & d_hea = 3 ->
-				1 : (attack' = 6) ;
+				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 10 & b_hea = 3 & c_hea = 10 & d_hea = 4 ->
 				1 : (attack' = 5) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 10 & b_hea = 3 & c_hea = 10 & d_hea = 5 ->
@@ -19221,11 +19221,11 @@ module game
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 10 & b_hea = 4 & c_hea = 8 & d_hea = 0 ->
 				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 10 & b_hea = 4 & c_hea = 8 & d_hea = 1 ->
-				1 : (attack' = 6) ;
+				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 10 & b_hea = 4 & c_hea = 8 & d_hea = 2 ->
-				1 : (attack' = 6) ;
+				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 10 & b_hea = 4 & c_hea = 8 & d_hea = 3 ->
-				1 : (attack' = 6) ;
+				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 10 & b_hea = 4 & c_hea = 8 & d_hea = 4 ->
 				1 : (attack' = 7) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 10 & b_hea = 4 & c_hea = 8 & d_hea = 5 ->
@@ -19369,7 +19369,7 @@ module game
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 10 & b_hea = 5 & c_hea = 5 & d_hea = 2 ->
 				1 : (attack' = 7) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 10 & b_hea = 5 & c_hea = 5 & d_hea = 3 ->
-				1 : (attack' = 6) ;
+				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 10 & b_hea = 5 & c_hea = 5 & d_hea = 4 ->
 				1 : (attack' = 7) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 10 & b_hea = 5 & c_hea = 5 & d_hea = 5 ->
@@ -19419,9 +19419,9 @@ module game
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 10 & b_hea = 5 & c_hea = 8 & d_hea = 0 ->
 				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 10 & b_hea = 5 & c_hea = 8 & d_hea = 1 ->
-				1 : (attack' = 6) ;
+				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 10 & b_hea = 5 & c_hea = 8 & d_hea = 2 ->
-				1 : (attack' = 6) ;
+				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 10 & b_hea = 5 & c_hea = 8 & d_hea = 3 ->
 				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 10 & b_hea = 5 & c_hea = 8 & d_hea = 4 ->
@@ -19553,7 +19553,7 @@ module game
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 10 & b_hea = 7 & c_hea = 4 & d_hea = 4 ->
 				1 : (attack' = 7) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 10 & b_hea = 7 & c_hea = 4 & d_hea = 5 ->
-				1 : (attack' = 7) ;
+				1 : (attack' = 5) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 10 & b_hea = 7 & c_hea = 4 & d_hea = 7 ->
 				1 : (attack' = 7) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 10 & b_hea = 7 & c_hea = 5 & d_hea = -2 ->
@@ -19603,13 +19603,13 @@ module game
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 10 & b_hea = 7 & c_hea = 7 & d_hea = 2 ->
 				1 : (attack' = 7) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 10 & b_hea = 7 & c_hea = 7 & d_hea = 3 ->
-				1 : (attack' = 6) ;
+				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 10 & b_hea = 7 & c_hea = 7 & d_hea = 4 ->
 				1 : (attack' = 7) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 10 & b_hea = 7 & c_hea = 7 & d_hea = 5 ->
 				1 : (attack' = 6) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 10 & b_hea = 7 & c_hea = 7 & d_hea = 7 ->
-				1 : (attack' = 7) ;
+				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 10 & b_hea = 7 & c_hea = 8 & d_hea = -2 ->
 				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 10 & b_hea = 7 & c_hea = 8 & d_hea = -1 ->
@@ -19617,9 +19617,9 @@ module game
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 10 & b_hea = 7 & c_hea = 8 & d_hea = 0 ->
 				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 10 & b_hea = 7 & c_hea = 8 & d_hea = 1 ->
-				1 : (attack' = 6) ;
+				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 10 & b_hea = 7 & c_hea = 8 & d_hea = 2 ->
-				1 : (attack' = 6) ;
+				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 10 & b_hea = 7 & c_hea = 8 & d_hea = 3 ->
 				1 : (attack' = 6) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 10 & b_hea = 7 & c_hea = 8 & d_hea = 4 ->
@@ -19627,7 +19627,7 @@ module game
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 10 & b_hea = 7 & c_hea = 8 & d_hea = 5 ->
 				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 10 & b_hea = 7 & c_hea = 8 & d_hea = 7 ->
-				1 : (attack' = 7) ;
+				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 10 & b_hea = 7 & c_hea = 10 & d_hea = -2 ->
 				1 : (attack' = 4) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & a_hea = 10 & b_hea = 7 & c_hea = 10 & d_hea = -1 ->
