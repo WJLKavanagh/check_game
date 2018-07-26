@@ -110,10 +110,14 @@ def run(characters, model):
     if "U" in team_1 or "W" in team_1 or "U" in team_2 or "W" in team_2:
         print
 
+    """
     if "W" in team_2:
         print "\ta_stun : bool;\n\tb_stun : bool;";
     if "W" in team_1:
         print "\tc_stun : bool;\n\td_stun : bool;"
+    """
+    print "\ta_stun : bool;\n\tb_stun : bool;\n\tc_stun : bool;\n\td_stun : bool;"
+
 
     if "U" in team_2:
         print "\ta_dot : [0.." + info[17][0] + "] init 0;\n\tb_dot : [0.." + info[17][0] + "] init 0;"

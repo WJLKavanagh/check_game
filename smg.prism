@@ -2,21 +2,21 @@ smg
 
 // TEAM 1
 	// Knight
-const double A_acc = 0.8;
-const int A_hea = 10;
+const double A_acc = 0.75;
+const int A_hea = 8;
 const int A_dmg = 3;
 	// Archer
-const double B_acc = 0.7;
+const double B_acc = 0.75;
 const int B_hea = 7;
 const int B_dmg = 2;
 
 // TEAM 2
 	// Knight
-const double C_acc = 0.8;
-const int C_hea = 10;
+const double C_acc = 0.75;
+const int C_hea = 8;
 const int C_dmg = 3;
 	// Wizard
-const double D_acc = 0.85;
+const double D_acc = 0.8;
 const int D_hea = 7;
 const int D_dmg = 2;
 

@@ -14,32 +14,52 @@ def find_attribute(C, attribute):
 
 def rewrite(character, attribute, b):
     global info
-    f = open("char_prac.txt","r+")
+    f = open("char_info.txt","r+")
     info = f.readlines()
     num = find_attribute(character, attribute)
     f.close()
-    f = open("char_prac.txt", "w")
+    f = open("char_info.txt", "w")
     for i in range(len(info)):
         if i != num:
              f.write(info[i])
         else:
              f.write(b + "\n")
-
-
     f.close()
 
-rewrite("W", "acc", "0.234")
-"""
+def readsource():
+    f = open("source.csv", "r+")
+    attributes = f.readline().split(",")
+    nums = f.readlines()
+    f.close()
+    f.open("source.csv", "w")
+    f.readline()
+    lines_read = 0
+    for line in f.readlines():
+        if len num.split(",") < 10:
+            lines_read = lines_read + 1
+            continue
+        for i in range(9):
+            rewrite(attrib[i][0], attrib[i][2:], attributes[i]
+        # OTHERWISE: we need to process the line...
 
-SOMETHING LIKE:
+        # Calculate OPtimal values for either player
 
-candidates_for_att1 = [7,8,9,10]
+        # If they are within acceptable bounds:
+            # Then interate up to 10 times
 
-for att1 in candidates_for_att1:
-    change att1
-    for att2 in range(given by input):
-        change att2
-        for att3 in range(given by input):
-            change att3
-            DO_SCIENCE()
+            # ELSE don't bother
+
+        # Rewrite the line, with the optimal values, iterated values and 'total', all comma-seperated.
+        # move to next line (this requires no code, it's a for-loop)
+
+
+
+
+for a in K_acc_range:
+    rewrite("K", "acc", a)
+    for b in W_acc_range:
+        rewrite("W", "acc", b)
+        for c in A_acc_range:
+            rewrite("A", "acc", c)
+
 """

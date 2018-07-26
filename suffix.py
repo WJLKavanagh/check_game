@@ -261,11 +261,11 @@ def run(characters, multiple):
         for ch in ['a','b','c','d']:
             print "\t" + multiple_initial_health(ch) + " &"
         print "\tattack = 0 & turn_clock = 0 |"
-        if "W" in team_2:
+        """if "W" in team_2:
             print "\t(attack = 0 & turn_clock = 1 & "
             print "\t(a_stun = false & b_stun = false) |"
             print "\t(a_stun = false & b_stun = true) |"
-            print "\t(a_stun = true & b_stun = false) )"
+            print "\t(a_stun = true & b_stun = false) ) |"
         else:
             print "\t(attack = 0 & turn_clock = 1) |"
         if "W" in team_1:
@@ -273,15 +273,26 @@ def run(characters, multiple):
             print "\t(c_stun = false & d_stun = false) | "
             print "\t(c_stun = false & d_stun = true) | "
             print "\t(c_stun = true & d_stun = false) )"
+        else:
             print "\t(attack = 0 & turn_clock = 2) "
-
+        """
+        print "\t(attack = 0 & turn_clock = 1 & "
+        print "\t(a_stun = false & b_stun = false) |"
+        print "\t(a_stun = false & b_stun = true) |"
+        print "\t(a_stun = true & b_stun = false) ) |"
+        print "\t(attack = 0 & turn_clock = 2 & "
+        print "\t(c_stun = false & d_stun = false) | "
+        print "\t(c_stun = false & d_stun = true) | "
+        print "\t(c_stun = true & d_stun = false) )"
     else:
         print "init\t\t\t\t\t//SINGLE INITIAL STATE"
         print "\ta_hea = A_hea & b_hea = B_hea &\n\tc_hea = C_hea & d_hea = D_hea & \n\tattack = 0 & turn_clock = 0"
-        if "W" in team_2:
+        """if "W" in team_2:
             print "\t& a_stun = false & b_stun = false"
         if "W" in team_1:
             print "\t& c_stun = false & d_stun = false"
+        """
+        print "\t& a_stun = false & b_stun = false & c_stun = false & d_stun = false"
     print "endinit\n"
 
     print 'label "team_1_win" = (a_hea > 0 | b_hea > 0) & (c_hea <= 0 & d_hea <= 0);'

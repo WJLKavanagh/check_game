@@ -16,6 +16,21 @@ def find_char(act):
     elif pos == "D":
         return chars[3]
 
+def find_final_state(Cs):
+    output = 1
+    for entry in Cs:
+        if entry == "A":
+            output += 1
+        elif entry == "W":
+            output += 2
+        elif entry == "P":
+            output += 3
+        elif entry == "K":
+            output += 2
+        elif entry == "U":
+            output += 3
+    return str(output)
+
 def generate_moves(team, opps, n, pref):
     global states
     start = 1
@@ -209,7 +224,7 @@ def generate_moves(team, opps, n, pref):
         if team == team_2:
             te = ["c", "d"]
         print "(" + te[0] + "_hea <= 0 & " + te[1] + "_stun = true) | (" +te[1] + "_hea <= 0 & " + te[0] + "_stun = true) ->"
-        print "\t\t\t\t1 : (attack' = " + str(states) + ") & " + reset_stuns(n) + " ;"
+        print "\t\t\t\t1 : (attack' = " + find_final_state(chars) + ") & " + reset_stuns(n) + " ;"
 
 def act_start(b):
     if not b:
@@ -232,6 +247,8 @@ def run(characters, team, pref_move):
     global chars
     global first_t2
     global team_2, team_1, states
+
+    chars = []
 
     team_1 = [characters[0], characters[1]]
     team_2 = [characters[2], characters[3]]
@@ -285,6 +302,7 @@ def run(characters, team, pref_move):
         s[curr] = "team_2_DoT"
         curr += 1
     s[states] = "next_turn"
+    next_turn_state_number = states
     #state dict FINISHED
 
     first_t2 = -1

@@ -1,7 +1,7 @@
 Knight
 acc, hea, dmg
-0.8
-10
+0.75
+8
 3
 Princess
 acc, heal_acc, hea, dmg, heal
@@ -18,11 +18,11 @@ acc, hea, dmg, DoT_dur
 2
 Wizard
 acc, hea, dmg
-0.85
+0.8
 7
 2
 Archer
 acc, hea, dmg
-0.7
+0.75
 7
 2
