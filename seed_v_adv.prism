@@ -26,8 +26,8 @@ module game
 	c_hea : [-2..C_hea];
 	d_hea : [-2..D_hea];
 	turn_clock : [0..2];
-	attack : [0..7];			// Chosen action:
-	// 0 : NONE, 1 : A_C, 2 : A_D, 3 : B_opp, 4 : C_A, 5 : C_B, 6 : D_opp, 7 : NEXT_TURN.
+	attack : [0..8];			// Chosen action:
+	// 0 : NONE, 1 : A_C, 2 : A_D, 3 : B_opp, 4 : C_A, 5 : C_B, 6 : D_opp, 7 : gap_fix, 8 : NEXT TURN.
 	a_stun : bool;
 	b_stun : bool;
 	c_stun : bool;
@@ -68,33 +68,33 @@ module game
 				(attack' = 6) ;
 
 	[A_C] attack = 1 & c_hea > 0 ->
-			A_acc : (c_hea' = c_hea - A_dmg) & (attack' = 7) + (1-A_acc) : (attack' = 7);
+			A_acc : (c_hea' = c_hea - A_dmg) & (attack' = 8) + (1-A_acc) : (attack' = 8);
 	[A_D] attack = 2 & d_hea > 0 ->
-			A_acc : (d_hea' = d_hea - A_dmg) & (attack' = 7) + (1-A_acc) : (attack' = 7);
+			A_acc : (d_hea' = d_hea - A_dmg) & (attack' = 8) + (1-A_acc) : (attack' = 8);
 	[B_opp] attack = 3 & c_hea > 0 & d_hea > 0 ->
-			B_acc * B_acc : (c_hea' = c_hea - B_dmg) & (d_hea' = d_hea - B_dmg) & (attack' = 7) +
-			B_acc * (1-B_acc) : (c_hea' = c_hea - B_dmg) & (attack' = 7) +
-			B_acc * (1-B_acc) : (d_hea' = d_hea - B_dmg) & (attack' = 7) +
-			(1-B_acc) * (1-B_acc) : (attack' = 7);
+			B_acc * B_acc : (c_hea' = c_hea - B_dmg) & (d_hea' = d_hea - B_dmg) & (attack' = 8) +
+			B_acc * (1-B_acc) : (c_hea' = c_hea - B_dmg) & (attack' = 8) +
+			B_acc * (1-B_acc) : (d_hea' = d_hea - B_dmg) & (attack' = 8) +
+			(1-B_acc) * (1-B_acc) : (attack' = 8);
 	[B_opp] attack = 3 & c_hea > 0 & d_hea <= 0 ->
-			B_acc : (c_hea' = c_hea - B_dmg) & (attack' = 7) + (1-B_acc) : (attack' = 7);
+			B_acc : (c_hea' = c_hea - B_dmg) & (attack' = 8) + (1-B_acc) : (attack' = 8);
 	[B_opp] attack = 3 & c_hea <= 0 & d_hea > 0 ->
-			B_acc : (d_hea' = d_hea - B_dmg) & (attack' = 7) + (1-B_acc) : (attack' = 7);
+			B_acc : (d_hea' = d_hea - B_dmg) & (attack' = 8) + (1-B_acc) : (attack' = 8);
 	[C_A] attack = 4 & a_hea > 0 ->
-			C_acc : (a_hea' = a_hea - C_dmg) & (attack' = 7) + (1-C_acc) : (attack' = 7);
+			C_acc : (a_hea' = a_hea - C_dmg) & (attack' = 8) + (1-C_acc) : (attack' = 8);
 	[C_B] attack = 5 & b_hea > 0 ->
-			C_acc : (b_hea' = b_hea - C_dmg) & (attack' = 7) + (1-C_acc) : (attack' = 7);
+			C_acc : (b_hea' = b_hea - C_dmg) & (attack' = 8) + (1-C_acc) : (attack' = 8);
 	[D_opp] attack = 6 & a_hea > 0 & b_hea > 0 ->
-			D_acc * D_acc : (a_hea' = a_hea - D_dmg) & (b_hea' = b_hea - D_dmg) & (attack' = 7) +
-			D_acc * (1-D_acc) : (a_hea' = a_hea - D_dmg) & (attack' = 7) +
-			D_acc * (1-D_acc) : (b_hea' = b_hea - D_dmg) & (attack' = 7) +
-			(1-D_acc) * (1-D_acc) : (attack' = 7);
+			D_acc * D_acc : (a_hea' = a_hea - D_dmg) & (b_hea' = b_hea - D_dmg) & (attack' = 8) +
+			D_acc * (1-D_acc) : (a_hea' = a_hea - D_dmg) & (attack' = 8) +
+			D_acc * (1-D_acc) : (b_hea' = b_hea - D_dmg) & (attack' = 8) +
+			(1-D_acc) * (1-D_acc) : (attack' = 8);
 	[D_opp] attack = 6 & a_hea > 0 & b_hea <= 0 ->
-			D_acc : (a_hea' = a_hea - D_dmg) & (attack' = 7) + (1-D_acc) : (attack' = 7);
+			D_acc : (a_hea' = a_hea - D_dmg) & (attack' = 8) + (1-D_acc) : (attack' = 8);
 	[D_opp] attack = 6 & a_hea <= 0 & b_hea > 0 ->
-			D_acc : (b_hea' = b_hea - D_dmg) & (attack' = 7) + (1-D_acc) : (attack' = 7);
+			D_acc : (b_hea' = b_hea - D_dmg) & (attack' = 8) + (1-D_acc) : (attack' = 8);
 
-	[next_turn] attack = 7 & turn_clock > 0 & (a_hea > 0 | b_hea > 0) & (c_hea > 0 | d_hea > 0) ->
+	[next_turn] attack = 8 & turn_clock > 0 & (a_hea > 0 | b_hea > 0) & (c_hea > 0 | d_hea > 0) ->
 			(turn_clock' = 3 - turn_clock) & (attack' = 0);
 
 endmodule

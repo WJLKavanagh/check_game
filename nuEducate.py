@@ -1,10 +1,10 @@
-import sys
+import sys, seed_strat
 
 def populate_state_dictionary(characters):
     global s
     team_1 = [characters[0], characters[1]]
     team_2 = [characters[2], characters[3]]
-    states = 1
+    states = 2
     for entry in characters:
         if entry == "A":
             states += 1
@@ -47,6 +47,7 @@ def populate_state_dictionary(characters):
     if "U" in team_1:
         s[curr] = "team_2_DoT"
         curr += 1
+    s[states-1] = "gap_fix"
     s[states] = "next_turn"
 
 def populate_states(file, team):
@@ -99,8 +100,13 @@ def find_attribute(C, attribute):
             break
     return int(info[i + index_diff])
 
+
 def find_health(C):
     return find_attribute(C, "hea")
+
+def find_max_health():
+    global info
+    return max(find_health("K"),find_health("A"),find_health("W"))
 
 def is_valid(a,b,c,d,characters):
     global minD, maxD
@@ -207,17 +213,31 @@ def print_healthExtras(characters,t):
 
     # FIND GAPS
     print "// Gap detection"
-    gap_dictionary = {"A":[],"B":[],"C":[],"D":[]}     
+    in_order = ["A","B","C","D"]
+    gaps = []
+    max_health = find_max_health()
+    for c in range(len(in_order)):
+        for i in range(find_health(characters[c])-1, max_health+1):
+            if i != find_health(characters[c]):
+                gaps += [in_order[c].lower() + "_hea = " + str(i)]
+
     # print Guard-comm to send gaps to gap_fixing states
 
-    print "\t[team_"+str(t)+"_turn]\tturn_clock = " + str(t) + " & attack = 0 &",
-    #(a_hea = AGAP | b_hea = BGAP | c_hea = CGAP | d_hea = DGAP) ->"
+    print "\t[team_"+str(t)+"_turn]\tturn_clock = " + str(t) + " & attack = 0",
+    for c in range(len(gaps)):
+        if c == 0:
+            print "& (" + gaps[c],
+        elif c < len(gaps)-1:
+            print "|", gaps[c],
+        else:
+            print "|", gaps[c] + ") ->"
 
-
-    print "\t\t\t\t1 : (attack' = GAP_STATE)"
+    print "\t\t\t\t1 : (attack' =", str(s.keys()[s.values().index("gap_fix")]) + ") ;"
     print "// Gap solution"
-    # Naive strat from gap_fixing state
 
+    # Naive strat from gap_fixing state
+    print "// naive with attack = gap_fix "
+    seed_strat.run(characters, t, "none", s.keys()[s.values().index("gap_fix")]))
 
 def run(characters, file, team):
     global s, info, minD, maxD, states, transitions
@@ -243,8 +263,6 @@ def run(characters, file, team):
     if not against_wizard(characters,team):
         print_wizardExtras(characters, team)
     print_healthExtras(characters,team)
-
-    # TODO: What about states where opposing health values > what t has seen before?
     print "//", status
 
 # run(["K", "A", "K", "W"], "tmp", 1)

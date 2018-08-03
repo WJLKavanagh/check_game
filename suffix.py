@@ -161,7 +161,7 @@ def run(characters, multiple):
     for c in team_2:
         chars += [c]
 
-    states = 1
+    states = 2
     for entry in chars:
         if entry == "A":
             states += 1
@@ -206,7 +206,9 @@ def run(characters, multiple):
         s[curr] = "team_2_DoT"
         curr += 1
 
+    s[states-1] = "gap_fix"
     s[states] = "next_turn"
+
 
     # STATE DICTIONARY FINISHED
     # standard attack blocks

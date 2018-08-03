@@ -224,7 +224,7 @@ def generate_moves(team, opps, n, pref):
         if team == team_2:
             te = ["c", "d"]
         print "(" + te[0] + "_hea <= 0 & " + te[1] + "_stun = true) | (" +te[1] + "_hea <= 0 & " + te[0] + "_stun = true) ->"
-        print "\t\t\t\t1 : (attack' = " + find_final_state(chars) + ") & " + reset_stuns(n) + " ;"
+        print "\t\t\t\t1 : (attack' = " + str(states) + ") & " + reset_stuns(n) + " ;"
 
 def act_start(b):
     if not b:
@@ -258,7 +258,7 @@ def run(characters, team, pref_move):
     for c in team_2:
         chars += [c]
 
-    states = 1
+    states = 2
     for entry in chars:
         if entry == "A":
             states += 1
@@ -301,6 +301,7 @@ def run(characters, team, pref_move):
     if "U" in team_1:
         s[curr] = "team_2_DoT"
         curr += 1
+    s[states-1] = "gap_fix"
     s[states] = "next_turn"
     next_turn_state_number = states
     #state dict FINISHED

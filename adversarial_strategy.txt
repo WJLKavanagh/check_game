@@ -13131,6 +13131,9 @@
 	[team_2_turn]	turn_clock = 2 & attack = 0 & d_hea > 0 & d_stun = false & c_stun = true & ( a_hea > 0 | b_hea > 0) ->
 				1 : (attack' = 6) & (d_stun' = false) & (c_stun' = false) ;
 	[team_2_turn]	turn_clock = 2 & attack = 0 & (c_hea <= 0 & d_stun = true) | (c_stun = true & d_hea <= 0) ->
-				1 : (attack' = 7) & (d_stun' = false) & (c_stun' = false) ;
-// HEALTH EXTRAS HERE
-// [6561, 5539]
+				1 : (attack' = 8) & (d_stun' = false) & (c_stun' = false) ;
+// Gap detection
+	[team_2_turn]	turn_clock = 2 & attack = 0 & (a_hea = 7 | b_hea = 6 | b_hea = 8 | c_hea = 7 | d_hea = 6 | d_hea = 8) ->
+				1 : (attack' = 7) ;
+// Gap solution
+// naive with attack = gap_fix 

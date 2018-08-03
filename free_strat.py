@@ -25,7 +25,7 @@ def run(characters, team):
     for c in team_2:
         chars += [c]
 
-    states = 1
+    states = 2
     for entry in chars:
         if entry == "A":
             states += 1
@@ -68,7 +68,9 @@ def run(characters, team):
     if "U" in team_1:
         s[curr] = "team_2_DoT"
         curr += 1
+    s[states-1] = "gap_fix"
     s[states] = "next_turn"
+
     #state dict FINISHED
 
     first_t2 = -1

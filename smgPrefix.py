@@ -77,7 +77,7 @@ def run(characters):
     print "\td_hea : ["+LB+"..D_hea];"
     print "\tturn_clock : [0..2];"
 
-    states = 1
+    states = 2
     for entry in chars:
         if entry == "A":
             states += 1
@@ -122,7 +122,9 @@ def run(characters):
         print str(curr) + " : team_2_DoT,",
         curr += 1
 
-    print str(states) + " : " + "NEXT_TURN."
+    print str(states-1) + " : " + "gap_fix,",
+    print str(states) + " : " + "NEXT TURN."
+
 
     # ADV RELATIONSHIPS DONE
     """

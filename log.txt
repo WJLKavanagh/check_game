@@ -2,12 +2,12 @@ PRISM
 =====
 
 Version: 4.4
-Date: Fri Aug 03 12:17:16 BST 2018
+Date: Fri Aug 03 16:16:48 BST 2018
 Hostname: wkav-B250M-D2V
 Memory limits: cudd=1g, java(heap)=910.5m
-Command line: prism seed2.prism props.props -prop 2
+Command line: prism seed_v_adv.prism props.props -prop 2 -s -exportadvmdp tmp.tra -exportstates tmp.sta
 
-Parsing model file "seed2.prism"...
+Parsing model file "seed_v_adv.prism"...
 
 Parsing properties file "props.props"...
 
@@ -21,25 +21,58 @@ Type:        MDP
 Modules:     game 
 Variables:   a_hea b_hea c_hea d_hea turn_clock attack a_stun b_stun c_stun d_stun 
 
----------------------------------------------------------------------
-
-Model checking: Pmax=? [ F "team_2_win" ]
-
 Building model...
 
 Computing reachable states...
 
-Reachability (BFS): 34 iterations in 0.01 seconds (average 0.000412, setup 0.00)
+Reachability (BFS): 6 iterations in 0.01 seconds (average 0.001000, setup 0.00)
 
-Time for model construction: 0.04 seconds.
+Time for model construction: 0.033 seconds.
 
-Warning: Deadlocks detected and fixed in 338 states
+Warning: Deadlocks detected and fixed in 782214 states
 
 Type:        MDP
-States:      18465 (1 initial)
-Transitions: 33028
-Choices:     20355
+States:      4269198 (4001200 initial)
+Transitions: 9745158
+Choices:     5108406
 
-Transition matrix: 2574 nodes (11 terminal), 33028 minterms, vars: 25r/25c/12nd
+Transition matrix: 5220 nodes (9 terminal), 9745158 minterms, vars: 26r/26c/12nd
 
-Prob0A: 46 iterations in 0.02 seconds (average 0.000413, setup 0.00)
+Exporting list of reachable states in plain text format to file "tmp.sta"...
+
+---------------------------------------------------------------------
+
+Model checking: Pmax=? [ F "team_2_win" ]
+
+Warning: Disabling Prob1 since this is needed for adversary generation
+
+Prob0A: 38 iterations in 0.07 seconds (average 0.001947, setup 0.00)
+
+yes = 307359, no = 1029051, maybe = 2932788
+
+Computing remaining probabilities...
+Engine: Sparse
+
+Building sparse matrix... [n=4269198, nc=3716268, nnz=7670520, k=3] [95.4 MB]
+Building action information... [16.3 MB]
+Creating vector for yes... [32.6 MB]
+Allocating iteration vectors... [2 x 32.6 MB]
+Allocating adversary vector... [16.3 MB]
+TOTAL: [225.7 MB]
+
+Starting iterations...
+
+Iterative method: 86 iterations in 6.20 seconds (average 0.061640, setup 0.90)
+
+Adversary written to file "tmp.tra".
+
+Range of values over initial states: [0.0,1.0]
+
+Time for model checking: 6.778 seconds.
+
+Result: [0.0,1.0] (range of values over initial states)
+
+---------------------------------------------------------------------
+
+Note: There were 2 warnings during computation.
+
