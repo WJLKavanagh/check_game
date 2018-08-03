@@ -29,10 +29,18 @@ def optimality(characters):     # Takes 4 characters and returns opt(win) for ei
     suffix.run(characters, False)
 
     sys.stdout=sys.__stdout__
-    os.system("~/Documents/Applications/prism-games-2.0.beta3-linux64/bin/prism -cuddmaxmem 4g smg.prism smg_props.props -prop 4 -s > log.txt")
+    #LAPTOP
+    #os.system("~/Documents/Applications/prism-games-2.0.beta3-linux64/bin/prism -cuddmaxmem 4g smg.prism smg_props.props -prop 4 -s > log.txt")
+    #DESKTOP
+    os.system("~/../../usr/prism-games/prism-games-2.0.beta3-linux64/bin/prism  -cuddmaxmem 4g smg.prism smg_props.props -prop 4 -s > log.txt")
+
     p1_opt = find_prev_result()
     #print "Optimal strategy for player one guarantees:", p1_opt
-    os.system("~/Documents/Applications/prism-games-2.0.beta3-linux64/bin/prism -cuddmaxmem 4g smg.prism smg_props.props -prop 5 -s > log.txt")
+    #LAPTOP
+    #os.system("~/Documents/Applications/prism-games-2.0.beta3-linux64/bin/prism -cuddmaxmem 4g smg.prism smg_props.props -prop 5 -s > log.txt")
+    #DESKTOP
+    os.system("~/../../usr/prism-games/prism-games-2.0.beta3-linux64/bin/prism  -cuddmaxmem 4g smg.prism smg_props.props -prop 5 -s > log.txt")
+
     p2_opt = find_prev_result()
     #print "Optimal strategy for player two guarantees:", p2_opt
     return p1_opt, p2_opt
@@ -49,36 +57,40 @@ def generate_opt_grid():    # Generates grid of opt(win) for all permutations of
     KWkw, _ = optimality(["K", "W", "K", "W"])
     WAwa, _ = optimality(["W", "A", "W", "A"])
     print "win\\vs\t|KA\t\t|KW\t\t|WA"
-    print "KA\t|"+str(KAka)+"|"+str(KAkw)+"|"+str(KAwa)
-    print "KW\t|"+str(KWka)+"|"+str(KWkw)+"|"+str(KWwa)
-    print "WA\t|"+str(WAka)+"|"+str(WAkw)+"|"+str(WAwa)
+    print "KA\t|"+str(KAka)+"\t|"+str(KAkw)+"\t|"+str(KAwa)
+    print "KW\t|"+str(KWka)+"\t|"+str(KWkw)+"\t|"+str(KWwa)
+    print "WA\t|"+str(WAka)+"\t|"+str(WAkw)+"\t|"+str(WAwa)
 
-def find_adversary(target_team, iterations, matchup):
+def find_adversary(target_team, iterations, opposing_pair):
     # Finds the adversarial team for target_team against recently identified strategy
-
-    print "iteration:", str(iterations) + ", finding adversary for team", str(target_team)
-    sys.stdout=open("adversarial_strategy.txt","w")
-
-"""
-    STATE OF PLAY: 25/7/18
-
-    nuEducate has been updated so strats are forced to consider being stunned.
-
-    Still needs to add the ability for strats to consider targets with health values > than what they've seen
-
-
-"""
-
-    nuEducate.run(matchup, "tmp", 3-target_team)
-    sys.stdout=sys.__stdout__
     best_prob = 0.0
     best_team = None
-    for opposing_team in ([["K", "A"], ["K", "W"], ["W", "A"]]):
-        sys.stdout=open("it"+str(iterations)+"_"+str(target_team)+".prism", "w")
-        prefix.run(characters, "mdp")
+    for candidate_team in ([["K", "A"], ["K", "W"], ["W", "A"]]):
+        sys.stdout=open("it"+str(iterations)+"_vs:"+str(candidate_team[0])+str(candidate_team[1])+".prism", "w")
         if target_team == 1:
-            free_strat.run()
-            print "done for now"
+            matchup = candidate_team + opposing_pair
+            prefix.run(matchup, "mdp")
+            free_strat.run(matchup, 1)
+            sys.stdout=sys.__stdout__
+            os.system("cat adversarial_strategy.txt >> it"+str(iterations)+"_vs:"+str(candidate_team[0])+str(candidate_team[1])+".prism")
+            sys.stdout=open("it"+str(iterations)+"_vs:"+str(candidate_team[0])+str(candidate_team[1])+".prism", "a")
+            suffix.run(matchup, False)
+        else:
+            matchup = opposing_pair + candidate_team
+            prefix.run(matchup, "mdp")
+            sys.stdout=sys.__stdout__
+            os.system("cat adversarial_strategy.txt >> it"+str(iterations)+"_vs:"+str(candidate_team[0])+str(candidate_team[1])+".prism")
+            sys.stdout=open("it"+str(iterations)+"_vs:"+str(candidate_team[0])+str(candidate_team[1])+".prism", "a")
+            free_strat.run(matchup, 2)
+            suffix.run(matchup, False)
+        sys.stdout=sys.__stdout__
+        os.system("prism it"+str(iterations)+"_vs:"+str(candidate_team[0])+str(candidate_team[1]) + ".prism props.props -prop " + str(target_team) + " > log.txt")
+        candidate_probability = find_prev_result()
+        if candidate_probability > best_prob:
+            best_prob = candidate_probability
+            best_team = candidate_team
+    return best_team
+
 
 def iterate(): # Cycle until converge upon Nash==
     # Generate seed strategy and find best opposition to it
@@ -116,7 +128,11 @@ def iterate(): # Cycle until converge upon Nash==
     os.system("prism seed_v_adv.prism props.props -prop 2 -s -exportadvmdp tmp.tra -exportstates tmp.sta > log.txt")
 
     iterations = 0
-    find_adversary(1, iterations, p1+p2)
+    print "iteration:", str(iterations) + ", finding adversarial strategy against:", p2
+    sys.stdout=open("adversarial_strategy.txt","w")         # Write adversary to file and copy rather than write x3
+    nuEducate.run(p1+p2, "tmp", 2)
+    sys.stdout=sys.__stdout__
+    print "Best team found to be:", find_adversary(1, iterations, p2)
 
 #generate_opt_grid()
 iterate()

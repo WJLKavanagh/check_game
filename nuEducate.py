@@ -162,6 +162,7 @@ def print_wizardExtras(characters,t):  # What if you're stunned and you haven't 
     ally2 = chars[2*(t-1)+1]
     opp1 = chars[(2-t)*2]
     opp2 = chars[(2-t)*2+1]
+    print "// Deal with stuns if unseen "
     for i in range(2):
         character = ally1
         ally = ally2
@@ -186,9 +187,9 @@ def print_wizardExtras(characters,t):  # What if you're stunned and you haven't 
                     # if only one is alive...
             print "\t[team_"+str(t)+"_turn]\tturn_clock = " + str(t) + " & attack = 0 & " + character + "_hea",
             print "> 0 & " + character + "_stun = false & " + ally + "_stun = true &",
-            print "(" + opp1 + "_hea > 0 & " + opp2 + "_hea <= 0 ->"
+            print opp1 + "_hea > 0 & " + opp2 + "_hea <= 0 ->"
             print "\t\t\t\t1 : (attack' = " + str(s.keys()[s.values().index(character.upper()+"_"+opp1.upper())]) + ") &",
-            print "(" + character + "_stun' = false) & " + ally + "_stun' = false) ;"
+            print "(" + character + "_stun' = false) & (" + ally + "_stun' = false) ;"
             print "\t[team_"+str(t)+"_turn]\tturn_clock = " + str(t) + " & attack = 0 & " + character + "_hea",
             print "> 0 & " + character + "_stun = false & " + ally + "_stun = true &",
             print opp1 + "_hea <= 0 & " + opp2 + "_hea > 0 ->"
@@ -200,6 +201,23 @@ def print_wizardExtras(characters,t):  # What if you're stunned and you haven't 
     print ally2 + "_hea <= 0) ->"
     print "\t\t\t\t1 : (attack' = " + str(s.keys()[s.values().index("next_turn")]) + ") &",
     print "(" + character + "_stun' = false) & (" + ally + "_stun' = false) ;"
+
+def print_healthExtras(characters,t):
+    # what to do if opponents have health > than what we've seen?
+
+    # FIND GAPS
+    print "// Gap detection"
+    gap_dictionary = {"A":[],"B":[],"C":[],"D":[]}     
+    # print Guard-comm to send gaps to gap_fixing states
+
+    print "\t[team_"+str(t)+"_turn]\tturn_clock = " + str(t) + " & attack = 0 &",
+    #(a_hea = AGAP | b_hea = BGAP | c_hea = CGAP | d_hea = DGAP) ->"
+
+
+    print "\t\t\t\t1 : (attack' = GAP_STATE)"
+    print "// Gap solution"
+    # Naive strat from gap_fixing state
+
 
 def run(characters, file, team):
     global s, info, minD, maxD, states, transitions
@@ -224,6 +242,7 @@ def run(characters, file, team):
                         status[1] += 1
     if not against_wizard(characters,team):
         print_wizardExtras(characters, team)
+    print_healthExtras(characters,team)
 
     # TODO: What about states where opposing health values > what t has seen before?
     print "//", status
