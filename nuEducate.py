@@ -1,4 +1,4 @@
-import sys, seed_strat
+import sys, seed_strat, collections
 
 def populate_state_dictionary(characters):
     global s
@@ -53,9 +53,9 @@ def populate_state_dictionary(characters):
 def populate_states(file, team):
     states = {}
     for line in open(file+".sta", "r").readlines()[1:]:
-        values = line.split("(")[1][:-2].split(",")
+        values = line.split("(")[1][:-1].split(",")
         if values[5] == "0" and values[4] == str(team):
-            states[line.split("(")[0]] = ",".join(values[:4]) + "," + ",".join(values[-2:])
+            states[line.split("(")[0][:-1]] = ",".join(values[:1]) + "," + values[-1][:-1]
     return states
 
 def against_wizard(characters, team):
@@ -148,7 +148,17 @@ def print_GuardComm(a,b,c,d,t):
     comm = find_command(a,b,c,d,"false","false")
     print_command(comm, False, t)
 
+
+
 def print_wGuardComms(a,b,c,d,t):
+
+    # NEW
+
+    # Find range of states with ABCD
+
+
+
+    """         OLD
     comm = find_command(a,b,c,d,"false","false")
     if comm != None:
         print_wGuard(a,b,c,d,t,"false","false")
@@ -161,6 +171,8 @@ def print_wGuardComms(a,b,c,d,t):
     if comm != None:
         print_wGuard(a,b,c,d,t,"true","false")
         print_command(comm, True, t)
+    """
+
 
 def print_wizardExtras(characters,t):  # What if you're stunned and you haven't encountered this before?
     chars = ["a","b","c","d"]
@@ -237,7 +249,7 @@ def print_healthExtras(characters,t):
 
     # Naive strat from gap_fixing state
     print "// naive with attack = gap_fix "
-    seed_strat.run(characters, t, "none", s.keys()[s.values().index("gap_fix")]))
+    seed_strat.run(characters, t, "none", s.keys()[s.values().index("gap_fix")])
 
 def run(characters, file, team):
     global s, info, minD, maxD, states, transitions
@@ -254,10 +266,7 @@ def run(characters, file, team):
                 for d in range(1-maxD, find_health(characters[3]) +1):
                     if is_valid(a,b,c,d,characters):
                         status[0] += 1
-                        if against_wizard(characters, team):
-                            print_wGuardComms(a,b,c,d,team)
-                        else:
-                            print_GuardComm(a,b,c,d,team)
+                        print_wGuardComms(a,b,c,d,team)
                     else:
                         status[1] += 1
     if not against_wizard(characters,team):
