@@ -32,14 +32,18 @@ def optimality(characters):     # Takes 4 characters and returns opt(win) for ei
     #LAPTOP
     #os.system("~/Documents/Applications/prism-games-2.0.beta3-linux64/bin/prism -cuddmaxmem 4g smg.prism smg_props.props -prop 4 -s > log.txt")
     #DESKTOP
-    os.system("~/../../usr/prism-games/prism-games-2.0.beta3-linux64/bin/prism  -cuddmaxmem 4g smg.prism smg_props.props -prop 4 -s > log.txt")
+    #os.system("~/../../usr/prism-games/prism-games-2.0.beta3-linux64/bin/prism  -cuddmaxmem 4g smg.prism smg_props.props -prop 4 -s > log.txt")
+    #SAND
+    os.system("../../../../../../usr/local/prism-games-2.0.beta3-linux64/bin/prism -cuddmaxmem 4g smg.prism smg_props.props -prop 4 -s > log.txt")
 
     p1_opt = find_prev_result()
     #print "Optimal strategy for player one guarantees:", p1_opt
     #LAPTOP
     #os.system("~/Documents/Applications/prism-games-2.0.beta3-linux64/bin/prism -cuddmaxmem 4g smg.prism smg_props.props -prop 5 -s > log.txt")
     #DESKTOP
-    os.system("~/../../usr/prism-games/prism-games-2.0.beta3-linux64/bin/prism  -cuddmaxmem 4g smg.prism smg_props.props -prop 5 -s > log.txt")
+    #os.system("~/../../usr/prism-games/prism-games-2.0.beta3-linux64/bin/prism  -cuddmaxmem 4g smg.prism smg_props.props -prop 5 -s > log.txt")
+    #SAND
+    os.system("../../../../../../usr/local/prism-games-2.0.beta3-linux64/bin/prism -cuddmaxmem 4g smg.prism smg_props.props -prop 5 -s > log.txt")
 
     p2_opt = find_prev_result()
     #print "Optimal strategy for player two guarantees:", p2_opt
