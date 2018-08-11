@@ -156,22 +156,22 @@ def iterate(): # Cycle until converge upon Nash==
     opposition = chosen_seed_team
     challenger = best_opponents
     iterations = 1
-    bestProbAdv = find_prev_result()
+    bestProbAdv = highest_adversary
     while above_opt(bestProbAdv, opposition, challenger):
         opposition = challenger
         print "Iteration " + str(iterations) + ": find best stat against", opposition
         sys.stdout=open("adversarial_strategy.txt","w")                                             # Write adversary to file and copy rather than write x3
         if iterations%2 == 0:
-            nuNuEducate.run(challenger + educated, "tmp", 2)
+            nuNuEducate.run(challenger + opposition, "tmp", 2)
             sys.stdout=sys.__stdout__
             challenger, bestProbAdv = find_adversary(1, iterations, opposition)
         else:
-            nuNuEducate.run(educated + challenger, "tmp", 1)
+            nuNuEducate.run(opposition + challenger, "tmp", 1)
             sys.stdout=sys.__stdout__
             challenger, bestProbAdv = find_adversary(2, iterations, opposition)
         print challenger, "found as adversarial opponents with probAdv =", bestProbAdv
         iterations+=1
-        
+
 
     """
     # setup players (p1,p2) and find first adversary.
