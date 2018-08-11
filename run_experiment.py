@@ -118,7 +118,7 @@ def find_adversary(target_team, iterations, opposing_pair):
         if candidate_probability > best_prob:
             best_prob = candidate_probability
             best_team = candidate_team
-    return best_team
+    return best_team, best_prob
 
 def iterate(): # Cycle until converge upon Nash==
     # Generate seed strategy and find best opposition to it
@@ -143,7 +143,37 @@ def iterate(): # Cycle until converge upon Nash==
             best_opponents = opposing_team
         #os.system("rm seed.prism")
         loop += 1
-    print ("continuing with...", best_opponents)
+    print "continuing with...", best_opponents, "as team 2"
+    sys.stdout = open("seed_v_adv.prism", "w")
+    prefix.run(chosen_seed_team+best_opponents, "mdp")
+    seed_strat.run(chosen_seed_team+best_opponents, 1, "none", 0)
+    free_strat.run(chosen_seed_team+best_opponents, 2)
+    suffix.run(chosen_seed_team+best_opponents, True)
+    sys.stdout=sys.__stdout__
+    os.system("prism -cuddmaxmem 8g -javamaxmem 8g seed_v_adv.prism props.props -prop 2 -s -exportadvmdp tmp.tra -exportstates tmp.sta > log.txt")
+    print "Adversarial strategy generated"
+
+    opposition = chosen_seed_team
+    challenger = best_opponents
+    iterations = 1
+    bestProbAdv = find_prev_result()
+    while above_opt(bestProbAdv, opposition, challenger):
+        opposition = challenger
+        print "Iteration " + str(iterations) + ": find best stat against", opposition
+        sys.stdout=open("adversarial_strategy.txt","w")                                             # Write adversary to file and copy rather than write x3
+        if iterations%2 == 0:
+            nuNuEducate.run(challenger + educated, "tmp", 2)
+            sys.stdout=sys.__stdout__
+            challenger, bestProbAdv = find_adversary(1, iterations, opposition)
+        else:
+            nuNuEducate.run(educated + challenger, "tmp", 1)
+            sys.stdout=sys.__stdout__
+            challenger, bestProbAdv = find_adversary(2, iterations, opposition)
+        print challenger, "found as adversarial opponents with probAdv =", bestProbAdv
+        iterations+=1
+        
+
+    """
     # setup players (p1,p2) and find first adversary.
     p1 = chosen_seed_team
     p2 = best_opponents
@@ -154,6 +184,8 @@ def iterate(): # Cycle until converge upon Nash==
     suffix.run(p1+p2, True)
     sys.stdout=sys.__stdout__
     os.system("prism -cuddmaxmem 8g -javamaxmem 8g seed_v_adv.prism props.props -prop 2 -s -exportadvmdp tmp.tra -exportstates tmp.sta > log.txt")
+    print ("Adversary calculated")
+
 
     iterations = 0
     educated = p2
@@ -175,5 +207,6 @@ def iterate(): # Cycle until converge upon Nash==
         ProbAdv = find_prev_result()
         print "Best team found to be:", challenger, "with P = " + str(ProbAdv)
 
+    """
 generate_opt_grid()
 iterate()
