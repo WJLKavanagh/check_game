@@ -26,7 +26,6 @@ def define_constants(c, l):
 
 def run(characters):
     global info
-
     info = open("char_info.txt", "r").readlines()
     team_1 = [characters[0], characters[1]]
     team_2 = [characters[2], characters[3]]
@@ -56,8 +55,8 @@ def run(characters):
     for i in range(len(L)):
         if chars[i] == "A":
             print "[" + L[i] + "_opp],",
-            curr += 1
-            L_p += 1
+            curr += 2
+            L_p += 2
         elif chars[i] == "W" or chars[i] == "U" or chars[i] == "K" or chars[i] == "P":
             if L_p <= 2:
                 print "[" + L[i] + "_C],",
@@ -77,18 +76,7 @@ def run(characters):
     print "\td_hea : ["+LB+"..D_hea];"
     print "\tturn_clock : [0..2];"
 
-    states = 2
-    for entry in chars:
-        if entry == "A":
-            states += 1
-        elif entry == "W":
-            states += 2
-        elif entry == "P":
-            states += 3
-        elif entry == "K":
-            states += 2
-        elif entry == "U":
-            states += 3
+    states = 10
     print "\tattack : [0.." + str(states) + "];\t\t\t// Chosen action:\n\t// 0 : NONE,",         # EXPLAIN ATTACK STATES
     curr = 1
     L_p = 0
@@ -96,8 +84,9 @@ def run(characters):
     for i in range(len(L)):
         if chars[i] == "A":
             print str(curr) + " : " + L[i] + "_opp,",
-            curr += 1
-            L_p += 1
+            print str(curr+1) + " : not_used,",
+            curr += 2
+            L_p += 2
         elif chars[i] == "W" or chars[i] == "U" or chars[i] == "K" or chars[i] == "P":
             if L_p <= 2:
                 print str(curr) + " : " + L[i] + "_C,",
@@ -107,42 +96,10 @@ def run(characters):
                 print str(curr+1) + " : " + L[i] + "_B,",
             curr+=2
             L_p+=2
-
-    # BASIC RELATIONSHIPS DONE
-
-    for c in chars:
-        if c == "P":         # Princesses require individual healing states
-            print str(curr) + " : " + L[chars.index(c)] + "_heal,",
-            curr += 1
-
-    if "U" in team_2:        # Unicorns require dot calc.
-        print str(curr) + " : team_1_DoT,",
-        curr += 1
-    if "U" in team_1:
-        print str(curr) + " : team_2_DoT,",
-        curr += 1
-
     print str(states-1) + " : " + "gap_fix,",
     print str(states) + " : " + "NEXT TURN."
 
-
-    # ADV RELATIONSHIPS DONE
-    """
-    if "W" in team_2:
-        print "\ta_stun : bool;\n\tb_stun : bool;";
-    if "W" in team_1:
-        print "\tc_stun : bool;\n\td_stun : bool;"
-        """
-
-    if "U" in team_1 or "W" in team_1 or "U" in team_2 or "W" in team_2:
-        print
-
     print "\ta_stun : bool;\n\tb_stun : bool;\n\tc_stun : bool;\n\td_stun : bool;";
-
-    if "U" in team_2:
-        print "\ta_dot : [0.." + info[17][0] + "] init 0;\n\tb_dot : [0.." + info[17][0] + "] init 0;"
-    if "U" in team_1:
-        print "\tc_dot : [0.." + info[17][0] + "] init 0;\n\td_dot : [0.." + info[17][0] + "] init 0;"
 
     print "\n\t[flip_coin]	turn_clock = 0 ->"
     print "\t\t\t\t0.5 : (turn_clock' = 1) + 0.5 : (turn_clock' = 2);\n"

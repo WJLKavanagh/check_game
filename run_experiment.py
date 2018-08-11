@@ -30,20 +30,20 @@ def optimality(characters):     # Takes 4 characters and returns opt(win) for ei
 
     sys.stdout=sys.__stdout__
     #LAPTOP
-    #os.system("~/Documents/Applications/prism-games-2.0.beta3-linux64/bin/prism -cuddmaxmem 4g smg.prism smg_props.props -prop 4 -s > log.txt")
+    #os.system("~/Documents/Applications/prism-games-2.0.beta3-linux64/bin/prism -cuddmaxmem 8g -javamaxmem 8g smg.prism smg_props.props -prop 4 -s > log.txt")
     #DESKTOP
-    #os.system("~/../../usr/prism-games/prism-games-2.0.beta3-linux64/bin/prism  -cuddmaxmem 4g smg.prism smg_props.props -prop 4 -s > log.txt")
+    #os.system("~/../../usr/prism-games/prism-games-2.0.beta3-linux64/bin/prism  -cuddmaxmem 8g -javamaxmem 8g smg.prism smg_props.props -prop 4 -s > log.txt")
     #SAND
-    os.system("../../../../../../usr/local/prism-games-2.0.beta3-linux64/bin/prism -cuddmaxmem 4g smg.prism smg_props.props -prop 4 -s > log.txt")
+    os.system("../../../../../../usr/local/prism-games-2.0.beta3-linux64/bin/prism -cuddmaxmem 8g -javamaxmem 8g smg.prism smg_props.props -prop 4 -s > log.txt")
 
     p1_opt = find_prev_result()
     #print "Optimal strategy for player one guarantees:", p1_opt
     #LAPTOP
-    #os.system("~/Documents/Applications/prism-games-2.0.beta3-linux64/bin/prism -cuddmaxmem 4g smg.prism smg_props.props -prop 5 -s > log.txt")
+    #os.system("~/Documents/Applications/prism-games-2.0.beta3-linux64/bin/prism -cuddmaxmem 8g -javamaxmem 8g smg.prism smg_props.props -prop 5 -s > log.txt")
     #DESKTOP
-    #os.system("~/../../usr/prism-games/prism-games-2.0.beta3-linux64/bin/prism  -cuddmaxmem 4g smg.prism smg_props.props -prop 5 -s > log.txt")
+    #os.system("~/../../usr/prism-games/prism-games-2.0.beta3-linux64/bin/prism  -cuddmaxmem 8g -javamaxmem 8g smg.prism smg_props.props -prop 5 -s > log.txt")
     #SAND
-    os.system("../../../../../../usr/local/prism-games-2.0.beta3-linux64/bin/prism -cuddmaxmem 4g smg.prism smg_props.props -prop 5 -s > log.txt")
+    os.system("../../../../../../usr/local/prism-games-2.0.beta3-linux64/bin/prism -cuddmaxmem 8g -javamaxmem 8g smg.prism smg_props.props -prop 5 -s > log.txt")
 
     p2_opt = find_prev_result()
     #print "Optimal strategy for player two guarantees:", p2_opt
@@ -113,7 +113,7 @@ def find_adversary(target_team, iterations, opposing_pair):
             free_strat.run(matchup, 2)
             suffix.run(matchup, False)
         sys.stdout=sys.__stdout__
-        os.system("prism -cuddmaxmem 6g it"+str(iterations)+"vs"+str(candidate_team[0])+str(candidate_team[1]) + ".prism props.props -prop " + str(target_team) + " > log.txt")
+        os.system("prism -cuddmaxmem 8g -javamaxmem 8g it"+str(iterations)+"vs"+str(candidate_team[0])+str(candidate_team[1]) + ".prism props.props -prop " + str(target_team) + " > log.txt")
         candidate_probability = find_prev_result()
         if candidate_probability > best_prob:
             best_prob = candidate_probability
@@ -135,7 +135,7 @@ def iterate(): # Cycle until converge upon Nash==
         free_strat.run(characters, 2)
         suffix.run(characters, False)
         sys.stdout=sys.__stdout__
-        os.system("prism -cuddmaxmem 6g seed"+str(loop)+".prism props.props -prop 2 > log.txt")
+        os.system("prism -cuddmaxmem 8g -javamaxmem 8g seed"+str(loop)+".prism props.props -prop 2 > log.txt")
         adversarial_probability = find_prev_result()
         print(opposing_team,"can win with probability:", adversarial_probability)
         if adversarial_probability > highest_adversary:
@@ -153,7 +153,7 @@ def iterate(): # Cycle until converge upon Nash==
     free_strat.run(p1+p2, 2)
     suffix.run(p1+p2, True)
     sys.stdout=sys.__stdout__
-    os.system("prism -cuddmaxmem 6g seed_v_adv.prism props.props -prop 2 -s -exportadvmdp tmp.tra -exportstates tmp.sta > log.txt")
+    os.system("prism -cuddmaxmem 8g -javamaxmem 8g seed_v_adv.prism props.props -prop 2 -s -exportadvmdp tmp.tra -exportstates tmp.sta > log.txt")
 
     iterations = 0
     educated = p2

@@ -25,18 +25,7 @@ def run(characters, team):
     for c in team_2:
         chars += [c]
 
-    states = 2
-    for entry in chars:
-        if entry == "A":
-            states += 1
-        elif entry == "W":
-            states += 2
-        elif entry == "P":
-            states += 3
-        elif entry == "K":
-            states += 2
-        elif entry == "U":
-            states += 3
+    states = 10
     s[0] = "none"
     curr = 1
     L_p = 0
@@ -44,8 +33,9 @@ def run(characters, team):
     for i in range(len(L)):
         if chars[i] == "A":
             s[curr] = L[i] + "_opp"
-            curr += 1
-            L_p += 1
+            s[curr+1] = "not_used"
+            curr += 2
+            L_p += 2
         elif chars[i] == "W" or chars[i] == "U" or chars[i] == "K" or chars[i] == "P":
             if L_p <= 2:
                 s[curr] = L[i] + "_C"
@@ -56,18 +46,6 @@ def run(characters, team):
             curr+=2
             L_p+=2
     standard_states = curr
-
-    for c in chars:
-        if c == "P":         # Princesses require individual healing states
-            s[curr] = L[chars.index(c)] + "_heal"
-            curr += 1
-
-    if "U" in team_2:        # Unicorns require dot calc.
-        s[curr] = "team_1_DoT"
-        curr += 1
-    if "U" in team_1:
-        s[curr] = "team_2_DoT"
-        curr += 1
     s[states-1] = "gap_fix"
     s[states] = "next_turn"
 
@@ -100,13 +78,15 @@ def run(characters, team):
             op = [0,1]
         Cs = ["A", "B", "C", "D"]
         for act in possible_actions:
+            if act == "not_used":
+                break
             act_start(n == 2)
             if act[-3:] != "opp":
                 if "W" in opps:
                     print act[0].lower() + "_hea > 0 & " + act[0].lower()  + "_stun = false & " + act[-1].lower() + "_hea > 0 ->"
                 else:
                     print act[0].lower() + "_hea > 0 & " + act[-1].lower() + "_hea > 0 ->"
-            else:
+            elif act[-3:] == "opp":
                 if "W" in opps:
                     print act[0].lower() + "_hea > 0 & " + act[0].lower()  + "_stun = false & (" + Cs[op[0]].lower() + "_hea > 0 | " + Cs[op[1]].lower() + "_hea > 0) ->"
                 else:

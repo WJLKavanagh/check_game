@@ -4,18 +4,7 @@ def populate_state_dictionary(characters):
     global s
     team_1 = [characters[0], characters[1]]
     team_2 = [characters[2], characters[3]]
-    states = 2
-    for entry in characters:
-        if entry == "A":
-            states += 1
-        elif entry == "W":
-            states += 2
-        elif entry == "P":
-            states += 3
-        elif entry == "K":
-            states += 2
-        elif entry == "U":
-            states += 3
+    states = 10
     s[0] = "none"
     curr = 1
     L_p = 0
@@ -23,9 +12,10 @@ def populate_state_dictionary(characters):
     for i in range(len(L)):
         if characters[i] == "A":
             s[curr] = L[i] + "_opp"
-            curr += 1
-            L_p += 1
-        elif characters[i] == "W" or characters[i] == "U" or characters[i] == "K" or characters[i] == "P":
+            s[curr+1] = "not_used"
+            curr += 2
+            L_p += 2
+        elif characters[i] == "W" or characters[i] == "K":
             if L_p <= 2:
                 s[curr] = L[i] + "_C"
                 s[curr+1] = L[i] + "_D"
@@ -35,18 +25,6 @@ def populate_state_dictionary(characters):
             curr+=2
             L_p+=2
     standard_states = curr
-
-    for c in characters:
-        if c == "P":         # Princesses require individual healing states
-            s[curr] = L[characters.index(c)] + "_heal"
-            curr += 1
-
-    if "U" in team_2:        # Unicorns require dot calc.
-        s[curr] = "team_1_DoT"
-        curr += 1
-    if "U" in team_1:
-        s[curr] = "team_2_DoT"
-        curr += 1
     s[states-1] = "gap_fix"
     s[states] = "next_turn"
 

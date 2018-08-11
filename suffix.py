@@ -5,9 +5,7 @@ chars = []
 s = {}              # STATE DICTIONARY
 
 def new_action(act):
-    if len(act) == 4:
-        return act[0] + "_" + act[-1]
-    return act[0] + "_opp"
+    return act
 
 def find_char(act):
     global chars
@@ -66,81 +64,12 @@ def archer_attack(act, i):
     print str(act[0])[0] + "_dmg) & (attack' = " + str(max(s.keys())) + ") + (1-" + str(act)[0] + "_acc) : (attack' =",
     print str(max(s.keys())) + ");"
 
-def princess_attack(act, i):
-    heal_state = -1
-    for blah in s.keys():
-        if s[blah] == act[0]+"_heal":
-            heal_state = blah
-    print "\t[" + new_action(act) + "] attack = " + str(s.keys()[i]) + " & " + str(act[-1]).lower() + "_hea > 0 ->"
-    print "\t\t\t" + str(act)[0] + "_acc : (" + str(act[-1]).lower() + "_hea' = " + str(act[-1]).lower() + "_hea -",
-    print str(act[0])[0] + "_dmg) & (attack' = " + str(heal_state) + ") + \n\t\t\t(1-" + str(act)[0] + "_acc) : (attack' =",
-    print str(max(s.keys())) + ");"
-
 def wizard_attack(act, i):
     print "\t[" + new_action(act) + "] attack = " + str(s.keys()[i]) + " & " + str(act[-1]).lower() + "_hea > 0 ->"
     print "\t\t\t" + str(act)[0] + "_acc : (" + str(act[-1]).lower() + "_hea' = " + str(act[-1]).lower() + "_hea -",
     print str(act[0])[0] + "_dmg) & (" + str(act[-1]).lower() + "_stun' = true) & (attack' =",
     print str(max(s.keys())) + ") + \n\t\t\t(1-" + str(act)[0] + "_acc) : (attack' =",
     print str(max(s.keys())) + ");"
-
-def unicorn_attack(act, i):
-    print "\t[" + new_action(act) + "] attack = " + str(s.keys()[i]) + " & " + str(act[-1]).lower() + "_hea > 0 ->"
-    print "\t\t\t" + str(act)[0] + "_acc : (" + str(act[-1]).lower() + "_hea' = " + str(act[-1]).lower() + "_hea -",
-    print str(act[0])[0] + "_dmg) & (" + str(act[-1]).lower() + "_dot' = " + str(act)[0] + "_DoT_dur) & (attack' =",
-    print str(max(s.keys())) + ") + \n\t\t\t(1-" + str(act)[0] + "_acc) : (attack' =",
-    print str(max(s.keys())) + ");"
-
-def heal_block(act, i):
-    friend = "A"
-    if act[0] == "A":
-        friend = "B"
-    elif act[0] == "C":
-        friend = "D"
-    elif act[0] == "D":
-        friend = "C"
-    print "\t[" + str(act) + "] attack = " + str(s.keys()[i]) + " & " + str(act[0]).lower() + "_hea = " + str(act[0]) + "_hea",
-    print "& (" + friend.lower() + "_hea <= 0 | " + friend.lower() + "_hea = " + friend + "_hea) ->\t\t\t\t// none suitable\n\t\t\t(attack' =",
-    print str(max(s.keys())) + ");"
-    print "\t[" + str(act) + "] attack = " + str(s.keys()[i]) + " & " + friend.lower() + "_hea > 0 &",
-    print friend.lower() + "_hea < " + friend + "_hea & (" + friend + "_hea - " + friend.lower() + "_hea >",
-    print act[0] + "_hea - " + act[0].lower() + "_hea) ->\t\t// heal friend"
-    print "\t\t\t"+act[0] + "_heal_acc : (" + friend.lower() + "_hea' = min(" + friend + "_hea, " + friend.lower() + "_hea +",
-    print act[0] + "_heal)) & (attack' = " +str(max(s.keys()))+ ") + \n\t\t\t(1-" + act[0] + "_heal_acc) : (attack' = " + str(max(s.keys()))+");"
-
-    print "\t[" + str(act) + "] attack = " + str(s.keys()[i]) + " & " + act[0].lower() + "_hea < " + act[0] + "_hea & ( (",
-    print friend + "_hea - " + friend.lower() + "_hea <= " + act[0] + "_hea - " + act[0].lower() + "_hea) | " + friend.lower() + "_hea <= 0 )",
-    print "->\t// heal self"
-    print "\t\t\t"+act[0] + "_heal_acc : (" + act[0].lower() + "_hea' = min(" + act[0] + "_hea, " + act[0].lower() + "_hea +",
-    print act[0] + "_heal)) & (attack' = " + str(max(s.keys()))+ ") + \n\t\t\t(1-" + act[0] + "_heal_acc) : (attack' = " + str(max(s.keys()))+");"
-    print
-
-def DoT_block(act, i):
-    o = ["a", "b"]
-    if act[5] == "2":
-        o = ["c", "d"]
-    exit_state = 0
-    if act[5] == "1" and "team_2_DoT" in s.values():
-        exit_state = max(s.keys()) - 1
-    print "\t[" + str(act) + "] attack = " + str(s.keys()[i]) + " & " + o[0] + "_hea > 0 & " + o[0] + "_dot > 0 &",
-    print o[1] + "_hea > 0 & " + o[1] + "_dot > 0 ->\t\t// both"
-    print "\t\t\t(" + o[0] + "_hea' = " + o[0] + "_hea - 1) & (" + o[0] + "_dot' = " + o[0] + "_dot - 1) &",
-    print "(" + o[1] + "_hea' = " + o[1] + "_hea - 1) &\n\t\t\t(" + o[1] + "_dot' = " + o[1] + "_dot - 1) &",
-    print "(attack' = " + str(exit_state) + ");"
-
-    print "\t[" + str(act) + "] attack = " + str(s.keys()[i]) + " & " + o[0] + "_hea > 0 & " + o[0] + "_dot > 0 &",
-    print "("+o[1] + "_hea <= 0 | " + o[1] + "_dot <= 0) ->\t\t// first"
-    print "\t\t\t(" + o[0] + "_hea' = " + o[0] + "_hea - 1) & (" + o[0] + "_dot' =",
-    print o[0] + "_dot - 1) & (attack' = " + str(exit_state) + ");"
-
-    print "\t[" + str(act) + "] attack = " + str(s.keys()[i]) + " & (" + o[0] + "_hea <= 0 | " + o[0] + "_dot <= 0) &",
-    print o[1] + "_hea > 0 & " + o[1] + "_dot > 0 ->\t\t// second"
-    print "\t\t\t(" + o[1] + "_hea' = " + o[1] + "_hea - 1) & (" + o[1] + "_dot' =",
-    print o[1] + "_dot - 1) & (attack' = " + str(exit_state) + ");"
-
-    print "\t[" + str(act) + "] attack = " + str(s.keys()[i]) + " & (" + o[0] + "_hea <= 0 | " + o[0] + "_dot <= 0) &",
-    print "("+o[1] + "_hea <= 0 | " + o[1] + "_dot <= 0) ->\t// neither"
-    print "\t\t\t(attack' = " + str(exit_state) + ");"
-    print
 
 def multiple_initial_health(c):             # GENERATE TO_STRING FOR POSSIBLE CHAR HEALTH VALUES FOR MULTIPLE INITIAL STATES
     ret_s = "( (" + c + "_hea > " + str(-maxD) + " & " + c + "_hea < (" + c.upper() + "_hea-" + str(minD-1) + ") ) | "
@@ -161,54 +90,29 @@ def run(characters, multiple):
     for c in team_2:
         chars += [c]
 
-    states = 2
-    for entry in chars:
-        if entry == "A":
-            states += 1
-        elif entry == "W":
-            states += 2
-        elif entry == "P":
-            states += 3
-        elif entry == "K":
-            states += 2
-        elif entry == "U":
-            states += 3
+    states = 10
     s[0] = "none"
     curr = 1
     L_p = 0
     L = ["A","B","C","D"]
     for i in range(len(L)):
         if chars[i] == "A":
-            s[curr] = L[i] + "->opp"
-            curr += 1
-            L_p += 1
+            s[curr] = L[i] + "_opp"
+            s[curr+1] = "not_used"
+            curr += 2
+            L_p += 2
         elif chars[i] == "W" or chars[i] == "U" or chars[i] == "K" or chars[i] == "P":
             if L_p <= 2:
-                s[curr] = L[i] + "->C"
-                s[curr+1] = L[i] + "->D"
+                s[curr] = L[i] + "_C"
+                s[curr+1] = L[i] + "_D"
             else:
-                s[curr] = L[i] + "->A"
-                s[curr+1] = L[i] + "->B"
+                s[curr] = L[i] + "_A"
+                s[curr+1] = L[i] + "_B"
             curr+=2
             L_p+=2
     standard_states = curr
-
-    for c in chars:
-        if c == "P":         # Princesses require individual healing states
-            s[curr] = L[chars.index(c)] + "_heal"
-            curr += 1
-
-
-    if "U" in team_2:        # Unicorns require dot calc.
-        s[curr] = "team_1_DoT"
-        curr += 1
-    if "U" in team_1:
-        s[curr] = "team_2_DoT"
-        curr += 1
-
     s[states-1] = "gap_fix"
     s[states] = "next_turn"
-
 
     # STATE DICTIONARY FINISHED
     # standard attack blocks

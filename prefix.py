@@ -1,22 +1,32 @@
 import sys
 
-def run(characters, model):
+def define_constants(c, l):
+    for i in range(len(info)):
+        if info[i][0] == str(c):
+            print "\t//", info[i],
+            deets = info[i+1][:-1].split(", ")
+            for j in range(len(deets)):
+                if deets[j] != "\n":
+                    ty = "double"
+                    if "." not in info[i+j+2]:
+                        ty = "int"
+                    print "const", ty, l + "_" + deets[j], "=", info[i+j+2][:-1] + ";"
+
+def find_attribute(C, attribute):
+    index_diff = 0
+    for i in range(len(info)):
+        if info[i][0] == C:
+            attributes = info[i+1][:-1].split(", ")
+            break
+    for j in range(len(attributes)):
+        if attributes[j] == attribute:
+            index_diff = j + 2
+            break
+    return int(info[i + index_diff])
+
+def run(characters, model):    #USAGE: python prefix.py A B C D model_type
+    global info
     info = open("char_info.txt", "r").readlines()
-
-    #USAGE: python prefix.py A B C D model_type
-
-    def define_constants(c, l):
-        for i in range(len(info)):
-            if info[i][0] == str(c):
-                print "\t//", info[i],
-                deets = info[i+1][:-1].split(", ")
-                for j in range(len(deets)):
-                    if deets[j] != "\n":
-                        ty = "double"
-                        if "." not in info[i+j+2]:
-                            ty = "int"
-                        print "const", ty, l + "_" + deets[j], "=", info[i+j+2][:-1] + ";"
-
     team_1 = [characters[0], characters[1]]
     team_2 = [characters[2], characters[3]]
     chars = []
@@ -25,23 +35,10 @@ def run(characters, model):
     for c in team_2:
         chars += [c]
 
-    def find_attribute(C, attribute):
-        index_diff = 0
-        for i in range(len(info)):
-            if info[i][0] == C:
-                attributes = info[i+1][:-1].split(", ")
-                break
-        for j in range(len(attributes)):
-            if attributes[j] == attribute:
-                index_diff = j + 2
-                break
-        return int(info[i + index_diff])
-
     mD = 0      # MAX DAMAGE
     for c in chars:
             if find_attribute(c, "dmg") > mD:
                 mD = find_attribute(c, "dmg")
-
     LB = str(1-mD)   # LOWER BOUND FOR HEALTH
 
     print model                   # DTMC or MDP
@@ -58,18 +55,7 @@ def run(characters, model):
     print "\td_hea : ["+LB+"..D_hea];"
     print "\tturn_clock : [0..2];"
 
-    states = 2
-    for entry in chars:
-        if entry == "A":
-            states += 1
-        elif entry == "W":
-            states += 2
-        elif entry == "P":
-            states += 3
-        elif entry == "K":
-            states += 2
-        elif entry == "U":
-            states += 3
+    states = 10
     print "\tattack : [0.." + str(states) + "];\t\t\t// Chosen action:\n\t// 0 : NONE,",         # EXPLAIN ATTACK STATES
     curr = 1
     L_p = 0
@@ -77,8 +63,9 @@ def run(characters, model):
     for i in range(len(L)):
         if chars[i] == "A":
             print str(curr) + " : " + L[i] + "_opp,",
-            curr += 1
-            L_p += 1
+            print str(curr+1) + " : not_used,",
+            curr += 2
+            L_p += 2
         elif chars[i] == "W" or chars[i] == "U" or chars[i] == "K" or chars[i] == "P":
             if L_p <= 2:
                 print str(curr) + " : " + L[i] + "_C,",
@@ -88,42 +75,8 @@ def run(characters, model):
                 print str(curr+1) + " : " + L[i] + "_B,",
             curr+=2
             L_p+=2
-
-    # BASIC RELATIONSHIPS DONE
-
-    for c in chars:
-        if c == "P":         # Princesses require individual healing states
-            print str(curr) + " : " + L[chars.index(c)] + "_heal,",
-            curr += 1
-
-    if "U" in team_2:        # Unicorns require dot calc.
-        print str(curr) + " : team_1_DoT,",
-        curr += 1
-    if "U" in team_1:
-        print str(curr) + " : team_2_DoT,",
-        curr += 1
-
     print str(states-1) + " : " + "gap_fix,",
     print str(states) + " : " + "NEXT TURN."
-
-    # ADV RELATIONSHIPS DONE
-
-    if "U" in team_1 or "W" in team_1 or "U" in team_2 or "W" in team_2:
-        print
-
-    """
-    if "W" in team_2:
-        print "\ta_stun : bool;\n\tb_stun : bool;";
-    if "W" in team_1:
-        print "\tc_stun : bool;\n\td_stun : bool;"
-    """
     print "\ta_stun : bool;\n\tb_stun : bool;\n\tc_stun : bool;\n\td_stun : bool;"
-
-
-    if "U" in team_2:
-        print "\ta_dot : [0.." + info[17][0] + "] init 0;\n\tb_dot : [0.." + info[17][0] + "] init 0;"
-    if "U" in team_1:
-        print "\tc_dot : [0.." + info[17][0] + "] init 0;\n\td_dot : [0.." + info[17][0] + "] init 0;"
-
     print "\n\t[flip_coin]	turn_clock = 0 ->"
     print "\t\t\t\t0.5 : (turn_clock' = 1) + 0.5 : (turn_clock' = 2);\n"
