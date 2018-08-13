@@ -128,9 +128,9 @@ def find_adversary(target_team, iterations, opposing_pair):
     prefix.run(full_comp, "mdp")
     if target_team == 1:
         free_strat.run(full_comp, 1)
-        os.system("cat adversarial_strategy.txt")
+        os.system("cat adversarial_strategy.txt >> it"+str(iterations)+"_adv.prism")
     else:
-        os.system("cat adversarial_strategy.txt")
+        os.system("cat adversarial_strategy.txt >> it"+str(iterations)+"_adv.prism")
         free_strat.run(full_comp,2)
     suffix.run(full_comp, True)
     sys.stdout=sys.__stdout__
