@@ -119,7 +119,7 @@ def find_adversary(target_team, iterations, opposing_pair):
             best_prob = candidate_probability
             best_team = candidate_team
         print candidate_team, "could guarantee", candidate_probability, "against", opposing_pair
-    print "generating states for best opponent:", best_team, "with probAdv =", bestProbAdv
+    print "generating states for best opponent:", best_team, "with probAdv =", best_prob
     sys.stdout = open("it"+str(iterations)+"_adv.prism", "w")
     if target_team == 1:
         full_comp = best_team + opposing_pair
@@ -134,7 +134,7 @@ def find_adversary(target_team, iterations, opposing_pair):
         free_strat.run(full_comp,2)
     suffix.run(full_comp, True)
     sys.stdout=sys.__stdout__
-    os.system("prism -cuddmaxmem 8g -javamaxmem 8g it"+str(iterations)+"_adv.prism props.props -prop " + str(target_team) " + -s -exportadvmdp tmp.tra -exportstates tmp.sta > log.txt")
+    os.system("prism -cuddmaxmem 8g -javamaxmem 8g it"+str(iterations)+"_adv.prism props.props -prop " + str(target_team) + " -s -exportadvmdp tmp.tra -exportstates tmp.sta > log.txt")
     return best_team, best_prob
 
 def iterate(): # Cycle until converge upon Nash==
