@@ -101,14 +101,14 @@ def find_adversary(target_team, iterations, opposing_pair):
             prefix.run(matchup, "mdp")
             free_strat.run(matchup, 1)
             sys.stdout=sys.__stdout__
-            os.system("cat adversarial_strategy.txt >> it"+str(iterations)+"vs"+str(candidate_team[0])+str(candidate_team[1])+".prism")
+            os.system("cat adversarial_strategy"+str(iterations)+".txt >> it"+str(iterations)+"vs"+str(candidate_team[0])+str(candidate_team[1])+".prism")
             sys.stdout=open("it"+str(iterations)+"vs"+str(candidate_team[0])+str(candidate_team[1])+".prism", "a")
             suffix.run(matchup, False)
         else:
             matchup = opposing_pair + candidate_team
             prefix.run(matchup, "mdp")
             sys.stdout=sys.__stdout__
-            os.system("cat adversarial_strategy.txt >> it"+str(iterations)+"vs"+str(candidate_team[0])+str(candidate_team[1])+".prism")
+            os.system("cat adversarial_strategy"+str(iterations)+".txt >> it"+str(iterations)+"vs"+str(candidate_team[0])+str(candidate_team[1])+".prism")
             sys.stdout=open("it"+str(iterations)+"vs"+str(candidate_team[0])+str(candidate_team[1])+".prism", "a")
             free_strat.run(matchup, 2)
             suffix.run(matchup, False)
@@ -128,9 +128,9 @@ def find_adversary(target_team, iterations, opposing_pair):
     prefix.run(full_comp, "mdp")
     if target_team == 1:
         free_strat.run(full_comp, 1)
-        os.system("cat adversarial_strategy.txt >> it"+str(iterations)+"_adv.prism")
+        os.system("cat adversarial_strategy"+str(iterations)+".txt >> it"+str(iterations)+"_adv.prism")
     else:
-        os.system("cat adversarial_strategy.txt >> it"+str(iterations)+"_adv.prism")
+        os.system("cat adversarial_strategy"+str(iterations)+".txt >> it"+str(iterations)+"_adv.prism")
         free_strat.run(full_comp,2)
     suffix.run(full_comp, True)
     sys.stdout=sys.__stdout__
@@ -174,10 +174,10 @@ def iterate(): # Cycle until converge upon Nash==
     challenger = best_opponents
     iterations = 1
     bestProbAdv = highest_adversary
-    while above_opt(bestProbAdv, opposition, challenger):
+    while true:#above_opt(bestProbAdv, opposition, challenger):             # Closed for testing
         opposition = challenger
         print "Iteration " + str(iterations) + ": finding best strat against educated:", opposition
-        sys.stdout=open("adversarial_strategy.txt","w")                                             # Write adversary to file and copy rather than write x3
+        sys.stdout=open("adversarial_strategy"+str(iterations)+".txt","w")                                             # Write adversary to file and copy rather than write x3
         if iterations%2 == 0:
             nuNuEducate.run(challenger + opposition, "tmp", 2)
             sys.stdout=sys.__stdout__
@@ -188,41 +188,5 @@ def iterate(): # Cycle until converge upon Nash==
             challenger, bestProbAdv = find_adversary(2, iterations, opposition)
         iterations+=1
 
-
-    """
-    # setup players (p1,p2) and find first adversary.
-    p1 = chosen_seed_team
-    p2 = best_opponents
-    sys.stdout = open("seed_v_adv.prism", "w")
-    prefix.run(p1+p2, "mdp")
-    seed_strat.run(p1+p2, 1, "none", 0)
-    free_strat.run(p1+p2, 2)
-    suffix.run(p1+p2, True)
-    sys.stdout=sys.__stdout__
-    os.system("prism -cuddmaxmem 8g -javamaxmem 8g seed_v_adv.prism props.props -prop 2 -s -exportadvmdp tmp.tra -exportstates tmp.sta > log.txt")
-    print ("Adversary calculated")
-
-
-    iterations = 0
-    educated = p2
-    challenger = p1
-    ProbAdv = 1.0           # To pass initial check
-    while above_opt(ProbAdv, educated, challenger):     # While ProbAdv > ProbOpt
-        educated = challenger
-        print "iteration:", str(iterations) + ", finding adversarial strategy against:", educated
-        sys.stdout=open("adversarial_strategy.txt","w")                                             # Write adversary to file and copy rather than write x3
-        if iterations%2 == 0:
-            nuNuEducate.run(challenger + educated, "tmp", 2)
-            sys.stdout=sys.__stdout__
-            challenger = find_adversary(1, iterations, educated)
-        else:
-            nuNuEducate.run(educated + challenger, "tmp", 1)
-            sys.stdout=sys.__stdout__
-            challenger = find_adversary(2, iterations, educated)
-        iterations+=1
-        ProbAdv = find_prev_result()
-        print "Best team found to be:", challenger, "with P = " + str(ProbAdv)
-
-    """
-generate_opt_grid()
+#generate_opt_grid()    # closed for testing.
 iterate()
