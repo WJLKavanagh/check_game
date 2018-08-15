@@ -62,15 +62,19 @@ def run(characters, model, multiple):    #USAGE: python prefix.py A B C D model_
         print "\tb_hea : ["+LB+".."+max_h+"];"
         print "\tc_hea : ["+LB+".."+max_h+"];"
         print "\td_hea : ["+LB+".."+max_h+"];"
+        print "\tturn_clock : [0..2];"
+        print "\tattack : [0..10];",
     else:
-        print "\ta_hea : ["+LB+".."+max_h+"]    init A_hea;"
-        print "\tb_hea : ["+LB+".."+max_h+"]    init B_hea;"
-        print "\tc_hea : ["+LB+".."+max_h+"]    init C_hea;"
-        print "\td_hea : ["+LB+".."+max_h+"]    init D_hea;"
-    print "\tturn_clock : [0..2];"
+        print "\ta_hea : ["+LB+".."+max_h+"]\tinit A_hea;"
+        print "\tb_hea : ["+LB+".."+max_h+"]\tinit B_hea;"
+        print "\tc_hea : ["+LB+".."+max_h+"]\tinit C_hea;"
+        print "\td_hea : ["+LB+".."+max_h+"]\tinit D_hea;"
+        print "\tturn_clock : [0..2]\tinit 0;"
+        print "\tattack : [0..10]\tinit 0;",
 
+    print "\t\t\t// Chosen action:\n\t// 0 : NONE,",         # EXPLAIN ATTACK STATES
     states = 10
-    print "\tattack : [0.." + str(states) + "];\t\t\t// Chosen action:\n\t// 0 : NONE,",         # EXPLAIN ATTACK STATES
+
     curr = 1
     L_p = 0
     L = ["A","B","C","D"]

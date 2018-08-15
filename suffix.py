@@ -196,16 +196,9 @@ def run(characters, multiple):
         print "\t(c_stun = false & d_stun = false) | "
         print "\t(c_stun = false & d_stun = true) | "
         print "\t(c_stun = true & d_stun = false) )"
+        print "endinit\n"
     else:
-        print "init\t\t\t\t\t//SINGLE INITIAL STATE"
-        print "\ta_hea = A_hea & b_hea = B_hea &\n\tc_hea = C_hea & d_hea = D_hea & \n\tattack = 0 & turn_clock = 0"
-        """if "W" in team_2:
-            print "\t& a_stun = false & b_stun = false"
-        if "W" in team_1:
-            print "\t& c_stun = false & d_stun = false"
-        """
-        print "\t& a_stun = false & b_stun = false & c_stun = false & d_stun = false"
-    print "endinit\n"
+        print "//SINGLE INITIAL STATE"
 
     print 'label "team_1_win" = (a_hea > 0 | b_hea > 0) & (c_hea <= 0 & d_hea <= 0);'
     print 'label "team_2_win" = (c_hea > 0 | d_hea > 0) & (a_hea <= 0 & b_hea <= 0);'
