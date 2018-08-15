@@ -72,9 +72,15 @@ def wizard_attack(act, i):
     print str(max(s.keys())) + ");"
 
 def multiple_initial_health(c):             # GENERATE TO_STRING FOR POSSIBLE CHAR HEALTH VALUES FOR MULTIPLE INITIAL STATES
-    ret_s = "( (" + c + "_hea > " + str(-maxD) + " & " + c + "_hea < (" + c.upper() + "_hea-" + str(minD-1) + ") ) | "
-    ret_s += c + "_hea = " + c.upper() + "_hea)"
+    ret_s = "(" + c + "_hea > " + str(-maxD) + " & " + c + "_hea < " + str(find_max_health()+1) + ")"
     return ret_s
+
+def find_health(C):
+    return find_attribute(C, "hea")
+
+def find_max_health():
+    global info
+    return max(find_health("K"),find_health("A"),find_health("W"))
 
 def run(characters, multiple):
     global chars, s, maxD, minD

@@ -24,6 +24,13 @@ def find_attribute(C, attribute):
             break
     return int(info[i + index_diff])
 
+def find_health(C):
+    return find_attribute(C, "hea")
+
+def find_max_health():
+    global info
+    return max(find_health("K"),find_health("A"),find_health("W"))
+
 def run(characters, model):    #USAGE: python prefix.py A B C D model_type
     global info
     info = open("char_info.txt", "r").readlines()
@@ -48,11 +55,12 @@ def run(characters, model):    #USAGE: python prefix.py A B C D model_type
     print "\n// TEAM 2"
     define_constants(team_2[0], "C")
     define_constants(team_2[1], "D")
+    max_h = str(find_max_health())
     print "\nmodule game"
-    print "\ta_hea : ["+LB+"..A_hea];"
-    print "\tb_hea : ["+LB+"..B_hea];"
-    print "\tc_hea : ["+LB+"..C_hea];"
-    print "\td_hea : ["+LB+"..D_hea];"
+    print "\ta_hea : ["+LB+".."+max_h+"]    init A_hea;"
+    print "\tb_hea : ["+LB+".."+max_h+"]    init B_hea;"
+    print "\tc_hea : ["+LB+".."+max_h+"]    init C_hea;"
+    print "\td_hea : ["+LB+".."+max_h+"]    init D_hea;"
     print "\tturn_clock : [0..2];"
 
     states = 10

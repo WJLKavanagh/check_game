@@ -91,6 +91,20 @@ def above_opt(probability, opposition, challenger):
     return probability > opt
 
 def find_adversary(target_team, iterations, opposing_pair):
+
+    # For each possible pair
+        # Generate their strategy vs adversarial+naive_padding
+        # Replace naive_padding with pure-strats to make a fully realised adversarial strategy
+        # Calculate probability of winning
+        # update max_prob, best_pair if probWin > max_prob.
+    # return
+
+
+
+
+
+
+
     # Finds the adversarial team for target_team against recently identified strategy
     best_prob = 0.0
     best_team = None
@@ -174,7 +188,7 @@ def iterate(): # Cycle until converge upon Nash==
     challenger = best_opponents
     iterations = 1
     bestProbAdv = highest_adversary
-    while true:#above_opt(bestProbAdv, opposition, challenger):             # Closed for testing
+    while True:#above_opt(bestProbAdv, opposition, challenger):             # Closed for testing
         opposition = challenger
         print "Iteration " + str(iterations) + ": finding best strat against educated:", opposition
         sys.stdout=open("adversarial_strategy"+str(iterations)+".txt","w")                                             # Write adversary to file and copy rather than write x3
