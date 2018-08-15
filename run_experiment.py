@@ -112,7 +112,7 @@ def find_adversary(target_team, iterations, opposing_pair):
         sys.stdout=open("it"+str(iterations)+"vs"+str(candidate_team[0])+str(candidate_team[1])+".prism", "w")
         if target_team == 1:
             matchup = candidate_team + opposing_pair
-            prefix.run(matchup, "mdp")
+            prefix.run(matchup, "mdp", False)
             free_strat.run(matchup, 1)
             sys.stdout=sys.__stdout__
             os.system("cat adversarial_strategy"+str(iterations)+".txt >> it"+str(iterations)+"vs"+str(candidate_team[0])+str(candidate_team[1])+".prism")
@@ -120,7 +120,7 @@ def find_adversary(target_team, iterations, opposing_pair):
             suffix.run(matchup, False)
         else:
             matchup = opposing_pair + candidate_team
-            prefix.run(matchup, "mdp")
+            prefix.run(matchup, "mdp", False)
             sys.stdout=sys.__stdout__
             os.system("cat adversarial_strategy"+str(iterations)+".txt >> it"+str(iterations)+"vs"+str(candidate_team[0])+str(candidate_team[1])+".prism")
             sys.stdout=open("it"+str(iterations)+"vs"+str(candidate_team[0])+str(candidate_team[1])+".prism", "a")
@@ -139,7 +139,7 @@ def find_adversary(target_team, iterations, opposing_pair):
         full_comp = best_team + opposing_pair
     else:
         full_comp = opposing_pair + best_team
-    prefix.run(full_comp, "mdp")
+    prefix.run(full_comp, "mdp", True)
     if target_team == 1:
         free_strat.run(full_comp, 1)
         os.system("cat adversarial_strategy"+str(iterations)+".txt >> it"+str(iterations)+"_adv.prism")
@@ -161,7 +161,7 @@ def iterate(): # Cycle until converge upon Nash==
     for opposing_team in ([["K", "A"], ["K", "W"], ["W", "A"]]):
         sys.stdout=open("seed"+str(loop)+".prism","w")
         characters = chosen_seed_team + opposing_team
-        prefix.run(characters, "mdp")
+        prefix.run(characters, "mdp", False)
         seed_strat.run(characters, 1, "none", 0)
         free_strat.run(characters, 2)
         suffix.run(characters, False)
@@ -176,7 +176,7 @@ def iterate(): # Cycle until converge upon Nash==
         loop += 1
     print "continuing with...", best_opponents, "as team 2"
     sys.stdout = open("seed_v_adv.prism", "w")
-    prefix.run(chosen_seed_team+best_opponents, "mdp")
+    prefix.run(chosen_seed_team+best_opponents, "mdp", True)
     seed_strat.run(chosen_seed_team+best_opponents, 1, "none", 0)
     free_strat.run(chosen_seed_team+best_opponents, 2)
     suffix.run(chosen_seed_team+best_opponents, True)
