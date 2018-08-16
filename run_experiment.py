@@ -192,7 +192,7 @@ def iterate(): # Cycle until converge upon Nash==
         opposition = challenger
         print "Iteration " + str(iterations) + ": finding best strat against educated:", opposition
         sys.stdout=open("adversarial_strategy"+str(iterations)+".txt","w")                                             # Write adversary to file and copy rather than write x3
-        if iterations%2 == 0:
+        if iterations%2 == 1:
             nuNuEducate.run(challenger + opposition, "tmp", 2)
             sys.stdout=sys.__stdout__
             challenger, bestProbAdv = find_adversary(1, iterations, opposition)
