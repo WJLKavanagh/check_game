@@ -92,12 +92,12 @@ def is_valid(state_info, characters):
     b = int(state_info[1])
     c = int(state_info[2])
     d = int(state_info[3])
-    if (a <= 0 and b <= 0) or (c <= 0 and d <= 0):
+    a_stun = (state_info[6] == "True")
+    b_stun = (state_info[7] == "True")
+    c_stun = (state_info[8] == "True")
+    d_stun = (state_info[9] == "True")
+    if ((a <= 0 or a_stun) and (b <= 0 or b_stun)) or ((c <= 0 or c_stun) and (d <= 0 or d_stun)):
         return False
-    """for i in range(len([a,b,c,d])):
-        if [a,b,c,d][i] > find_health(characters[i]) - minD and [a,b,c,d][i] < find_health(characters[i]):
-            return False
-    """
     return True
 
 def print_guard(values):
