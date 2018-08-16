@@ -129,14 +129,14 @@ def print_wizardExtras(characters,t):  # What if you're stunned and you haven't 
     ally2 = chars[2*(t-1)+1]
     opp1 = chars[(2-t)*2]
     opp2 = chars[(2-t)*2+1]
-    """print "// Deal with stuns if unseen "
+    print "// Deal with stuns if unseen "
     for i in range(2):
         character = ally1
         ally = ally2
         if i == 1:
             character = ally2
             ally = ally1
-        if characters[2 * (t-1) + i] == "A":     # If the character is an archer and their ally is stunned...
+        """if characters[2 * (t-1) + i] == "A":     # If the character is an archer and their ally is stunned...
             print "\t[team_"+str(t)+"_turn]\tturn_clock = " + str(t) + " & attack = 0 & " + character + "_hea",
             print "> 0 & " + character + "_stun = false & " + ally + "_stun = true & (",
             print opp1 + "_hea > 0 | " + opp2 + "_hea > 0) ->"
@@ -162,13 +162,13 @@ def print_wizardExtras(characters,t):  # What if you're stunned and you haven't 
             print opp1 + "_hea <= 0 & " + opp2 + "_hea > 0 ->"
             print "\t\t\t\t1 : (attack' = " + str(s.keys()[s.values().index(character.upper()+"_"+opp2.upper())]) + ") &",
             print "(" + character + "_stun' = false) & (" + ally + "_stun' = false) ;"
-    """
-    # If one is stunned and the other is dead, then skip..
-    print "\t[team_"+str(t)+"_turn]\tturn_clock = " + str(t) + " & attack = 0 & (" + ally1 + "_hea",
-    print "<= 0 & " + ally2 + "_stun = true) | (" + ally1 + "_stun = true &",
-    print ally2 + "_hea <= 0) ->"
-    print "\t\t\t\t1 : (attack' = " + str(s.keys()[s.values().index("next_turn")]) + ") &",
-    print "(" + character + "_stun' = false) & (" + ally + "_stun' = false) ;"
+        """
+        # If one is stunned and the other is dead, then skip..
+        print "\t[team_"+str(t)+"_turn]\tturn_clock = " + str(t) + " & attack = 0 & (" + ally1 + "_hea",
+        print "<= 0 & " + ally2 + "_stun = true) | (" + ally1 + "_stun = true &",
+        print ally2 + "_hea <= 0) ->"
+        print "\t\t\t\t1 : (attack' = " + str(s.keys()[s.values().index("next_turn")]) + ") &",
+        print "(" + character + "_stun' = false) & (" + ally + "_stun' = false) ;"
 
 def print_healthExtras(characters,t):
     # what to do if opponents have health > than what we've seen?
