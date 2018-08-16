@@ -82,20 +82,10 @@ def run(characters, team):
                 break
             act_start(n == 2)
             if act[-3:] != "opp":
-                if "W" in opps:
-                    print act[0].lower() + "_hea > 0 & " + act[0].lower()  + "_stun = false & " + act[-1].lower() + "_hea > 0 ->"
-                else:
-                    print act[0].lower() + "_hea > 0 & " + act[-1].lower() + "_hea > 0 ->"
+                print act[0].lower() + "_hea > 0 & " + act[0].lower()  + "_stun = false & " + act[-1].lower() + "_hea > 0 ->"
             elif act[-3:] == "opp":
-                if "W" in opps:
-                    print act[0].lower() + "_hea > 0 & " + act[0].lower()  + "_stun = false & (" + Cs[op[0]].lower() + "_hea > 0 | " + Cs[op[1]].lower() + "_hea > 0) ->"
-                else:
-                    print act[0].lower() + "_hea > 0 & (" + Cs[op[0]].lower() + "_hea > 0 | " + Cs[op[1]].lower() + "_hea > 0) ->"
-            if "W" in opps:
-                print "\t\t\t\t(attack' = " + str(find_index(act)) + ") & (" + Cs[2*(n-1)].lower() + "_stun' = false) & (" + Cs[2*(n-1)+1].lower() + "_stun' = false) ;"
-            else:
-                print "\t\t\t\t(attack' = " + str(find_index(act)) + ") ;"
-        if "W" in opps:
+                print act[0].lower() + "_hea > 0 & " + act[0].lower()  + "_stun = false & (" + Cs[op[0]].lower() + "_hea > 0 | " + Cs[op[1]].lower() + "_hea > 0) ->"
+            print "\t\t\t\t(attack' = " + str(find_index(act)) + ") & (" + Cs[2*(n-1)].lower() + "_stun' = false) & (" + Cs[2*(n-1)+1].lower() + "_stun' = false) ;"
             fr = [possible_actions[0], possible_actions[2]]
             act_start(n==2)
             print "(" + fr[0][0].lower() + "_hea <= 0 | " + fr[0][0].lower() + "_stun  = true) &",
