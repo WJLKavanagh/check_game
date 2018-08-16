@@ -94,9 +94,10 @@ def is_valid(state_info, characters):
     d = int(state_info[3])
     if (a <= 0 and b <= 0) or (c <= 0 and d <= 0):
         return False
-    for i in range(len([a,b,c,d])):
+    """for i in range(len([a,b,c,d])):
         if [a,b,c,d][i] > find_health(characters[i]) - minD and [a,b,c,d][i] < find_health(characters[i]):
             return False
+    """
     return True
 
 def print_guard(values):
@@ -205,7 +206,7 @@ def run(characters, file, team):
         if is_valid(states[line], characters):
             print_guard(states[line])
             print_command(line)
-    if not against_wizard(characters,team):
-        print_wizardExtras(characters, team)
-    print_healthExtras(characters,team)
+#    if not against_wizard(characters,team):
+#        print_wizardExtras(characters, team)
+#    print_healthExtras(characters,team)
 # USAGE: run(["K", "A", "K", "W"], "tmp", 1)
