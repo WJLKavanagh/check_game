@@ -192,7 +192,7 @@ def iterate(): # Cycle until converge upon Nash==
         opposition = challenger
         print "Iteration " + str(iterations) + ": finding best strat against educated:", opposition
         sys.stdout=open("adversarial_strategy"+str(iterations)+".txt","w")                                             # Write adversary to file and copy rather than write x3
-        if iterations%2 == 1:
+        if iterations%2 == 1 :
             nuNuEducate.run(challenger + opposition, "tmp", 2)
             sys.stdout=sys.__stdout__
             challenger, bestProbAdv = find_adversary(1, iterations, opposition)
@@ -202,5 +202,98 @@ def iterate(): # Cycle until converge upon Nash==
             challenger, bestProbAdv = find_adversary(2, iterations, opposition)
         iterations+=1
 
+def run():
+    global possible_pairs
+    possible_pairs = [["K","A"],["K","W"],["W","A"]]
+    best_score = 0.0
+    best_pair = None
+    chosen_seed_team = possible_pairs[0]
+    print chosen_seed_team, "chosen as the seed, calculating adversaries..."
+    for i in range(len(possible_pairs)):
+        sys.stdout=open("seed"+str(i)+".prism","w")
+        matchup = chosen_seed_team + possible_pairs[i]
+        prefix.run(matchup, "mdp", False)
+        seed_strat.run(matchup, 1, "none", 0)
+        free_strat.run(matchup, 2)
+        suffix.run(matchup, False)
+        sys.stdout=sys.__stdout__
+        os.system("prism -cuddmaxmem 2g -javamaxmem 2g seed"+str(i)+".prism props.props -prop 2 > log.txt")
+        pair_result = find_prev_result()
+        print "ProbAdv_2(" + str(matchup) + ") = " + str(pair_result)
+        if pair_result > best_score:
+            best_score = pair_result
+            best_pair = possible_pairs[i]
+    print best_pair, "found as adversarial team, generating strategy..."
+    matchup = chosen_seed_team + best_pair
+    sys.stdout = open("seed_v_adv.prism", "w")
+    prefix.run(matchup, "mdp", True)
+    seed_strat.run(matchup, 1, "none", 0)
+    free_strat.run(matchup, 2)
+    suffix.run(matchup, True)
+    sys.stdout=sys.__stdout__
+    os.system("prism -cuddmaxmem 2g -javamaxmem 2g seed_v_adv.prism props.props -prop 2 > log.txt")
+    sys.stdout = open("adversarial_strategy_0.txt", "w")
+    nuNuEducate.run(matchup, "tmp", 2)
+    sys.stdout=sys.__stdout__
+
+    iteration = 1
+    while(True):
+        best_pair = flip_and_run(iteration, best_pair)
+        iteration+=1
+
+def flip_and_run(it, opponent):
+    print opponent, "is opponent team in iteration:", str(it)
+    best_pair = None
+    best_score = 0.0
+    for i in range(len(possible_pairs)):
+        sys.stdout=open("it"+str(it)+"vs"+possible_pairs[i][0]+possible_pairs[i][1]+".prism","w")
+        if it % 2 == 1:
+            matchup = possible_pairs[i]+opponent
+            prefix.run(matchup, "mdp", False)
+            free_strat.run(matchup, 1)
+            sys.stdout=sys.__stdout__
+            os.system("cat adversarial_strategy_"+str(it-1)+".txt >> it"+str(it)+"vs"+possible_pairs[i][0]+possible_pairs[i][1]+".prism")
+            sys.stdout=open("it"+str(it)+"vs"+possible_pairs[i][0]+possible_pairs[i][1]+".prism","a")
+        else:
+            matchup = opponent+possible_pairs[i]
+            prefix.run(matchup, "mdp", False)
+            sys.stdout=sys.__stdout__
+            os.system("cat adversarial_strategy_"+str(it-1)+".txt >> it"+str(it)+"vs"+possible_pairs[i][0]+possible_pairs[i][1]+".prism")
+            sys.stdout=open("it"+str(it)+"vs"+possible_pairs[i][0]+possible_pairs[i][1]+".prism","a")
+            free_strat.run(matchup, 2)
+        suffix.run(matchup, False)
+        sys.stdout=sys.__stdout__
+        os.system("prism -cuddmaxmem 2g -javamaxmem 2g it"+str(it)+"vs"+possible_pairs[i][0]+possible_pairs[i][1]+".prism props.props -prop "+str(2-it%2)+" > log.txt")
+        pair_result = find_prev_result()
+        print "ProbAdv_"+str(it%2)+"(" + str(matchup) + ") = " + str(pair_result)
+        if pair_result > best_score:
+            best_score = pair_result
+            best_pair = possible_pairs[i]
+    print best_pair, "found as adversarial team, generating strategy..."
+    sys.stdout = open("it"+str(it)+"_adv.prism", "w")
+    if it % 2 == 1:
+        matchup = best_pair + opponent
+        prefix.run(matchup, "mdp", True)
+        free_strat.run(matchup, 1)
+        sys.stdout=sys.__stdout__
+        os.system("cat adversarial_strategy_"+str(it-1)+".txt >> it"+str(it)+"_adv.prism")
+        sys.stdout=open("it"+str(it)+"_adv.prism","a")
+        suffix.run(matchup, True)
+    else:
+        matchup = opponent + best_pair
+        prefix.run(matchup, "mdp", True)
+        sys.stdout=sys.__stdout__
+        os.system("cat adversarial_strategy_"+str(it-1)+".txt >> it"+str(it)+"_adv.prism")
+        sys.stdout=open("it"+str(it)+"_adv.prism","a")
+        free_strat.run(matchup, 2)
+        suffix.run(matchup, True)
+    sys.stdout=sys.__stdout__
+    os.system("prism -cuddmaxmem 2g -javamaxmem 2g it"+str(it)+"_adv.prism props.props -prop "+str(2-it%2)+" > log.txt")
+    sys.stdout = open("adversarial_strategy_"+str(it)+".txt", "a")
+    nuNuEducate.run(matchup, "tmp", it)
+    sys.stdout=sys.__stdout__
+    return best_pair
+
 #generate_opt_grid()    # closed for testing.
-iterate()
+#iterate()
+run()

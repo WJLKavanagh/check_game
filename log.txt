@@ -2,9 +2,9 @@ PRISM
 =====
 
 Version: 4.4
-Date: Tue Aug 07 12:41:57 BST 2018
+Date: Fri Aug 17 13:12:22 BST 2018
 Hostname: wkav-B250M-D2V
-Memory limits: cudd=6g, java(heap)=910.5m
-Command line: prism -cuddmaxmem 6g it0vsKA.prism props.props -prop 1
+Memory limits: cudd=2g, java(heap)=1.8g
+Command line: prism -cuddmaxmem 2g -javamaxmem 2g it1vsKA.prism props.props -prop 1
 
-Parsing model file "it0vsKA.prism"...
+Parsing model file "it1vsKA.prism"...
