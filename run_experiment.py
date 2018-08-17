@@ -152,7 +152,7 @@ def flip_and_run(it, opponent):
         suffix.run(matchup, True)
     sys.stdout=sys.__stdout__
     os.system("prism -cuddmaxmem 20g -javamaxmem 20g it"+str(it)+"_adv.prism props.props -prop "+str(2-it%2)+" -s -exportadvmdp tmp.tra -exportstates tmp.sta > log.txt")
-    sys.stdout = open("adversarial_strategy_"+str(it)+".txt", "a")
+    sys.stdout = open("adversarial_strategy_"+str(it)+".txt", "w")
     nuNuEducate.run(matchup, "tmp", 2-(it%2))
     sys.stdout=sys.__stdout__
     return best_pair
