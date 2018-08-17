@@ -70,14 +70,14 @@ def run(characters):
     print "[next_turn]\nendplayer\n"
 
     print "\nmodule game"
-    print "\ta_hea : ["+LB+"..A_hea];"
-    print "\tb_hea : ["+LB+"..B_hea];"
-    print "\tc_hea : ["+LB+"..C_hea];"
-    print "\td_hea : ["+LB+"..D_hea];"
-    print "\tturn_clock : [0..2];"
+    print "\ta_hea : ["+LB+"..A_hea] init A_hea;"
+    print "\tb_hea : ["+LB+"..B_hea] init B_hea;"
+    print "\tc_hea : ["+LB+"..C_hea] init C_hea;"
+    print "\td_hea : ["+LB+"..D_hea] init D_hea;"
+    print "\tturn_clock : [0..2] init 0;"
 
     states = 10
-    print "\tattack : [0.." + str(states) + "];\t\t\t// Chosen action:\n\t// 0 : NONE,",         # EXPLAIN ATTACK STATES
+    print "\tattack : [0.." + str(states) + "] init 0;\t\t\t// Chosen action:\n\t// 0 : NONE,",         # EXPLAIN ATTACK STATES
     curr = 1
     L_p = 0
     L = ["A","B","C","D"]
