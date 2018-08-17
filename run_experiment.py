@@ -217,7 +217,7 @@ def run():
         free_strat.run(matchup, 2)
         suffix.run(matchup, False)
         sys.stdout=sys.__stdout__
-        os.system("prism -cuddmaxmem 2g -javamaxmem 2g seed"+str(i)+".prism props.props -prop 2 > log.txt")
+        os.system("prism -cuddmaxmem 20g -javamaxmem 20g seed"+str(i)+".prism props.props -prop 2 > log.txt")
         pair_result = find_prev_result()
         print "ProbAdv_2(" + str(matchup) + ") = " + str(pair_result)
         if pair_result > best_score:
@@ -231,7 +231,7 @@ def run():
     free_strat.run(matchup, 2)
     suffix.run(matchup, True)
     sys.stdout=sys.__stdout__
-    os.system("prism -cuddmaxmem 2g -javamaxmem 2g seed_v_adv.prism props.props -prop 2 > log.txt")
+    os.system("prism -cuddmaxmem 20g -javamaxmem 20g seed_v_adv.prism props.props -prop 2 > log.txt")
     sys.stdout = open("adversarial_strategy_0.txt", "w")
     nuNuEducate.run(matchup, "tmp", 2)
     sys.stdout=sys.__stdout__
@@ -263,7 +263,7 @@ def flip_and_run(it, opponent):
             free_strat.run(matchup, 2)
         suffix.run(matchup, False)
         sys.stdout=sys.__stdout__
-        os.system("prism -cuddmaxmem 2g -javamaxmem 2g it"+str(it)+"vs"+possible_pairs[i][0]+possible_pairs[i][1]+".prism props.props -prop "+str(2-it%2)+" > log.txt")
+        os.system("prism -cuddmaxmem 20g -javamaxmem 20g it"+str(it)+"vs"+possible_pairs[i][0]+possible_pairs[i][1]+".prism props.props -prop "+str(2-it%2)+" > log.txt")
         pair_result = find_prev_result()
         print "ProbAdv_"+str(it%2)+"(" + str(matchup) + ") = " + str(pair_result)
         if pair_result > best_score:
@@ -288,9 +288,9 @@ def flip_and_run(it, opponent):
         free_strat.run(matchup, 2)
         suffix.run(matchup, True)
     sys.stdout=sys.__stdout__
-    os.system("prism -cuddmaxmem 2g -javamaxmem 2g it"+str(it)+"_adv.prism props.props -prop "+str(2-it%2)+" > log.txt")
+    os.system("prism -cuddmaxmem 20g -javamaxmem 20g it"+str(it)+"_adv.prism props.props -prop "+str(2-it%2)+" > log.txt")
     sys.stdout = open("adversarial_strategy_"+str(it)+".txt", "a")
-    nuNuEducate.run(matchup, "tmp", it)
+    nuNuEducate.run(matchup, "tmp", 2-(it%2))
     sys.stdout=sys.__stdout__
     return best_pair
 

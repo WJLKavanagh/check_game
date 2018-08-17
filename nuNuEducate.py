@@ -136,33 +136,6 @@ def print_wizardExtras(characters,t):  # What if you're stunned and you haven't 
         if i == 1:
             character = ally2
             ally = ally1
-        """if characters[2 * (t-1) + i] == "A":     # If the character is an archer and their ally is stunned...
-            print "\t[team_"+str(t)+"_turn]\tturn_clock = " + str(t) + " & attack = 0 & " + character + "_hea",
-            print "> 0 & " + character + "_stun = false & " + ally + "_stun = true & (",
-            print opp1 + "_hea > 0 | " + opp2 + "_hea > 0) ->"
-            print "\t\t\t\t1 : (attack' = " + str(s.keys()[s.values().index(character.upper()+"_opp")]) + ") &",
-            print "(" + character + "_stun' = false) & (" + ally + "_stun' = false) ;"
-        else:                   # if the character is NOT an archer and their ally is stunned...
-                    # if both opponents are alive...
-            print "\t[team_"+str(t)+"_turn]\tturn_clock = " + str(t) + " & attack = 0 & " + character + "_hea",
-            print "> 0 & " + character + "_stun = false & " + ally + "_stun = true &",
-            print opp1 + "_hea > 0 & " + opp2 + "_hea > 0 ->"
-            print "\t\t\t\t0.5 : (attack' = " + str(s.keys()[s.values().index(character.upper()+"_"+opp1.upper())]) + ") &",
-            print "(" + character + "_stun' = false) & (" + ally + "_stun' = false) +"
-            print "\t\t\t\t0.5 : (attack' = " + str(s.keys()[s.values().index(character.upper()+"_"+opp2.upper())]) + ") &",
-            print "(" + character + "_stun' = false) & (" + ally + "_stun' = false) ;"
-                    # if only one is alive...
-            print "\t[team_"+str(t)+"_turn]\tturn_clock = " + str(t) + " & attack = 0 & " + character + "_hea",
-            print "> 0 & " + character + "_stun = false & " + ally + "_stun = true &",
-            print opp1 + "_hea > 0 & " + opp2 + "_hea <= 0 ->"
-            print "\t\t\t\t1 : (attack' = " + str(s.keys()[s.values().index(character.upper()+"_"+opp1.upper())]) + ") &",
-            print "(" + character + "_stun' = false) & (" + ally + "_stun' = false) ;"
-            print "\t[team_"+str(t)+"_turn]\tturn_clock = " + str(t) + " & attack = 0 & " + character + "_hea",
-            print "> 0 & " + character + "_stun = false & " + ally + "_stun = true &",
-            print opp1 + "_hea <= 0 & " + opp2 + "_hea > 0 ->"
-            print "\t\t\t\t1 : (attack' = " + str(s.keys()[s.values().index(character.upper()+"_"+opp2.upper())]) + ") &",
-            print "(" + character + "_stun' = false) & (" + ally + "_stun' = false) ;"
-        """
         # If one is stunned and the other is dead, then skip..
         print "\t[team_"+str(t)+"_turn]\tturn_clock = " + str(t) + " & attack = 0 & (" + ally1 + "_hea",
         print "<= 0 & " + ally2 + "_stun = true) | (" + ally1 + "_stun = true &",
@@ -207,7 +180,6 @@ def run(characters, file, team):
         if is_valid(states[line], characters):
             print_guard(states[line])
             print_command(line)
-#    if not against_wizard(characters,team):
     print_wizardExtras(characters, team)
-#    print_healthExtras(characters,team)
+    print
 # USAGE: run(["K", "A", "K", "W"], "tmp", 1)
