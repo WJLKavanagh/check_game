@@ -34,7 +34,7 @@ def optimality(characters):     # Takes 4 characters and returns opt(win) for ei
     #DESKTOP
     #os.system("~/../../usr/prism-games/prism-games-2.0.beta3-linux64/bin/prism  -cuddmaxmem 8g -javamaxmem 8g smg.prism smg_props.props -prop 4 -s > log.txt")
     #SAND
-    os.system("../../../../../../usr/local/prism-games-2.0.beta3-linux64/bin/prism -cuddmaxmem 8g -javamaxmem 8g smg.prism smg_props.props -prop 4 -s > log.txt")
+    os.system("../../../../../../usr/local/prism-games-2.0.beta3-linux64/bin/prism -cuddmaxmem 100g -javamaxmem 100g smg.prism smg_props.props -prop 4 -s > log.txt")
 
     p1_opt = find_prev_result()
     #print "Optimal strategy for player one guarantees:", p1_opt
@@ -43,7 +43,7 @@ def optimality(characters):     # Takes 4 characters and returns opt(win) for ei
     #DESKTOP
     #os.system("~/../../usr/prism-games/prism-games-2.0.beta3-linux64/bin/prism  -cuddmaxmem 8g -javamaxmem 8g smg.prism smg_props.props -prop 5 -s > log.txt")
     #SAND
-    os.system("../../../../../../usr/local/prism-games-2.0.beta3-linux64/bin/prism -cuddmaxmem 8g -javamaxmem 8g smg.prism smg_props.props -prop 5 -s > log.txt")
+    os.system("../../../../../../usr/local/prism-games-2.0.beta3-linux64/bin/prism -cuddmaxmem 100g -javamaxmem 100g smg.prism smg_props.props -prop 5 -s > log.txt")
 
     p2_opt = find_prev_result()
     #print "Optimal strategy for player two guarantees:", p2_opt
@@ -65,6 +65,32 @@ def generate_opt_grid():    # Generates grid of opt(win) for all permutations of
     print "KW\t|"+str(KWka)+"\t|"+str(KWkw)+"\t|"+str(KWwa)
     print "WA\t|"+str(WAka)+"\t|"+str(WAkw)+"\t|"+str(WAwa)
 
+def above_opt(probability, opposition, challenger):
+    opt = 0
+    if challenger == ["K","A"]:
+        if opposition == ["K","W"]:
+            opt = KAkw
+        elif opposition == ["W","A"]:
+            opt = KAwa
+        else:
+            opt = KAka
+    elif challenger == ["K","W"]:
+         if opposition == ["K","W"]:
+             opt = KWkw
+         elif opposition == ["W","A"]:
+             opt = KWwa
+         else:
+             opt = KWka
+    else:
+        if opposition == ["K","W"]:
+            opt = WAkw
+        elif opposition == ["W","A"]:
+            opt = WAwa
+        else:
+            opt = WAka
+    print "probOpt = " + str(probability) + ", optimal = " + str(opt)
+    return probability > opt
+
 def run():
     global possible_pairs
     possible_pairs = [["K","A"],["K","W"],["W","A"]]
@@ -80,7 +106,7 @@ def run():
         free_strat.run(matchup, 2)
         suffix.run(matchup, False)
         sys.stdout=sys.__stdout__
-        os.system("prism -cuddmaxmem 20g -javamaxmem 20g seed"+str(i)+".prism props.props -prop 2 > log.txt")
+        os.system("prism -cuddmaxmem 100g -javamaxmem 100g seed"+str(i)+".prism props.props -prop 2 > log.txt")
         pair_result = find_prev_result()
         print "ProbAdv_2(" + str(matchup) + ") = " + str(pair_result)
         if pair_result > best_score:
@@ -94,14 +120,15 @@ def run():
     free_strat.run(matchup, 2)
     suffix.run(matchup, True)
     sys.stdout=sys.__stdout__
-    os.system("prism -cuddmaxmem 20g -javamaxmem 20g seed_v_adv.prism props.props -prop 2 -s -exportadvmdp tmp.tra -exportstates tmp.sta > log.txt")
+    os.system("prism -cuddmaxmem 100g -javamaxmem 100g seed_v_adv.prism props.props -prop 2 -s -exportadvmdp tmp.tra -exportstates tmp.sta > log.txt")
     sys.stdout = open("adversarial_strategy_0.txt", "w")
     nuNuEducate.run(matchup, "tmp", 2)
     sys.stdout=sys.__stdout__
-
     iteration = 1
-    while(True):
-        best_pair = flip_and_run(iteration, best_pair)
+    old_opponents = chosen_seed_team
+    while above_opt(best_score, old_opponents, best_pair):        #prob, op, chal
+        old_opponents = best_pair
+        best_pair, best_score = flip_and_run(iteration, best_pair)
         iteration+=1
 
 def flip_and_run(it, opponent):
@@ -126,9 +153,9 @@ def flip_and_run(it, opponent):
             free_strat.run(matchup, 2)
         suffix.run(matchup, False)
         sys.stdout=sys.__stdout__
-        os.system("prism -cuddmaxmem 20g -javamaxmem 20g it"+str(it)+"vs"+possible_pairs[i][0]+possible_pairs[i][1]+".prism props.props -prop "+str(2-it%2)+" > log.txt")
+        os.system("prism -cuddmaxmem 100g -javamaxmem 100g it"+str(it)+"vs"+possible_pairs[i][0]+possible_pairs[i][1]+".prism props.props -prop "+str(2-it%2)+" > log.txt")
         pair_result = find_prev_result()
-        print "ProbAdv_"+str(it%2)+"(" + str(matchup) + ") = " + str(pair_result)
+        print "ProbAdv_"+str(2-(it%2))+"(" + str(matchup) + ") = " + str(pair_result)
         if pair_result > best_score:
             best_score = pair_result
             best_pair = possible_pairs[i]
@@ -151,12 +178,11 @@ def flip_and_run(it, opponent):
         free_strat.run(matchup, 2)
         suffix.run(matchup, True)
     sys.stdout=sys.__stdout__
-    os.system("prism -cuddmaxmem 20g -javamaxmem 20g it"+str(it)+"_adv.prism props.props -prop "+str(2-it%2)+" -s -exportadvmdp tmp.tra -exportstates tmp.sta > log.txt")
+    os.system("prism -cuddmaxmem 100g -javamaxmem 100g it"+str(it)+"_adv.prism props.props -prop "+str(2-it%2)+" -s -exportadvmdp tmp.tra -exportstates tmp.sta > log.txt")
     sys.stdout = open("adversarial_strategy_"+str(it)+".txt", "w")
     nuNuEducate.run(matchup, "tmp", 2-(it%2))
     sys.stdout=sys.__stdout__
-    return best_pair
+    return best_pair, best_score
 
-#generate_opt_grid()    # closed for testing.
-#iterate()
+generate_opt_grid()
 run()
