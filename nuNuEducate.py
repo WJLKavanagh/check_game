@@ -92,10 +92,10 @@ def is_valid(state_info, characters):
     b = int(state_info[1])
     c = int(state_info[2])
     d = int(state_info[3])
-    a_stun = (state_info[6] == "True")
-    b_stun = (state_info[7] == "True")
-    c_stun = (state_info[8] == "True")
-    d_stun = (state_info[9] == "True")
+    a_stun = (state_info[6] == "true")
+    b_stun = (state_info[7] == "true")
+    c_stun = (state_info[8] == "true")
+    d_stun = (state_info[9] == "true")
     if ((a <= 0 or a_stun) and (b <= 0 or b_stun)) or ((c <= 0 or c_stun) and (d <= 0 or d_stun)):
         return False
     return True
