@@ -114,6 +114,7 @@ def print_command(from_state):
     dec_state = transitions[from_state][0]
     comm_str = transitions[dec_state][1]
     comm_val = 0
+    print comm_str
     for elem in s.keys():
         if s[elem] == comm_str:
             break

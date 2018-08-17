@@ -65,143 +65,6 @@ def generate_opt_grid():    # Generates grid of opt(win) for all permutations of
     print "KW\t|"+str(KWka)+"\t|"+str(KWkw)+"\t|"+str(KWwa)
     print "WA\t|"+str(WAka)+"\t|"+str(WAkw)+"\t|"+str(WAwa)
 
-def above_opt(probability, opposition, challenger):
-    opt = 0
-    if challenger == ["K","A"]:
-        if opposition == ["K","W"]:
-            opt = KAkw
-        elif opposition == ["W","A"]:
-            opt = KAwa
-        else:
-            opt = KAka
-    elif challenger == ["K","W"]:
-         if opposition == ["K","W"]:
-             opt = KWkw
-         elif opposition == ["W","A"]:
-             opt = KWwa
-         else:
-             opt = KWka
-    else:
-        if opposition == ["K","W"]:
-            opt = WAkw
-        elif opposition == ["W","A"]:
-            opt = WAwa
-        else:
-            opt = WAka
-    return probability > opt
-
-def find_adversary(target_team, iterations, opposing_pair):
-
-    # For each possible pair
-        # Generate their strategy vs adversarial+naive_padding
-        # Replace naive_padding with pure-strats to make a fully realised adversarial strategy
-        # Calculate probability of winning
-        # update max_prob, best_pair if probWin > max_prob.
-    # return
-
-
-
-
-
-
-
-    # Finds the adversarial team for target_team against recently identified strategy
-    best_prob = 0.0
-    best_team = None
-    for candidate_team in ([["K", "A"], ["K", "W"], ["W", "A"]]):
-        sys.stdout=open("it"+str(iterations)+"vs"+str(candidate_team[0])+str(candidate_team[1])+".prism", "w")
-        if target_team == 1:
-            matchup = candidate_team + opposing_pair
-            prefix.run(matchup, "mdp", False)
-            free_strat.run(matchup, 1)
-            sys.stdout=sys.__stdout__
-            os.system("cat adversarial_strategy"+str(iterations)+".txt >> it"+str(iterations)+"vs"+str(candidate_team[0])+str(candidate_team[1])+".prism")
-            sys.stdout=open("it"+str(iterations)+"vs"+str(candidate_team[0])+str(candidate_team[1])+".prism", "a")
-            suffix.run(matchup, False)
-        else:
-            matchup = opposing_pair + candidate_team
-            prefix.run(matchup, "mdp", False)
-            sys.stdout=sys.__stdout__
-            os.system("cat adversarial_strategy"+str(iterations)+".txt >> it"+str(iterations)+"vs"+str(candidate_team[0])+str(candidate_team[1])+".prism")
-            sys.stdout=open("it"+str(iterations)+"vs"+str(candidate_team[0])+str(candidate_team[1])+".prism", "a")
-            free_strat.run(matchup, 2)
-            suffix.run(matchup, False)
-        sys.stdout=sys.__stdout__
-        os.system("prism -cuddmaxmem 8g -javamaxmem 8g it"+str(iterations)+"vs"+str(candidate_team[0])+str(candidate_team[1]) + ".prism props.props -prop " + str(target_team) + " > log.txt")
-        candidate_probability = find_prev_result()
-        if candidate_probability > best_prob:
-            best_prob = candidate_probability
-            best_team = candidate_team
-        print candidate_team, "could guarantee", candidate_probability, "against", opposing_pair
-    print "generating states for best opponent:", best_team, "with probAdv =", best_prob
-    sys.stdout = open("it"+str(iterations)+"_adv.prism", "w")
-    if target_team == 1:
-        full_comp = best_team + opposing_pair
-    else:
-        full_comp = opposing_pair + best_team
-    prefix.run(full_comp, "mdp", True)
-    if target_team == 1:
-        free_strat.run(full_comp, 1)
-        os.system("cat adversarial_strategy"+str(iterations)+".txt >> it"+str(iterations)+"_adv.prism")
-    else:
-        os.system("cat adversarial_strategy"+str(iterations)+".txt >> it"+str(iterations)+"_adv.prism")
-        free_strat.run(full_comp,2)
-    suffix.run(full_comp, True)
-    sys.stdout=sys.__stdout__
-    os.system("prism -cuddmaxmem 8g -javamaxmem 8g it"+str(iterations)+"_adv.prism props.props -prop " + str(target_team) + " -s -exportadvmdp tmp.tra -exportstates tmp.sta > log.txt")
-    return best_team, best_prob
-
-def iterate(): # Cycle until converge upon Nash==
-    # Generate seed strategy and find best opposition to it
-    chosen_seed_team = ["K", "A"]
-    print "Calculating most effective strategy vs:", chosen_seed_team,"..."
-    highest_adversary = 0
-    best_opponents = None
-    loop = 0
-    for opposing_team in ([["K", "A"], ["K", "W"], ["W", "A"]]):
-        sys.stdout=open("seed"+str(loop)+".prism","w")
-        characters = chosen_seed_team + opposing_team
-        prefix.run(characters, "mdp", False)
-        seed_strat.run(characters, 1, "none", 0)
-        free_strat.run(characters, 2)
-        suffix.run(characters, False)
-        sys.stdout=sys.__stdout__
-        os.system("prism -cuddmaxmem 8g -javamaxmem 8g seed"+str(loop)+".prism props.props -prop 2 > log.txt")
-        adversarial_probability = find_prev_result()
-        print(opposing_team,"can win with probability:", adversarial_probability)
-        if adversarial_probability > highest_adversary:
-            highest_adversary = adversarial_probability
-            best_opponents = opposing_team
-        #os.system("rm seed.prism")
-        loop += 1
-    print "continuing with...", best_opponents, "as team 2"
-    sys.stdout = open("seed_v_adv.prism", "w")
-    prefix.run(chosen_seed_team+best_opponents, "mdp", True)
-    seed_strat.run(chosen_seed_team+best_opponents, 1, "none", 0)
-    free_strat.run(chosen_seed_team+best_opponents, 2)
-    suffix.run(chosen_seed_team+best_opponents, True)
-    sys.stdout=sys.__stdout__
-    os.system("prism -cuddmaxmem 8g -javamaxmem 8g seed_v_adv.prism props.props -prop 2 -s -exportadvmdp tmp.tra -exportstates tmp.sta > log.txt")
-    print "Adversarial strategy generated"
-
-    opposition = chosen_seed_team
-    challenger = best_opponents
-    iterations = 1
-    bestProbAdv = highest_adversary
-    while True:#above_opt(bestProbAdv, opposition, challenger):             # Closed for testing
-        opposition = challenger
-        print "Iteration " + str(iterations) + ": finding best strat against educated:", opposition
-        sys.stdout=open("adversarial_strategy"+str(iterations)+".txt","w")                                             # Write adversary to file and copy rather than write x3
-        if iterations%2 == 1 :
-            nuNuEducate.run(challenger + opposition, "tmp", 2)
-            sys.stdout=sys.__stdout__
-            challenger, bestProbAdv = find_adversary(1, iterations, opposition)
-        else:
-            nuNuEducate.run(opposition + challenger, "tmp", 1)
-            sys.stdout=sys.__stdout__
-            challenger, bestProbAdv = find_adversary(2, iterations, opposition)
-        iterations+=1
-
 def run():
     global possible_pairs
     possible_pairs = [["K","A"],["K","W"],["W","A"]]
@@ -231,7 +94,7 @@ def run():
     free_strat.run(matchup, 2)
     suffix.run(matchup, True)
     sys.stdout=sys.__stdout__
-    os.system("prism -cuddmaxmem 20g -javamaxmem 20g seed_v_adv.prism props.props -prop 2 > log.txt")
+    os.system("prism -cuddmaxmem 20g -javamaxmem 20g seed_v_adv.prism props.props -prop 2 -s -exportadvmdp tmp.tra -exportstates tmp.sta > log.txt")
     sys.stdout = open("adversarial_strategy_0.txt", "w")
     nuNuEducate.run(matchup, "tmp", 2)
     sys.stdout=sys.__stdout__
@@ -288,7 +151,7 @@ def flip_and_run(it, opponent):
         free_strat.run(matchup, 2)
         suffix.run(matchup, True)
     sys.stdout=sys.__stdout__
-    os.system("prism -cuddmaxmem 20g -javamaxmem 20g it"+str(it)+"_adv.prism props.props -prop "+str(2-it%2)+" > log.txt")
+    os.system("prism -cuddmaxmem 20g -javamaxmem 20g it"+str(it)+"_adv.prism props.props -prop "+str(2-it%2)+" -s -exportadvmdp tmp.tra -exportstates tmp.sta > log.txt")
     sys.stdout = open("adversarial_strategy_"+str(it)+".txt", "a")
     nuNuEducate.run(matchup, "tmp", 2-(it%2))
     sys.stdout=sys.__stdout__
