@@ -49,6 +49,7 @@ def generate_moves(team, opps, n):
     print "(attack' = " + str(states) + ") & (" + Cs[2*(n-1)].lower() + "_stun' = false) & (" + Cs[2*(n-1)+1].lower() + "_stun' = false) ;"
 
 def run(characters, team):
+    global s, first_t2, standard_states, states
     info = open("char_info.txt", "r").readlines()
     chars = []
     s = {}              # STATE DICTIONARY
