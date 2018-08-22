@@ -55,12 +55,11 @@ def populate_transitions(file, team):
 
 def find_min_max_damage(characters):
     min_damage = 999
-    max_damage = 0
-    for c in characters:
+    for c in ["K","W","A"]:
             if find_attribute(c, "dmg") < min_damage:
                 min_damage = find_attribute(c, "dmg")
     max_damage = 0
-    for c in characters:
+    for c in ["K","W","A"]:
             if find_attribute(c, "dmg") > max_damage:
                 max_damage = find_attribute(c, "dmg")
     return min_damage, max_damage
