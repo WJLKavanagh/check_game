@@ -43,7 +43,7 @@ def run(characters, model, multiple):    #USAGE: python prefix.py A B C D model_
         chars += [c]
 
     mD = 0      # MAX DAMAGE
-    for c in chars:
+    for c in ["K","W","A"]:
             if find_attribute(c, "dmg") > mD:
                 mD = find_attribute(c, "dmg")
     LB = str(1-mD)   # LOWER BOUND FOR HEALTH
