@@ -78,10 +78,10 @@ def above_opt(probability, opposition, challenger):
 
 # Compare adversary with relevant recent files to see if we're in a loop.
 def adversary_is_unique(it):
-    f1 = "adversarial_strategy_" + str(it) + ".txt"
+    f1 = "adversarial_strategy_" + str(it-1) + ".txt"
     if it > 6:                                      # First adversaries can't be a duplicates
         print "Comparing generated adversary...",
-        for comp in range(it-1, -1, -1):             # Compares {it} with {it-1, it-2, ... 1}
+        for comp in range(it-2, -1, -1):             # Compares {it} with {it-1, it-2, ... 1}
             f2 = "adversarial_strategy_" + str(comp) + ".txt"
             if filecmp.cmp(f1, f2, shallow=False):  # false flag ensures deep comparison (not just file paths!)
                 print "adversary " + str(it) + " is equivalent to adversary " + str(comp)
