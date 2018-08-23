@@ -16,7 +16,7 @@ def find_char(act):
     elif pos == "D":
         return chars[3]
 
-def generate_moves(team, opps, n, pref, standard_states, from_act):
+def generate_moves(team, opps, n, pref, standard_states):
     global states
     start = 1
     possible_actions = s.values()[start:first_t2]
@@ -25,7 +25,7 @@ def generate_moves(team, opps, n, pref, standard_states, from_act):
         start = first_t2
         possible_actions = s.values()[first_t2:standard_states]
         op = [2,3]
-    act_start(n==2, from_act)
+    act_start(n==2)
 
     # 0 elims
     print "a_hea > 0 & b_hea > 0 & c_hea > 0 & d_hea > 0",
@@ -64,7 +64,7 @@ def generate_moves(team, opps, n, pref, standard_states, from_act):
         Cs = ["A", "B", "C", "D"]
         truth = [True, True, True, True]
         truth[it] = False
-        act_start(n==2, from_act)
+        act_start(n==2)
         if "W" in opps:
             if n==2:
                 for i in range(2):
@@ -137,7 +137,7 @@ def generate_moves(team, opps, n, pref, standard_states, from_act):
             truth = [True, True, True, True]
             truth[first_it] = False
             truth[second_it+2] = False
-            act_start(n==2, from_act)
+            act_start(n==2)
             if "W" in opps:
                 if n==2:
                     for i in range(2):
@@ -205,17 +205,17 @@ def generate_moves(team, opps, n, pref, standard_states, from_act):
 
     if "W" in opps:
         te = ["a", "b"]
-        act_start(n==2, from_act)
+        act_start(n==2)
         if team == team_2:
             te = ["c", "d"]
         print "(" + te[0] + "_hea <= 0 & " + te[1] + "_stun = true) | (" +te[1] + "_hea <= 0 & " + te[0] + "_stun = true) ->"
         print "\t\t\t\t1 : (attack' = " + str(states) + ") & " + reset_stuns(n) + " ;"
 
-def act_start(b,s):
+def act_start(b):
     if not b:
-        print "\t[team_1_turn] turn_clock = 1 & attack = "+ str(s) + " &",
+        print "\t[team_1_turn] turn_clock = 1 & attack = 0 &",
     else:
-        print "\t[team_2_turn] turn_clock = 2 & attack = "+ str(s) + " &",
+        print "\t[team_2_turn] turn_clock = 2 & attack = 0 &",
 
 def find_index(a):
     for i in s.keys():
@@ -228,7 +228,7 @@ def reset_stuns(n):
     else:
         return "(c_stun' = false) & (d_stun' = false)"
 
-def run(characters, team, pref_move, from_act):
+def run(characters, team, pref_move):
     global chars, first_t2, team_2, team_1, states
 
     chars = []
@@ -273,8 +273,8 @@ def run(characters, team, pref_move, from_act):
             break;
 
     if team == 2:
-        generate_moves(team_2, team_1, 2, pref_move, standard_states, from_act)
+        generate_moves(team_2, team_1, 2, pref_move, standard_states)
     else:
-        generate_moves(team_1, team_2, 1, pref_move, standard_states, from_act)
+        generate_moves(team_1, team_2, 1, pref_move, standard_states)
 
     print
