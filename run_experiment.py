@@ -77,7 +77,7 @@ def above_opt(probability, opposition, challenger):
     # return probability > opt              OLD: former (dumb) main while-loop check
 
 # Compare adversary with relevant recent files to see if we're in a loop.
-def adversary_if_unique(it):
+def adversary_is_unique(it):
     f1 = "adversarial_strategy_" + str(it) + ".txt"
     if it > 6:                                      # First adversaries can't be a duplicates
         print "Comparing generated adversary...",
