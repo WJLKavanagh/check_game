@@ -194,7 +194,7 @@ sys.stdout=sys.__stdout__
 iteration = 1
 old_opponents = chosen_seed_team
 while adversary_is_unique(iteration):
-    above_opt(best_score, old_opponents, best_pair):        #prob, op, chal
+    above_opt(best_score, old_opponents, best_pair)       #prob, op, chal
     old_opponents = best_pair
     best_pair, best_score = flip_and_run(iteration, best_pair)
     iteration+=1
