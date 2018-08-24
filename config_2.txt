@@ -1,0 +1,112 @@
+Knight
+acc, hea, dmg
+0.7
+8
+3
+Princess
+acc, heal_acc, hea, dmg, heal
+0.9
+0.5
+7
+2
+2
+Unicorn
+acc, hea, dmg, DoT_dur
+0.9
+8
+2
+2
+Wizard
+acc, hea, dmg
+0.7
+6
+2
+Archer
+acc, hea, dmg
+0.8
+7
+2
+Knight
+acc, hea, dmg
+0.8
+8
+3
+Princess
+acc, heal_acc, hea, dmg, heal
+0.9
+0.5
+7
+2
+2
+Unicorn
+acc, hea, dmg, DoT_dur
+0.9
+8
+2
+2
+Wizard
+acc, hea, dmg
+0.8
+7
+2
+Archer
+acc, hea, dmg
+0.7
+7
+2
+Knight
+acc, hea, dmg
+0.8
+8
+3
+Princess
+acc, heal_acc, hea, dmg, heal
+0.9
+0.5
+7
+2
+2
+Unicorn
+acc, hea, dmg, DoT_dur
+0.9
+8
+2
+2
+Wizard
+acc, hea, dmg
+0.9
+7
+2
+Archer
+acc, hea, dmg
+0.7
+7
+2
+Knight
+acc, hea, dmg
+0.8
+8
+3
+Princess
+acc, heal_acc, hea, dmg, heal
+0.9
+0.5
+7
+2
+2
+Unicorn
+acc, hea, dmg, DoT_dur
+0.9
+8
+2
+2
+Wizard
+acc, hea, dmg
+0.9
+7
+2
+Archer
+acc, hea, dmg
+0.75
+7
+2
