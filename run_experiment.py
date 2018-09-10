@@ -84,7 +84,7 @@ def adversary_is_unique(it):
         for comp in range(it-2, -1, -1):             # Compares {it} with {it-1, it-2, ... 1}
             f2 = "adversarial_strategy_" + str(comp) + ".txt"
             if filecmp.cmp(f1, f2, shallow=False):  # false flag ensures deep comparison (not just file paths!)
-                print "adversary " + str(it) + " is equivalent to adversary " + str(comp)
+                print "adversary " + str(it-1) + " is equivalent to adversary " + str(comp)
                 return False
     print "adversary is unique, continuing"
     return True
@@ -113,7 +113,7 @@ def flip_and_run(it, opponent):
             free_strat.run(matchup, 2)
         suffix.run(matchup, False)                      # False as |I| = 1
         sys.stdout=sys.__stdout__
-        os.system("prism -cuddmaxmem 100g -javamaxmem 100g it"+str(it)+"vs"+possible_pairs[i][0]+possible_pairs[i][1]+".prism props.props -prop "+str(2-it%2)+" > log.txt")
+        os.system("prism -javamaxmem 100g -s it"+str(it)+"vs"+possible_pairs[i][0]+possible_pairs[i][1]+".prism props.props -prop "+str(2-it%2)+" > log.txt")
         pair_result = find_prev_result()
         print "ProbAdv_"+str(2-(it%2))+"(" + str(matchup) + ") = " + str(pair_result)
         # find_max for opponent and probAdv
@@ -140,7 +140,7 @@ def flip_and_run(it, opponent):
         free_strat.run(matchup, 2)
         suffix.run(matchup, True)
     sys.stdout=sys.__stdout__
-    os.system("prism -cuddmaxmem 100g -javamaxmem 100g it"+str(it)+"_adv.prism props.props -prop "+str(2-it%2)+" -s -exportadvmdp tmp.tra -exportstates tmp.sta > log.txt")
+    os.system("prism -s -javamaxmem 100g it"+str(it)+"_adv.prism props.props -prop "+str(2-it%2)+" -s -exportadvmdp tmp.tra -exportstates tmp.sta > log.txt")
     sys.stdout = open("adversarial_strategy_"+str(it)+".txt", "w")
     # Write adversary to file (adversarial_strategy_it)
     educate_strat.run(matchup, "tmp", 2-(it%2))
@@ -149,11 +149,11 @@ def flip_and_run(it, opponent):
 
 # Main: setup
 global possible_pairs
-generate_opt_grid()
-possible_pairs = [["K","A"],["K","W"],["W","A"]]
+#generate_opt_grid()
+possible_pairs = [["K","A"],["A","K"],["K","W"],["W","K"],["W","A"],["A","W"]]
 best_score = 0.0
 best_pair = None
-chosen_seed_team = possible_pairs[0]                    # Change this value (0-2) for different seed teams
+chosen_seed_team = possible_pairs[2]                    # Change this value (0-2) for different seed teams
 print chosen_seed_team, "chosen as the seed, calculating adversaries..."
 
 # Find adversary of seed strategy:
@@ -167,7 +167,7 @@ for i in range(len(possible_pairs)):
     free_strat.run(matchup, 2)
     suffix.run(matchup, False)
     sys.stdout=sys.__stdout__
-    os.system("prism -cuddmaxmem 100g -javamaxmem 100g seed"+str(i)+".prism props.props -prop 2 > log.txt")
+    os.system("prism -s -javamaxmem 100g seed"+str(i)+".prism props.props -prop 2 > log.txt")
     pair_result = find_prev_result()
     print "ProbAdv_2(" + str(matchup) + ") = " + str(pair_result)
     if pair_result > best_score:
@@ -194,7 +194,7 @@ sys.stdout=sys.__stdout__
 iteration = 1
 old_opponents = chosen_seed_team
 while adversary_is_unique(iteration):
-    above_opt(best_score, old_opponents, best_pair)       #prob, op, chal
+    #above_opt(best_score, old_opponents, best_pair)       #prob, op, chal
     old_opponents = best_pair
     best_pair, best_score = flip_and_run(iteration, best_pair)
     iteration+=1

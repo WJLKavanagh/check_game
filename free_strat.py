@@ -35,7 +35,7 @@ def generate_moves(team, opps, n):
     Cs = ["A", "B", "C", "D"]
     for act in possible_actions:
         if act == "not_used":
-            break
+            continue
         act_start(n == 2)
         if act[-3:] != "opp":
             print act[0].lower() + "_hea > 0 & " + act[0].lower()  + "_stun = false & " + act[-1].lower() + "_hea > 0 ->"
