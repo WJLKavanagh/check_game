@@ -150,7 +150,7 @@ def flip_and_run(it, opponent):
 # Main: setup
 global possible_pairs
 #generate_opt_grid()
-possible_pairs = [["K","A"],["A","K"],["K","W"],["W","K"],["W","A"],["A","W"]]
+possible_pairs = [["K","A"],["K","W"],["A","W"]]
 best_score = 0.0
 best_pair = None
 chosen_seed_team = possible_pairs[2]                    # Change this value (0-2) for different seed teams
