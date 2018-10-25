@@ -149,7 +149,7 @@ def flip_and_run(it, opponent):
 
 # Main: setup
 global possible_pairs
-#generate_opt_grid()
+generate_opt_grid()
 possible_pairs = [["K","A"],["K","W"],["A","W"]]
 best_score = 0.0
 best_pair = None
