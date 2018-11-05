@@ -97,8 +97,9 @@ def flip_and_run(it, opponent):
     # build model for each opponent
     for i in range(len(possible_pairs)):
         pair_A = possible_pairs[i]
-        pair_B = possible_pairs[i][1] + possible_pairs[i][0]
-
+        pair_B = [possible_pairs[i][1]] + [possible_pairs[i][0]]
+        pair_result_a = 0.0
+        pair_result_b = 0.0
         # Calculate it forwards
         sys.stdout=open("it"+str(it)+"vs"+possible_pairs[i][0]+possible_pairs[i][1]+".prism","w")
         if it % 2 == 1:
@@ -151,10 +152,7 @@ def flip_and_run(it, opponent):
         if pair_result_b < pair_result_a:
             pair_result = pair_result_b
             possible_pair = pair_B
-        print str(pair_result_a), str(pair_A)
-        print str(pair_result_b), str(pair_B)
-        print pair_result_b < pair_result_a
-        print str(pair_result), str(possible_pair)
+        
         # find max
         if pair_result > best_score:
             best_score = pair_result
