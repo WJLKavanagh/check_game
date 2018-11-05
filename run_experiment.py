@@ -119,7 +119,7 @@ def flip_and_run(it, opponent):
         pair_result_a = find_prev_result()
         print "ProbAdv_"+str(2-(it%2))+"(" + str(matchup) + ") = " + str(pair_result_a)
 
-        pair_A = possible_pairs[i][1]+possible_pairs[0]
+        pair_A = possible_pairs[i][1]+possible_pairs[i][0]
 
         sys.stdout=open("it"+str(it)+"vs"+possible_pairs[i][1]+possible_pairs[i][0]+".prism","w")
 
@@ -148,7 +148,7 @@ def flip_and_run(it, opponent):
         if pair_result_b < pair_result_a:
             pair_result = pair_result_b
             possible_pair = pair_B
-        
+
         if pair_result > best_score:
             best_score = pair_result
             best_pair = possible_pair
