@@ -114,9 +114,33 @@ def flip_and_run(it, opponent):
         suffix.run(matchup, False)                      # False as |I| = 1
         sys.stdout=sys.__stdout__
         os.system("prism -javamaxmem 100g -s it"+str(it)+"vs"+possible_pairs[i][0]+possible_pairs[i][1]+".prism props.props -prop "+str(2-it%2)+" > log.txt")
-        pair_result = find_prev_result()
+        pair_result_a = find_prev_result()
         print "ProbAdv_"+str(2-(it%2))+"(" + str(matchup) + ") = " + str(pair_result)
-        # find_max for opponent and probAdv
+
+        sys.stdout=open("it"+str(it)+"vs"+possible_pairs[i][1]+possible_pairs[i][0]+".prism","w")
+
+        if it % 2 == 1:
+            matchup = possible_pairs[i][1]+possible_pairs[i][0]+opponent
+            prefix.run(matchup, "mdp", False)           # False as |I| = 1
+            free_strat.run(matchup, 1)
+            sys.stdout=sys.__stdout__
+            os.system("cat adversarial_strategy_"+str(it-1)+".txt >> it"+str(it)+"vs"+possible_pairs[i][1]+possible_pairs[i][0]+".prism")
+            sys.stdout=open("it"+str(it)+"vs"+possible_pairs[i][1]+possible_pairs[i][0]+".prism","a")
+        else:
+            matchup = opponent+possible_pairs[i][1]+possible_pairs[i][0]
+            prefix.run(matchup, "mdp", False)
+            sys.stdout=sys.__stdout__
+            os.system("cat adversarial_strategy_"+str(it-1)+".txt >> it"+str(it)+"vs"+possible_pairs[i][1]+possible_pairs[i][0]+".prism")
+            sys.stdout=open("it"+str(it)+"vs"+possible_pairs[i][1]+possible_pairs[i][0]+".prism","a")
+            free_strat.run(matchup, 2)
+        suffix.run(matchup, False)                      # False as |I| = 1
+        sys.stdout=sys.__stdout__
+        os.system("prism -javamaxmem 100g -s it"+str(it)+"vs"+possible_pairs[i][1]+possible_pairs[i][0]+".prism props.props -prop "+str(2-it%2)+" > log.txt")
+        pair_result_b = find_prev_result()
+        print "ProbAdv_"+str(2-(it%2))+"(" + str(matchup) + ") = " + str(pair_result)
+
+        pair_result = min(pair_result_a, pair_result_b)
+
         if pair_result > best_score:
             best_score = pair_result
             best_pair = possible_pairs[i]
