@@ -98,6 +98,8 @@ def flip_and_run(it, opponent):
     for i in range(len(possible_pairs)):
         pair_A = possible_pairs[i]
         pair_B = possible_pairs[i][1] + possible_pairs[i][0]
+
+        # Calculate it forwards
         sys.stdout=open("it"+str(it)+"vs"+possible_pairs[i][0]+possible_pairs[i][1]+".prism","w")
         if it % 2 == 1:
             matchup = possible_pairs[i]+opponent
@@ -121,8 +123,8 @@ def flip_and_run(it, opponent):
 
         pair_A = [possible_pairs[i][1]] + [possible_pairs[i][0]]
 
+        # calculate it backwards
         sys.stdout=open("it"+str(it)+"vs"+possible_pairs[i][1] + possible_pairs[i][0]+".prism","w")
-
         if it % 2 == 1:
             matchup = [possible_pairs[i][1]] + [possible_pairs[i][0]]+opponent
             prefix.run(matchup, "mdp", False)           # False as |I| = 1
@@ -135,7 +137,7 @@ def flip_and_run(it, opponent):
             prefix.run(matchup, "mdp", False)
             sys.stdout=sys.__stdout__
             os.system("cat adversarial_strategy_"+str(it-1)+".txt >> it"+str(it)+"vs"+possible_pairs[i][1] + possible_pairs[i][0]+".prism")
-            sys.stdout=open("it"+str(it)+"vs"+[possible_pairs[i][1]] + [possible_pairs[i][0]]+".prism","a")
+            sys.stdout=open("it"+str(it)+"vs"+possible_pairs[i][1] + possible_pairs[i][0]+".prism","a")
             free_strat.run(matchup, 2)
         suffix.run(matchup, False)                      # False as |I| = 1
         sys.stdout=sys.__stdout__
@@ -143,12 +145,17 @@ def flip_and_run(it, opponent):
         pair_result_b = find_prev_result()
         print "ProbAdv_"+str(2-(it%2))+"(" + str(matchup) + ") = " + str(pair_result_b)
 
+        # forwards or backwards?
         pair_result = pair_result_a
         possible_pair = pair_A
         if pair_result_b < pair_result_a:
             pair_result = pair_result_b
             possible_pair = pair_B
-
+        print str(pair_result_a), str(pair_A)
+        print str(pair_result_b), str(pair_B)
+        print pair_result_b < pair_result_a
+        print str(pair_result), str(possible_pair)
+        # find max
         if pair_result > best_score:
             best_score = pair_result
             best_pair = possible_pair
