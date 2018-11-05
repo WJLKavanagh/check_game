@@ -1,4 +1,4 @@
-import sys, shutil, os, filecmp                                             # utility imports
+[possible_pairs[i][1]] + [possible_pairs[i][0]]import sys, shutil, os, filecmp                                             # utility imports
 import free_strat, prefix, suffix, seed_strat, educate_strat, smgPrefix       # PRISM-generating files
 
 # Reads log.txt and returns last found p(win)
@@ -119,27 +119,27 @@ def flip_and_run(it, opponent):
         pair_result_a = find_prev_result()
         print "ProbAdv_"+str(2-(it%2))+"(" + str(matchup) + ") = " + str(pair_result_a)
 
-        pair_A = possible_pairs[i][1]+possible_pairs[i][0]
+        pair_A = [possible_pairs[i][1]] + [possible_pairs[i][0]]
 
-        sys.stdout=open("it"+str(it)+"vs"+possible_pairs[i][1]+possible_pairs[i][0]+".prism","w")
+        sys.stdout=open("it"+str(it)+"vs"+possible_pairs[i][1] + possible_pairs[i][0]+".prism","w")
 
         if it % 2 == 1:
-            matchup = possible_pairs[i][1]+possible_pairs[i][0]+opponent
+            matchup = [possible_pairs[i][1]] + [possible_pairs[i][0]]+opponent
             prefix.run(matchup, "mdp", False)           # False as |I| = 1
             free_strat.run(matchup, 1)
             sys.stdout=sys.__stdout__
-            os.system("cat adversarial_strategy_"+str(it-1)+".txt >> it"+str(it)+"vs"+possible_pairs[i][1]+possible_pairs[i][0]+".prism")
-            sys.stdout=open("it"+str(it)+"vs"+possible_pairs[i][1]+possible_pairs[i][0]+".prism","a")
+            os.system("cat adversarial_strategy_"+str(it-1)+".txt >> it"+str(it)+"vs"+possible_pairs[i][1] + possible_pairs[i][0]+".prism")
+            sys.stdout=open("it"+str(it)+"vs"+possible_pairs[i][1] + possible_pairs[i][0]+".prism","a")
         else:
-            matchup = opponent+possible_pairs[i][1]+possible_pairs[i][0]
+            matchup = opponent+[possible_pairs[i][1]] + [possible_pairs[i][0]]
             prefix.run(matchup, "mdp", False)
             sys.stdout=sys.__stdout__
-            os.system("cat adversarial_strategy_"+str(it-1)+".txt >> it"+str(it)+"vs"+possible_pairs[i][1]+possible_pairs[i][0]+".prism")
-            sys.stdout=open("it"+str(it)+"vs"+possible_pairs[i][1]+possible_pairs[i][0]+".prism","a")
+            os.system("cat adversarial_strategy_"+str(it-1)+".txt >> it"+str(it)+"vs"+[possible_pairs[i][1]] + [possible_pairs[i][0]]+".prism")
+            sys.stdout=open("it"+str(it)+"vs"+[possible_pairs[i][1]] + [possible_pairs[i][0]]+".prism","a")
             free_strat.run(matchup, 2)
         suffix.run(matchup, False)                      # False as |I| = 1
         sys.stdout=sys.__stdout__
-        os.system("prism -javamaxmem 100g -s it"+str(it)+"vs"+possible_pairs[i][1]+possible_pairs[i][0]+".prism props.props -prop "+str(2-it%2)+" > log.txt")
+        os.system("prism -javamaxmem 100g -s it"+str(it)+"vs"+[possible_pairs[i][1]] + [possible_pairs[i][0]]+".prism props.props -prop "+str(2-it%2)+" > log.txt")
         pair_result_b = find_prev_result()
         print "ProbAdv_"+str(2-(it%2))+"(" + str(matchup) + ") = " + str(pair_result_b)
 
