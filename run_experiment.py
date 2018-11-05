@@ -96,6 +96,8 @@ def flip_and_run(it, opponent):
     best_score = 0.0
     # build model for each opponent
     for i in range(len(possible_pairs)):
+        pair_A = possible_pairs[i]
+        pair_B = possible_pairs[i][1] + possible_pairs[i][0]
         sys.stdout=open("it"+str(it)+"vs"+possible_pairs[i][0]+possible_pairs[i][1]+".prism","w")
         if it % 2 == 1:
             matchup = possible_pairs[i]+opponent
@@ -115,7 +117,9 @@ def flip_and_run(it, opponent):
         sys.stdout=sys.__stdout__
         os.system("prism -javamaxmem 100g -s it"+str(it)+"vs"+possible_pairs[i][0]+possible_pairs[i][1]+".prism props.props -prop "+str(2-it%2)+" > log.txt")
         pair_result_a = find_prev_result()
-        print "ProbAdv_"+str(2-(it%2))+"(" + str(matchup) + ") = " + str(pair_result)
+        print "ProbAdv_"+str(2-(it%2))+"(" + str(matchup) + ") = " + str(pair_result_a)
+
+        pair_A = possible_pairs[i][1]+possible_pairs[0]
 
         sys.stdout=open("it"+str(it)+"vs"+possible_pairs[i][1]+possible_pairs[i][0]+".prism","w")
 
@@ -137,13 +141,17 @@ def flip_and_run(it, opponent):
         sys.stdout=sys.__stdout__
         os.system("prism -javamaxmem 100g -s it"+str(it)+"vs"+possible_pairs[i][1]+possible_pairs[i][0]+".prism props.props -prop "+str(2-it%2)+" > log.txt")
         pair_result_b = find_prev_result()
-        print "ProbAdv_"+str(2-(it%2))+"(" + str(matchup) + ") = " + str(pair_result)
+        print "ProbAdv_"+str(2-(it%2))+"(" + str(matchup) + ") = " + str(pair_result_b)
 
-        pair_result = min(pair_result_a, pair_result_b)
-
+        pair_result = pair_result_a
+        possible_pair = pair_A
+        if pair_result_b < pair_result_a:
+            pair_result = pair_result_b
+            possible_pair = pair_B
+        
         if pair_result > best_score:
             best_score = pair_result
-            best_pair = possible_pairs[i]
+            best_pair = possible_pair
     print best_pair, "found as adversarial team, generating strategy..."
     # Write old_adv VS best_opp to file with multiple i in I for adversary calculation
     sys.stdout = open("it"+str(it)+"_adv.prism", "w")
@@ -173,7 +181,7 @@ def flip_and_run(it, opponent):
 
 # Main: setup
 global possible_pairs
-generate_opt_grid()
+#generate_opt_grid()
 possible_pairs = [["K","A"],["K","W"],["A","W"]]
 best_score = 0.0
 best_pair = None
