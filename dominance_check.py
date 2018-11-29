@@ -50,23 +50,29 @@ def compare_candidate(plr_pair, ignore_pair, t):
     ret_dict = {}
     for p in pairs:
         if p != ignore_pair:
-            chars = plr_pair + p
-            file_name = "cmp"
-            for char in chars:
-                file_name += char
-            file_name += ".prism"
-            # Generate a prism file to represent SMG of game between both teams
-            sys.stdout=open(file_name,"w")
-            prefix.run(chars, "mdp", False)
-            sys.stdout = sys.__stdout__
-            os.system("cat candidate_dom_s_" + str(t) + ".txt >> " + file_name)
-            sys.stdout=open(file_name,"a")
-            free_strat.run(chars, 2)
-            suffix.run(chars, False)
-            sys.stdout=sys.__stdout__
-            # run prism-games with lots of memory, hardcoded prism-games location on SAND
-            os.system("../../../../../../usr/local/prism-games-2.0.beta3-linux64/bin/prism -cuddmaxmem 300g -javamaxmem 300g "+ file_name + " props.props -prop 1 -s > log.txt")
-            ret_dict[p] = find_prev_result()
+            for i in range(2):
+                if i == 1:
+                    tmp = p[0]
+                    p[0] = p[1]
+                    p[1] = tmp
+                chars = plr_pair + p
+                file_name = "cmp"
+                for char in chars:
+                    file_name += char
+                file_name += ".prism"
+                # Generate a prism file to represent SMG of game between both teams
+                sys.stdout=open(file_name,"w")
+                prefix.run(chars, "mdp", False)
+                sys.stdout = sys.__stdout__
+                os.system("cat candidate_dom_s_" + str(t) + ".txt >> " + file_name)
+                sys.stdout=open(file_name,"a")
+                free_strat.run(chars, 2)
+                suffix.run(chars, False)
+                sys.stdout=sys.__stdout__
+                # run prism-games with lots of memory, hardcoded prism-games location on SAND
+                os.system("../../../../../../usr/local/prism-games-2.0.beta3-linux64/bin/prism -cuddmaxmem 300g -javamaxmem 300g "+ file_name + " props.props -prop 2 -s > log.txt")
+                ret_dict[str(p)] = find_prev_result()
+    return ret_dict
 
 # Main: setup
 global pairs
