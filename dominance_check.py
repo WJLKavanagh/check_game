@@ -51,7 +51,10 @@ def compare_candidate(plr_pair, ignore_pair, t):
     for p in pairs:
         if p != ignore_pair:
             chars = plr_pair + p
-            file_name = "cmp"+str(chars)+".prism"
+            file_name = "cmp"
+            for char in chars:
+                file_name += char
+            file_name += ".prism"
             # Generate a prism file to represent SMG of game between both teams
             sys.stdout=open(file_name,"w")
             prefix.run(chars, "mdp", False)
