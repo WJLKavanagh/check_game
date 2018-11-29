@@ -46,9 +46,27 @@ def generate_strategy(characters, i):
     nu_educate_strat.run(characters, "tmp", 1)
     sys.stdout= sys.__stdout__
 
+def compare_candidate(plr_pair, ignore_pair, t):
+    for p in pairs:
+        if p != ignore_pair:
+            print "Comparing optimal strat against " + ignore_pair + " to " + p
+            chars = plr_pair + p
+            file_name = "cmp"+chars+".prism"
+            # Generate a prism file to represent SMG of game between both teams
+            sys.stdout=open(file_name,"w")
+            prefix.run(chars, "mdp", False)
+            sys.stdout = sys.__stdout__
+            os.system("cat candidate_dom_s_" + t + ".txt >> " + file_name)
+            sys.stdout=open(file_name,"a")
+            free_strat.run(chars, 2)
+            suffix.run(chars, False)
+            sys.stdout=sys.__stdout__
+            # run prism-games with lots of memory, hardcoded prism-games location on SAND
+            os.system("../../../../../../usr/local/prism-games-2.0.beta3-linux64/bin/prism -cuddmaxmem 300g -javamaxmem 300g "+file_name+" props.props -prop 1 -s > log.txt")
+            return find_prev_result()
+
 # Main: setup
-global possible_pairs
-#generate_opt_grid()
+global pairs
 pairs = [["K","A"],["K","W"],["A","W"]]
 for pair in pairs:
     print "Testing if a dominant strategy exists for", pair
@@ -69,9 +87,8 @@ for pair in pairs:
             for opp_pair in pairs:
                 if opp_pair != pair:
                     generate_strategy(pair+opp_pair, file_suffix)
+                    compare_candidate(pair, opp_pair, file_suffix)
                     file_suffix += 1
-            for i in range(2):
-                pass
 
 #
 # # Find adversary of seed strategy:
