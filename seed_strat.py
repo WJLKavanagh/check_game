@@ -1,5 +1,7 @@
 import sys
 
+# TODO: Fix this to deal with A in pos 1. (generates strategies for act = {1,2,3} not act = {1,3,4})
+
 info = open("char_info.txt", "r").readlines()
 chars = []
 s = {}              # STATE DICTIONARY
@@ -48,7 +50,7 @@ def generate_moves(team, opps, n, pref, standard_states):
                 start = start + 2
             else:
                 to_disp += [start]
-                start = start + 1
+                start = start + 2
         for i in range(len(to_disp)):
             if "W" in opps:
                 print "1/" + str(len(to_disp)) + " : (attack' = " + str(to_disp[i]) + ") & " + reset_stuns(n),

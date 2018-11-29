@@ -1,45 +1,66 @@
-PRISM
-=====
+PRISM-games
+===========
 
-Version: 4.4
-Date: Mon Sep 10 10:53:36 BST 2018
-Hostname: sand
-Memory limits: cudd=1g, java(heap)=88.9g
-Command line: prism -s -javamaxmem 100g seed4.prism props.props -prop 2
+Version: 2.0.beta3
+Date: Thu Nov 29 12:55:02 GMT 2018
+Hostname: william-XPS-15-9570
+Memory limits: cudd=100g, java(heap)=100g
+Command line: prism -cuddmaxmem 100g -javamaxmem 100g smgAWKA.prism smg_props.props -prop 4 -s
 
-Parsing model file "seed4.prism"...
+Parsing model file "smgAWKA.prism"...
 
-Parsing properties file "props.props"...
+Parsing properties file "smg_props.props"...
 
-4 properties:
+5 properties:
 (1) Pmax=? [ F "team_1_win" ]
 (2) Pmax=? [ F "team_2_win" ]
-(3) Pmin=? [ F "deadlock"&!"team_1_win"&!"team_2_win" ]
-(4) Pmax=? [ F "deadlock"&!"team_1_win"&!"team_2_win" ]
+(3) Pmax=? [ F "deadlock"&!"team_1_win"&!"team_2_win" ]
+(4) <<p1>> Pmax=? [ F "team_1_win" ]
+(5) <<p2>> Pmax=? [ F "team_2_win" ]
 
-Type:        MDP
+Type:        SMG
 Modules:     game 
 Variables:   a_hea b_hea c_hea d_hea turn_clock attack a_stun b_stun c_stun d_stun 
 
+Switching to explicit engine, which supports SMGs...
+
 ---------------------------------------------------------------------
 
-Model checking: Pmax=? [ F "team_2_win" ]
+Model checking: <<p1>> Pmax=? [ F "team_1_win" ]
 
 Building model...
 
-Computing reachable states...
+Computing reachable states... 18447 states
+Reachable states exploration and model construction done in 0.189 secs.
+Sorting reachable states list...
 
-Reachability (BFS): 38 iterations in 0.04 seconds (average 0.000921, setup 0.00)
+Time for model construction: 0.241 seconds.
 
-Time for model construction: 0.081 seconds.
+Warning: Deadlocks detected and fixed in 374 states
 
-Warning: Deadlocks detected and fixed in 546 states
+Type:        SMG
+States:      18447 (1 initial)
+Transitions: 32848
+Choices:     22623
+Max/avg:     3/1.23
 
-Type:        MDP
-States:      23233 (1 initial)
-Transitions: 38948
-Choices:     25699
+Starting probabilistic reachability...
+Starting Prob0 (maxmin)...
+Prob0 (maxmin) took 46 iterations and 0.172 seconds.
+Starting Prob1 (maxmin)...
+Prob1 (maxmin) took 355 iterations and 0.848 seconds.
+target=162, yes=162, no=212, maybe=18073
+Starting value iteration (maxmin)...
+Value iteration (maxmin) took 100 iterations and 0.222 seconds.
+Probabilistic reachability took 1.245 seconds.
 
-Transition matrix: 3484 nodes (12 terminal), 38948 minterms, vars: 26r/26c/13nd
+Value in the initial state: 0.45372092227933114
 
-Prob0A: 48 iterations in 0.03 seconds (average 0.000667, setup 0.00)
+Time for model checking: 1.258 seconds.
+
+Result: 0.45372092227933114 (value in the initial state)
+
+---------------------------------------------------------------------
+
+Note: There was 1 warning during computation.
+

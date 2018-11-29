@@ -1,0 +1,138 @@
+python run_experiment.py
+Calculating optimalities, this may take some time... win\vs	|KA		|KW		|WA
+KA	|0.4999999743	|0.3635744399	|0.4413396167
+KW	|0.6364252709	|0.499999726	|0.6953042112
+WA	|0.5586597069	|0.3046952441	|0.4999996867
+['W', 'A'] chosen as the seed, calculating adversaries...
+ProbAdv_2(['W', 'A', 'K', 'A']) = 0.6970751298
+ProbAdv_2(['W', 'A', 'K', 'W']) = 0.8398941279
+ProbAdv_2(['W', 'A', 'W', 'A']) = 0.6054446879
+['K', 'W'] found as adversarial team, generating strategy...
+adversary is unique, continuing
+['K', 'W'] is opponent team in iteration: 1
+ProbAdv_1(['K', 'A', 'K', 'W']) = 0.4916380662
+ProbAdv_1(['K', 'W', 'K', 'W']) = 0.9497010171
+ProbAdv_1(['W', 'A', 'K', 'W']) = 0.4381929554
+['K', 'W'] found as adversarial team, generating strategy...
+adversary is unique, continuing
+['K', 'W'] is opponent team in iteration: 2
+ProbAdv_2(['K', 'W', 'K', 'A']) = 0.4904401853
+ProbAdv_2(['K', 'W', 'K', 'W']) = 0.6307622909
+ProbAdv_2(['K', 'W', 'W', 'A']) = 0.9376723313
+['W', 'A'] found as adversarial team, generating strategy...
+adversary is unique, continuing
+['W', 'A'] is opponent team in iteration: 3
+ProbAdv_1(['K', 'A', 'W', 'A']) = 0.6376059009
+ProbAdv_1(['K', 'W', 'W', 'A']) = 0.7313740779
+ProbAdv_1(['W', 'A', 'W', 'A']) = 0.855028478
+['W', 'A'] found as adversarial team, generating strategy...
+adversary is unique, continuing
+['W', 'A'] is opponent team in iteration: 4
+ProbAdv_2(['W', 'A', 'K', 'A']) = 0.6185471642
+ProbAdv_2(['W', 'A', 'K', 'W']) = 0.9191637726
+ProbAdv_2(['W', 'A', 'W', 'A']) = 0.8000029974
+['K', 'W'] found as adversarial team, generating strategy...
+adversary is unique, continuing
+['K', 'W'] is opponent team in iteration: 5
+ProbAdv_1(['K', 'A', 'K', 'W']) = 0.4994192321
+ProbAdv_1(['K', 'W', 'K', 'W']) = 0.759374792
+ProbAdv_1(['W', 'A', 'K', 'W']) = 0.6798687022
+['K', 'W'] found as adversarial team, generating strategy...
+adversary is unique, continuing
+['K', 'W'] is opponent team in iteration: 6
+ProbAdv_2(['K', 'W', 'K', 'A']) = 0.5296474638
+ProbAdv_2(['K', 'W', 'K', 'W']) = 0.9437654381
+ProbAdv_2(['K', 'W', 'W', 'A']) = 0.7108897659
+['K', 'W'] found as adversarial team, generating strategy...
+Comparing generated adversary... adversary is unique, continuing
+['K', 'W'] is opponent team in iteration: 7
+ProbAdv_1(['K', 'A', 'K', 'W']) = 0.5210232838
+ProbAdv_1(['K', 'W', 'K', 'W']) = 0.6410747359
+ProbAdv_1(['W', 'A', 'K', 'W']) = 0.9342511861
+['W', 'A'] found as adversarial team, generating strategy...
+Comparing generated adversary... adversary is unique, continuing
+['W', 'A'] is opponent team in iteration: 8
+ProbAdv_2(['W', 'A', 'K', 'A']) = 0.6472216752
+ProbAdv_2(['W', 'A', 'K', 'W']) = 0.7228657731
+ProbAdv_2(['W', 'A', 'W', 'A']) = 0.9097043755
+['W', 'A'] found as adversarial team, generating strategy...
+Comparing generated adversary... adversary is unique, continuing
+['W', 'A'] is opponent team in iteration: 9
+ProbAdv_1(['K', 'A', 'W', 'A']) = 0.6271549134
+ProbAdv_1(['K', 'W', 'W', 'A']) = 0.9137772786
+ProbAdv_1(['W', 'A', 'W', 'A']) = 0.6714403532
+['K', 'W'] found as adversarial team, generating strategy...
+Comparing generated adversary... adversary is unique, continuing
+['K', 'W'] is opponent team in iteration: 10
+ProbAdv_2(['K', 'W', 'K', 'A']) = 0.4947901568
+ProbAdv_2(['K', 'W', 'K', 'W']) = 0.7623180645
+ProbAdv_2(['K', 'W', 'W', 'A']) = 0.6804773956
+['K', 'W'] found as adversarial team, generating strategy...
+Comparing generated adversary... adversary is unique, continuing
+['K', 'W'] is opponent team in iteration: 11
+ProbAdv_1(['K', 'A', 'K', 'W']) = 0.5296474638
+ProbAdv_1(['K', 'W', 'K', 'W']) = 0.9437654381
+ProbAdv_1(['W', 'A', 'K', 'W']) = 0.7108897659
+['K', 'W'] found as adversarial team, generating strategy...
+Comparing generated adversary... adversary is unique, continuing
+['K', 'W'] is opponent team in iteration: 12
+ProbAdv_2(['K', 'W', 'K', 'A']) = 0.52197661
+ProbAdv_2(['K', 'W', 'K', 'W']) = 0.6410747359
+ProbAdv_2(['K', 'W', 'W', 'A']) = 0.9342511861
+['W', 'A'] found as adversarial team, generating strategy...
+Comparing generated adversary... adversary is unique, continuing
+['W', 'A'] is opponent team in iteration: 13
+ProbAdv_1(['K', 'A', 'W', 'A']) = 0.6472216752
+ProbAdv_1(['K', 'W', 'W', 'A']) = 0.7228657731
+ProbAdv_1(['W', 'A', 'W', 'A']) = 0.9097043755
+['W', 'A'] found as adversarial team, generating strategy...
+Comparing generated adversary... adversary is unique, continuing
+['W', 'A'] is opponent team in iteration: 14
+ProbAdv_2(['W', 'A', 'K', 'A']) = 0.6271549134
+ProbAdv_2(['W', 'A', 'K', 'W']) = 0.9137772786
+ProbAdv_2(['W', 'A', 'W', 'A']) = 0.6714403532
+['K', 'W'] found as adversarial team, generating strategy...
+Comparing generated adversary... adversary is unique, continuing
+['K', 'W'] is opponent team in iteration: 15
+ProbAdv_1(['K', 'A', 'K', 'W']) = 0.4947901568
+ProbAdv_1(['K', 'W', 'K', 'W']) = 0.7623180645
+ProbAdv_1(['W', 'A', 'K', 'W']) = 0.6804773956
+['K', 'W'] found as adversarial team, generating strategy...
+Comparing generated adversary... adversary is unique, continuing
+['K', 'W'] is opponent team in iteration: 16
+ProbAdv_2(['K', 'W', 'K', 'A']) = 0.5296474638
+ProbAdv_2(['K', 'W', 'K', 'W']) = 0.9437654381
+ProbAdv_2(['K', 'W', 'W', 'A']) = 0.7108897659
+['K', 'W'] found as adversarial team, generating strategy...
+Comparing generated adversary... adversary is unique, continuing
+['K', 'W'] is opponent team in iteration: 17
+ProbAdv_1(['K', 'A', 'K', 'W']) = 0.52197661
+ProbAdv_1(['K', 'W', 'K', 'W']) = 0.6410747359
+ProbAdv_1(['W', 'A', 'K', 'W']) = 0.9342511861
+['W', 'A'] found as adversarial team, generating strategy...
+Comparing generated adversary... adversary is unique, continuing
+['W', 'A'] is opponent team in iteration: 18
+ProbAdv_2(['W', 'A', 'K', 'A']) = 0.6472216752
+ProbAdv_2(['W', 'A', 'K', 'W']) = 0.7228657731
+ProbAdv_2(['W', 'A', 'W', 'A']) = 0.9097043755
+['W', 'A'] found as adversarial team, generating strategy...
+Comparing generated adversary... adversary is unique, continuing
+['W', 'A'] is opponent team in iteration: 19
+ProbAdv_1(['K', 'A', 'W', 'A']) = 0.6271549134
+ProbAdv_1(['K', 'W', 'W', 'A']) = 0.9137772786
+ProbAdv_1(['W', 'A', 'W', 'A']) = 0.6714403532
+['K', 'W'] found as adversarial team, generating strategy...
+Comparing generated adversary... adversary is unique, continuing
+['K', 'W'] is opponent team in iteration: 20
+ProbAdv_2(['K', 'W', 'K', 'A']) = 0.4947901568
+ProbAdv_2(['K', 'W', 'K', 'W']) = 0.7623180645
+ProbAdv_2(['K', 'W', 'W', 'A']) = 0.6804773956
+['K', 'W'] found as adversarial team, generating strategy...
+Comparing generated adversary... adversary is unique, continuing
+['K', 'W'] is opponent team in iteration: 21
+ProbAdv_1(['K', 'A', 'K', 'W']) = 0.5296474638
+ProbAdv_1(['K', 'W', 'K', 'W']) = 0.9437654381
+ProbAdv_1(['W', 'A', 'K', 'W']) = 0.7108897659
+['K', 'W'] found as adversarial team, generating strategy...
+Comparing generated adversary... adversary 21 is equivalent to adversary 11
+Loop found, run terminated.

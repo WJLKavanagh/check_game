@@ -122,8 +122,6 @@ def flip_and_run(it, opponent):
         pair_result_a = find_prev_result()
         print "ProbAdv_"+str(2-(it%2))+"(" + str(matchup) + ") = " + str(pair_result_a)
 
-        pair_A = [possible_pairs[i][1]] + [possible_pairs[i][0]]
-
         # calculate it backwards
         sys.stdout=open("it"+str(it)+"vs"+possible_pairs[i][1] + possible_pairs[i][0]+".prism","w")
         if it % 2 == 1:
@@ -142,7 +140,7 @@ def flip_and_run(it, opponent):
             free_strat.run(matchup, 2)
         suffix.run(matchup, False)                      # False as |I| = 1
         sys.stdout=sys.__stdout__
-        os.system("prism -javamaxmem 100g -s it"+str(it)+"vs"+possible_pairs[i][1] + possible_pairs[i][0]+".prism props.props -prop "+str(2-it%2)+" > log.txt")
+        os.system("prism -javamaxmem 100g -s it"+str(it)+"vs"+possible_pairs[i][1]+possible_pairs[i][0]+".prism props.props -prop "+str(2-it%2)+" > log.txt")
         pair_result_b = find_prev_result()
         print "ProbAdv_"+str(2-(it%2))+"(" + str(matchup) + ") = " + str(pair_result_b)
 
@@ -152,7 +150,9 @@ def flip_and_run(it, opponent):
         if pair_result_b < pair_result_a:
             pair_result = pair_result_b
             possible_pair = pair_B
-        
+
+
+
         # find max
         if pair_result > best_score:
             best_score = pair_result

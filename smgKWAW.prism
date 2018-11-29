@@ -1,0 +1,105 @@
+smg
+
+// TEAM 1
+	// Knight
+const double A_acc = 0.7;
+const int A_hea = 8;
+const int A_dmg = 3;
+	// Wizard
+const double B_acc = 0.75;
+const int B_hea = 7;
+const int B_dmg = 2;
+
+// TEAM 2
+	// Archer
+const double C_acc = 0.75;
+const int C_hea = 7;
+const int C_dmg = 2;
+	// Wizard
+const double D_acc = 0.75;
+const int D_hea = 7;
+const int D_dmg = 2;
+
+player p1
+	[team_1_turn]
+endplayer
+
+player p2
+	[team_2_turn]
+endplayer
+
+player sys
+	[flip_coin], [A_C], [A_D], [B_C], [B_D], [C_opp], [D_A], [D_B], [next_turn]
+endplayer
+
+
+module game
+	a_hea : [-2..A_hea] init A_hea;
+	b_hea : [-2..B_hea] init B_hea;
+	c_hea : [-2..C_hea] init C_hea;
+	d_hea : [-2..D_hea] init D_hea;
+	turn_clock : [0..2] init 0;
+	attack : [0..10] init 0;			// Chosen action:
+	// 0 : NONE, 1 : A_C, 2 : A_D, 3 : B_C, 4 : B_D, 5 : C_opp, 6 : not_used, 7 : D_A, 8 : D_B, 9 : gap_fix, 10 : NEXT TURN.
+	a_stun : bool;
+	b_stun : bool;
+	c_stun : bool;
+	d_stun : bool;
+
+	[flip_coin]	turn_clock = 0 ->
+				0.5 : (turn_clock' = 1) + 0.5 : (turn_clock' = 2);
+
+	[team_1_turn] turn_clock = 1 & attack = 0 & a_hea > 0 & a_stun = false & c_hea > 0 ->
+				(attack' = 1) & (a_stun' = false) & (b_stun' = false) ;
+	[team_1_turn] turn_clock = 1 & attack = 0 & a_hea > 0 & a_stun = false & d_hea > 0 ->
+				(attack' = 2) & (a_stun' = false) & (b_stun' = false) ;
+	[team_1_turn] turn_clock = 1 & attack = 0 & b_hea > 0 & b_stun = false & c_hea > 0 ->
+				(attack' = 3) & (a_stun' = false) & (b_stun' = false) ;
+	[team_1_turn] turn_clock = 1 & attack = 0 & b_hea > 0 & b_stun = false & d_hea > 0 ->
+				(attack' = 4) & (a_stun' = false) & (b_stun' = false) ;
+	[team_1_turn] turn_clock = 1 & attack = 0 & (a_hea <= 0 | a_stun  = true) & (b_hea <= 0 | b_stun = true) ->
+				(attack' = 10) & (a_stun' = false) & (b_stun' = false) ;
+
+	[team_2_turn] turn_clock = 2 & attack = 0 & c_hea > 0 & c_stun = false & (a_hea > 0 | b_hea > 0) ->
+				(attack' = 5) & (c_stun' = false) & (d_stun' = false) ;
+	[team_2_turn] turn_clock = 2 & attack = 0 & d_hea > 0 & d_stun = false & a_hea > 0 ->
+				(attack' = 7) & (c_stun' = false) & (d_stun' = false) ;
+	[team_2_turn] turn_clock = 2 & attack = 0 & d_hea > 0 & d_stun = false & b_hea > 0 ->
+				(attack' = 8) & (c_stun' = false) & (d_stun' = false) ;
+	[team_2_turn] turn_clock = 2 & attack = 0 & (c_hea <= 0 | c_stun  = true) & (d_hea <= 0 | d_stun = true) ->
+				(attack' = 10) & (c_stun' = false) & (d_stun' = false) ;
+
+	[A_C] attack = 1 & c_hea > 0 ->
+			A_acc : (c_hea' = c_hea - A_dmg) & (attack' = 10) + (1-A_acc) : (attack' = 10);
+	[A_D] attack = 2 & d_hea > 0 ->
+			A_acc : (d_hea' = d_hea - A_dmg) & (attack' = 10) + (1-A_acc) : (attack' = 10);
+	[B_C] attack = 3 & c_hea > 0 ->
+			B_acc : (c_hea' = c_hea - B_dmg) & (c_stun' = true) & (attack' = 10) + 
+			(1-B_acc) : (attack' = 10);
+	[B_D] attack = 4 & d_hea > 0 ->
+			B_acc : (d_hea' = d_hea - B_dmg) & (d_stun' = true) & (attack' = 10) + 
+			(1-B_acc) : (attack' = 10);
+	[C_opp] attack = 5 & a_hea > 0 & b_hea > 0 ->
+			C_acc * C_acc : (a_hea' = a_hea - C_dmg) & (b_hea' = b_hea - C_dmg) & (attack' = 10) +
+			C_acc * (1-C_acc) : (a_hea' = a_hea - C_dmg) & (attack' = 10) +
+			C_acc * (1-C_acc) : (b_hea' = b_hea - C_dmg) & (attack' = 10) +
+			(1-C_acc) * (1-C_acc) : (attack' = 10);
+	[C_opp] attack = 5 & a_hea > 0 & b_hea <= 0 ->
+			C_acc : (a_hea' = a_hea - C_dmg) & (attack' = 10) + (1-C_acc) : (attack' = 10);
+	[C_opp] attack = 5 & a_hea <= 0 & b_hea > 0 ->
+			C_acc : (b_hea' = b_hea - C_dmg) & (attack' = 10) + (1-C_acc) : (attack' = 10);
+	[D_A] attack = 7 & a_hea > 0 ->
+			D_acc : (a_hea' = a_hea - D_dmg) & (a_stun' = true) & (attack' = 10) + 
+			(1-D_acc) : (attack' = 10);
+	[D_B] attack = 8 & b_hea > 0 ->
+			D_acc : (b_hea' = b_hea - D_dmg) & (b_stun' = true) & (attack' = 10) + 
+			(1-D_acc) : (attack' = 10);
+
+	[next_turn] attack = 10 & turn_clock > 0 & (a_hea > 0 | b_hea > 0) & (c_hea > 0 | d_hea > 0) ->
+			(turn_clock' = 3 - turn_clock) & (attack' = 0);
+
+endmodule
+
+//SINGLE INITIAL STATE
+label "team_1_win" = (a_hea > 0 | b_hea > 0) & (c_hea <= 0 & d_hea <= 0);
+label "team_2_win" = (c_hea > 0 | d_hea > 0) & (a_hea <= 0 & b_hea <= 0);

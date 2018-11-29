@@ -119,7 +119,7 @@ def generate_moves(team, opps, n):
             start = start + 2
         else:
             to_disp += [start]
-            start = start + 1
+            start = start + 2
     for i in range(len(to_disp)):
         if "W" in opps:
             print "1/" + str(len(to_disp)) + " : (attack' = " + str(to_disp[i]) + ") & " + reset_stuns(n),

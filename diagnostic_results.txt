@@ -1,0 +1,54 @@
+conf ?
+
+Finding diagnostics for KA
+In 123129 results, 108348 (87.99%) are identical.
+Finding diagnostics for KW
+In 132281 results, 73482 (55.54%) are identical.
+Finding diagnostics for AW
+In 132281 results, 72169 (54.55%) are identical.
+
+conf A
+
+Finding diagnostics for KA
+In 123129 results, 115892 (94.12%) are identical.
+Finding diagnostics for KW
+In 132281 results, 72930 (55.13%) are identical.
+Finding diagnostics for AW
+In 132281 results, 70669 (53.42%) are identical.
+
+
+conf B
+
+Finding diagnostics for KA
+In 123129 results, 114740 (93.18%) are identical.
+Finding diagnostics for KW
+In 132281 results, 72726 (54.97%) are identical.
+Finding diagnostics for AW
+In 132281 results, 70541 (53.32%) are identical.
+
+conf C
+
+Finding diagnostics for KA
+In 123129 results, 105935 (86.03%) are identical.
+Finding diagnostics for KW
+In 132281 results, 73583 (55.62%) are identical.
+Finding diagnostics for AW
+In 132281 results, 72321 (54.67%) are identical.
+
+conf D
+
+Finding diagnostics for KA
+Of 127665 actions, 121191 (94.92%) are identical.
+Finding diagnostics for KW
+Of 138852 actions, 68665 (49.45%) are identical.
+Finding diagnostics for AW
+Of 138852 actions, 68442 (49.29%) are identical.
+
+conf E
+
+Finding diagnostics for KA
+Of 127665 actions, 119411 (93.53%) are identical.
+Finding diagnostics for KW
+Of 138852 actions, 69752 (50.23%) are identical.
+Finding diagnostics for AW
+Of 138852 actions, 65209 (46.96%) are identical.
