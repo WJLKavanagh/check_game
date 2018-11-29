@@ -113,7 +113,7 @@ def print_guard(values):
     print "->"
 
 def print_command(from_state):
-    comm_str = transitions[from_state]
+    comm_str = transitions[from_state].split("turn_")[1]
     comm_val = 0
     for elem in s.keys():
         if s[elem] == comm_str:
