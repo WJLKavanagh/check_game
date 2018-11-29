@@ -72,6 +72,19 @@ def compare_candidate(plr_pair, ignore_pair, t):
                 # run prism-games with lots of memory, hardcoded prism-games location on SAND
                 os.system("../../../../../../usr/local/prism-games-2.0.beta3-linux64/bin/prism -cuddmaxmem 300g -javamaxmem 300g "+ file_name + " props.props -prop 2 -s > log.txt")
                 ret_dict[str(p)] = find_prev_result()
+    print "Compared optimal strategy for " + str(plr_pair) + " against " + str(ignore_pair) + ":"
+    dominant_strategy = True
+    for output_pair in ret_dict.keys():
+        dominant = "dominant"
+        if ret_dict[output_pair] < 0.5:
+            dominant = "not dominant"
+            dominant_strategy = False
+        print "\tAgainst " + output_pair + " the score was " + dominant + " at " + ret_dict[output_pair]
+    if dominant_strategy:
+        print "This is a dominant strategy, exiting"
+        exit()
+    else:
+        print "Strategy is not dominant"
     return ret_dict
 
 # Main: setup
@@ -97,9 +110,6 @@ for pair in pairs:
                 if opp_pair != pair:
                     generate_strategy(pair+opp_pair, file_suffix)
                     values = compare_candidate(pair, opp_pair, file_suffix)
-                    print values
-                    for p in values.keys():
-                        print "Comparing optimal strat against " + str(opp_pair) + " to " + str(p) + ": " + str(values[p])
                     file_suffix += 1
 
 #
