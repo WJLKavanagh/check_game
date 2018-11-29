@@ -51,18 +51,18 @@ def compare_candidate(plr_pair, ignore_pair, t):
     for p in pairs:
         if p != ignore_pair:
             chars = plr_pair + p
-            file_name = "cmp"+chars+".prism"
+            file_name = "cmp"+str(chars)+".prism"
             # Generate a prism file to represent SMG of game between both teams
             sys.stdout=open(file_name,"w")
             prefix.run(chars, "mdp", False)
             sys.stdout = sys.__stdout__
-            os.system("cat candidate_dom_s_" + t + ".txt >> " + file_name)
+            os.system("cat candidate_dom_s_" + str(t) + ".txt >> " + file_name)
             sys.stdout=open(file_name,"a")
             free_strat.run(chars, 2)
             suffix.run(chars, False)
             sys.stdout=sys.__stdout__
             # run prism-games with lots of memory, hardcoded prism-games location on SAND
-            os.system("../../../../../../usr/local/prism-games-2.0.beta3-linux64/bin/prism -cuddmaxmem 300g -javamaxmem 300g "+file_name+" props.props -prop 1 -s > log.txt")
+            os.system("../../../../../../usr/local/prism-games-2.0.beta3-linux64/bin/prism -cuddmaxmem 300g -javamaxmem 300g "+ file_name + " props.props -prop 1 -s > log.txt")
             ret_dict[p] = find_prev_result()
 
 # Main: setup
@@ -77,7 +77,7 @@ for pair in pairs:
             prob = optimality(pair + opp_pair)
             if prob > 0.5:
                 print "Strategy could be dominant..."
-                winning_strats+=1
+                winning_strats += 1
             else:
                 print "Non-dominant pair"
                 break
