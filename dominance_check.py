@@ -79,7 +79,7 @@ def compare_candidate(plr_pair, ignore_pair, t):
         if ret_dict[output_pair] < 0.5:
             dominant = "not dominant"
             dominant_strategy = False
-        print "\tAgainst " + output_pair + " the score was " + dominant + " at " + ret_dict[output_pair]
+        print "\tAgainst " + output_pair + " the strategy is " + dominant + " at p = " + str(1 - ret_dict[output_pair])
     if dominant_strategy:
         print "This is a dominant strategy, exiting"
         exit()
