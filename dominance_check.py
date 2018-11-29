@@ -47,9 +47,9 @@ def generate_strategy(characters, i):
     sys.stdout= sys.__stdout__
 
 def compare_candidate(plr_pair, ignore_pair, t):
+    ret_dict = {}
     for p in pairs:
         if p != ignore_pair:
-            print "Comparing optimal strat against " + ignore_pair + " to " + p
             chars = plr_pair + p
             file_name = "cmp"+chars+".prism"
             # Generate a prism file to represent SMG of game between both teams
@@ -63,7 +63,7 @@ def compare_candidate(plr_pair, ignore_pair, t):
             sys.stdout=sys.__stdout__
             # run prism-games with lots of memory, hardcoded prism-games location on SAND
             os.system("../../../../../../usr/local/prism-games-2.0.beta3-linux64/bin/prism -cuddmaxmem 300g -javamaxmem 300g "+file_name+" props.props -prop 1 -s > log.txt")
-            return find_prev_result()
+            ret_dict[p] = find_prev_result()
 
 # Main: setup
 global pairs
@@ -83,11 +83,14 @@ for pair in pairs:
                 break
         if winning_strats > 1:          # Dominant pair found
             file_suffix = 1
-            print "Generating dominant strategies"      # strategies written to file as candidate_dom_s_1.txt and candidate_dom_s_2.txt
+            print "Pair could be dominant - generating optimal strategies..."      # strategies written to file as candidate_dom_s_1.txt and candidate_dom_s_2.txt
             for opp_pair in pairs:
                 if opp_pair != pair:
                     generate_strategy(pair+opp_pair, file_suffix)
-                    compare_candidate(pair, opp_pair, file_suffix)
+                    values = compare_candidate(pair, opp_pair, file_suffix)
+                    for p in values.keys():
+                        print "Comparing optimal strat against " + str(opp_pair) + " to " + str(p) + ": " + str(values[p])
+
                     file_suffix += 1
 
 #
