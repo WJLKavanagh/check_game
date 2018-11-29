@@ -148,7 +148,6 @@ def run(characters, file, team):
     global s, info, minD, maxD, states, transitions
     s = {}              # STATE DICTIONARY
     transitions = populate_transitions(file,team)
-    print transitions
     states = populate_states(file,team)
     info = open("char_info.txt", "r").readlines()
     populate_state_dictionary(characters)
