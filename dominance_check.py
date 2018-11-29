@@ -88,9 +88,9 @@ for pair in pairs:
                 if opp_pair != pair:
                     generate_strategy(pair+opp_pair, file_suffix)
                     values = compare_candidate(pair, opp_pair, file_suffix)
+                    print values
                     for p in values.keys():
                         print "Comparing optimal strat against " + str(opp_pair) + " to " + str(p) + ": " + str(values[p])
-
                     file_suffix += 1
 
 #
