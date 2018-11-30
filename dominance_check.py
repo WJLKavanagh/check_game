@@ -54,7 +54,9 @@ def compare_candidate(plr_pair, ignore_pair, t):
             for i in range(2):
                 if i == 1:                          # Run again with relfected ordering
                     tmp = [p[1],p[0]]
-                chars = plr_pair + tmp
+                    chars = plr_pair + tmp
+                else:
+                    chars = plr_pair + p
                 file_name = "cmp"
                 for char in chars:
                     file_name += char
