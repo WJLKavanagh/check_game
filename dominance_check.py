@@ -112,12 +112,12 @@ def compare_candidate(plr_pair, ignore_pair, t):
 
 # Main: setup
 global pairs
-pairs = [["K","A"],["A","K"],["K","W"],["W","K"],["W","A"],["A","W"]]
+pairs = [["K","A"],["K","W"],["W","A"]]
 for pair in pairs:                                                          # Is an optimal strategy for this pair against any other dominant?
     print "Testing if a dominant strategy exists for", pair, "..."
     winning_strats = 0
     for opp_pair in pairs:                                                  # Check vs every opponent pair
-        if pair != opp_pair:                                                # Don't check against self
+        if pair != opp_pair:
             print "comparing strategy for", pair, "versus", opp_pair, "-",
             prob = optimality(pair + opp_pair)
             if prob > 0.5:                                                  # If it is dominant, add it to the dominance list
@@ -126,7 +126,7 @@ for pair in pairs:                                                          # Is
             else:                                                           # If a strategy isn't dominant for a pair, then the PAIR cannot be dominant
                 print "Non-dominant pair, p = " + str(prob) + ", continuing."
                 break
-    if winning_strats > 1:                                                  # Dominant pair found if 2 dominant strategies are found
+    if winning_strats > 1:                                                  # Dominant pair found if 4 dominant strategies are found
         file_suffix = 1
         print "Two dominant strategy candidates - pair could be dominant."      # strategies written to file as candidate_dom_s_1.txt and candidate_dom_s_2.txt
         for opp_pair in pairs:
