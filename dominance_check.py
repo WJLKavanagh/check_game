@@ -50,6 +50,7 @@ def compare_candidate(plr_pair, ignore_pair, t):
     ret_dict = {}
     print "Optimal strategy generated, calculating adversarial probabilities..."
     for p in pairs:
+        ret_dict[str(p)] = []
         if p != ignore_pair:
             for i in range(2):
                 if i == 1:                          # Run again with relfected ordering
@@ -73,37 +74,20 @@ def compare_candidate(plr_pair, ignore_pair, t):
                 # run prism-games with lots of memory, hardcoded prism-games location on SAND
                 os.system("../../../../../../usr/local/prism-games-2.0.beta3-linux64/bin/prism -cuddmaxmem 300g -javamaxmem 300g "+ file_name + " props.props -prop 2 -s > log.txt")
                 if i == 1:
-                    ret_dict[str(tmp)] = find_prev_result()
+                    ret_dict[str(p)] += [find_prev_result()]
                 else:
-                    ret_dict[str(p)] = find_prev_result()
-        else:
-             # Run with relfected ordering, we know it's dominant against the standard ordering
-            tmp = [p[1],p[0]]
-            chars = plr_pair + tmp
-            file_name = "cmp"
-            for char in chars:
-                file_name += char
-            file_name += ".prism"
-            # Generate a prism file to represent SMG of game between both teams
-            sys.stdout=open(file_name,"w")
-            prefix.run(chars, "mdp", False)
-            sys.stdout = sys.__stdout__
-            os.system("cat candidate_dom_s_" + str(t) + ".txt >> " + file_name)
-            sys.stdout=open(file_name,"a")
-            free_strat.run(chars, 2)
-            suffix.run(chars, False)
-            sys.stdout=sys.__stdout__
-            # run prism-games with lots of memory, hardcoded prism-games location on SAND
-            os.system("../../../../../../usr/local/prism-games-2.0.beta3-linux64/bin/prism -cuddmaxmem 300g -javamaxmem 300g "+ file_name + " props.props -prop 2 -s > log.txt")
-            ret_dict[str(tmp)] = find_prev_result()
+                    ret_dict[str(p)] += [find_prev_result()]
+    # Have dictionary with 2 entries e.g. {"KA": 0.37, 0.53, "WA": 0.45, 0.24}
+    # Need to find the ordering which is worse for each pair (e.g. KA and AW from above)
+
 
     dominant_strategy = True
     for output_pair in ret_dict.keys():
         dominant = "dominant"
-        if ret_dict[output_pair] > 0.5:
+        if ret_dict[output_pair][0] > 0.5 and ret_dict[output_pair][1] > 0.5:
             dominant = "not dominant"
             dominant_strategy = False
-        print "\tAgainst " + output_pair + " the strategy is " + dominant + " with minimum probability of winning = " + str(1 - ret_dict[output_pair])
+        print "\tAgainst " + output_pair + " the strategy is " + dominant + " with minimum probabilities of winning = " + str(1 - ret_dict[output_pair])
     if dominant_strategy:
         print "\t\tThe optimal strategy for ", plr_pair, "against", ignore_pair, " is a dominant strategy."
         exit(0)
