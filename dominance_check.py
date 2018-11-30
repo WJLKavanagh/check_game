@@ -50,8 +50,8 @@ def compare_candidate(plr_pair, ignore_pair, t):
     ret_dict = {}
     print "Optimal strategy generated, calculating adversarial probabilities..."
     for p in pairs:
-        ret_dict[str(p)] = []
         if p != ignore_pair:
+	    ret_dict[str(p)] = []
             for i in range(2):
                 if i == 1:                          # Run again with relfected ordering
                     tmp = [p[1],p[0]]
@@ -80,11 +80,10 @@ def compare_candidate(plr_pair, ignore_pair, t):
     # Have dictionary with 2 entries e.g. {"KA": 0.37, 0.53, "WA": 0.45, 0.24}
     # Need to find the ordering which is worse for each pair (e.g. KA and AW from above)
 
-
     dominant_strategy = True
     for output_pair in ret_dict.keys():
         dominant = "dominant"
-        if ret_dict[output_pair][0] > 0.5 and ret_dict[output_pair][1] > 0.5:
+        if ret_dict[output_pair][0] > 0.52 and ret_dict[output_pair][1] > 0.52:
             dominant = "not dominant"
             dominant_strategy = False
         print "\tAgainst " + output_pair + " the strategy is " + dominant + " with minimum probabilities of winning = " + str(1 - ret_dict[output_pair][0]) + " and " + str(1-ret_dict[output_pair][1])
