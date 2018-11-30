@@ -76,6 +76,27 @@ def compare_candidate(plr_pair, ignore_pair, t):
                     ret_dict[str(tmp)] = find_prev_result()
                 else:
                     ret_dict[str(p)] = find_prev_result()
+        else:
+             # Run with relfected ordering, we know it's dominant against the standard ordering
+            tmp = [p[1],p[0]]
+            chars = plr_pair + tmp
+            file_name = "cmp"
+            for char in chars:
+                file_name += char
+            file_name += ".prism"
+            # Generate a prism file to represent SMG of game between both teams
+            sys.stdout=open(file_name,"w")
+            prefix.run(chars, "mdp", False)
+            sys.stdout = sys.__stdout__
+            os.system("cat candidate_dom_s_" + str(t) + ".txt >> " + file_name)
+            sys.stdout=open(file_name,"a")
+            free_strat.run(chars, 2)
+            suffix.run(chars, False)
+            sys.stdout=sys.__stdout__
+            # run prism-games with lots of memory, hardcoded prism-games location on SAND
+            os.system("../../../../../../usr/local/prism-games-2.0.beta3-linux64/bin/prism -cuddmaxmem 300g -javamaxmem 300g "+ file_name + " props.props -prop 2 -s > log.txt")
+            ret_dict[str(tmp)] = find_prev_result()
+
     dominant_strategy = True
     for output_pair in ret_dict.keys():
         dominant = "dominant"
@@ -91,7 +112,7 @@ def compare_candidate(plr_pair, ignore_pair, t):
 
 # Main: setup
 global pairs
-pairs = [["K","A"],["K","W"],["A","W"]]
+pairs = [["K","A"],["A","K"],["K","W"],["W","K"],["W","A"],["A","W"]]
 for pair in pairs:                                                          # Is an optimal strategy for this pair against any other dominant?
     print "Testing if a dominant strategy exists for", pair, "..."
     winning_strats = 0
@@ -114,4 +135,4 @@ for pair in pairs:                                                          # Is
                 generate_strategy(pair+opp_pair, file_suffix)
                 compare_candidate(pair, opp_pair, file_suffix)
                 file_suffix += 1
-        exit(0)                                                             # Only one pair can be a candidate dominant pair.
+        #exit(0)                                                             # Only one pair can be a candidate dominant pair.
