@@ -52,11 +52,9 @@ def compare_candidate(plr_pair, ignore_pair, t):
     for p in pairs:
         if p != ignore_pair:
             for i in range(2):
-                if i == 1:
-                    tmp = p[0]
-                    p[0] = p[1]
-                    p[1] = tmp
-                chars = plr_pair + p
+                if i == 1:                          # Run again with relfected ordering
+                    tmp = [p[1],p[0]]
+                chars = plr_pair + tmp
                 file_name = "cmp"
                 for char in chars:
                     file_name += char
@@ -72,7 +70,10 @@ def compare_candidate(plr_pair, ignore_pair, t):
                 sys.stdout=sys.__stdout__
                 # run prism-games with lots of memory, hardcoded prism-games location on SAND
                 os.system("../../../../../../usr/local/prism-games-2.0.beta3-linux64/bin/prism -cuddmaxmem 300g -javamaxmem 300g "+ file_name + " props.props -prop 2 -s > log.txt")
-                ret_dict[str(p)] = find_prev_result()
+                if i == 1:
+                    ret_dict[str(tmp)] = find_prev_result()
+                else:
+                    ret_dict[str(p)] = find_prev_result()
     dominant_strategy = True
     for output_pair in ret_dict.keys():
         dominant = "dominant"
