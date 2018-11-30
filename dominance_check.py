@@ -84,7 +84,7 @@ def compare_candidate(plr_pair, ignore_pair, t):
         print "\t\tThe optimal strategy for ", plr_pair, "against", ignore_pair, " is a dominant strategy."
         exit(0)
     else:
-        print "There is no dominant strategy."
+        print "This is not a dominant strategy."
 
 # Main: setup
 global pairs
@@ -94,20 +94,20 @@ for pair in pairs:
     winning_strats = 0
     for opp_pair in pairs:
         if pair != opp_pair:
-            print "testing", pair, "versus", opp_pair, "-",
+            print "comparing strategy for", pair, "versus", opp_pair, "-",
             prob = optimality(pair + opp_pair)
             if prob > 0.5:
                 print "Strategy could be dominant, p =", str(prob)
                 winning_strats += 1
             else:
-                print "Non-dominant pair, p =" + str(prob) + "continuing."
+                print "Non-dominant pair, p = " + str(prob) + ", continuing."
                 break
-        if winning_strats > 1:          # Dominant pair found
-            file_suffix = 1
-            print "Two dominant strategy candidates - pair could be dominant."      # strategies written to file as candidate_dom_s_1.txt and candidate_dom_s_2.txt
-            for opp_pair in pairs:
-                if opp_pair != pair:
-                    print "Generating optimal strategy for ", pair, "against", opp_pair,
-                    generate_strategy(pair+opp_pair, file_suffix)
-                    compare_candidate(pair, opp_pair, file_suffix)
-                    file_suffix += 1
+    if winning_strats > 1:          # Dominant pair found
+        file_suffix = 1
+        print "Two dominant strategy candidates - pair could be dominant."      # strategies written to file as candidate_dom_s_1.txt and candidate_dom_s_2.txt
+        for opp_pair in pairs:
+            if opp_pair != pair:
+                print "Generating optimal strategy for", pair, "against", opp_pair,
+                generate_strategy(pair+opp_pair, file_suffix)
+                compare_candidate(pair, opp_pair, file_suffix)
+                file_suffix += 1
