@@ -87,7 +87,7 @@ def compare_candidate(plr_pair, ignore_pair, t):
         if ret_dict[output_pair][0] > 0.5 and ret_dict[output_pair][1] > 0.5:
             dominant = "not dominant"
             dominant_strategy = False
-        print "\tAgainst " + output_pair + " the strategy is " + dominant + " with minimum probabilities of winning = " + str(1 - ret_dict[output_pair])
+        print "\tAgainst " + output_pair + " the strategy is " + dominant + " with minimum probabilities of winning = " + str(1 - ret_dict[output_pair][0]) + " and " + str(1-ret_dict[output_pair][1])
     if dominant_strategy:
         print "\t\tThe optimal strategy for ", plr_pair, "against", ignore_pair, " is a dominant strategy."
         exit(0)
