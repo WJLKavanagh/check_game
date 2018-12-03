@@ -1,0 +1,10 @@
+PRISM-games
+===========
+
+Version: 2.0.beta3
+Date: Fri Nov 30 14:00:46 GMT 2018
+Hostname: sand
+Memory limits: cudd=300g, java(heap)=266.7g
+Command line: prism -cuddmaxmem 300g -javamaxmem 300g cmpAKAW.prism props.props -prop 2 -s
+
+Parsing model file "cmpAKAW.prism"...
