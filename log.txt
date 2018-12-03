@@ -1,13 +1,13 @@
-PRISM-games
-===========
+PRISM
+=====
 
-Version: 2.0.beta3
-Date: Fri Nov 30 16:40:38 GMT 2018
+Version: 4.4
+Date: Mon Dec 03 10:35:45 GMT 2018
 Hostname: sand
-Memory limits: cudd=300g, java(heap)=266.7g
-Command line: prism -cuddmaxmem 300g -javamaxmem 300g cmpKWWK.prism props.props -prop 2 -s
+Memory limits: cudd=1g, java(heap)=88.9g
+Command line: prism -s -javamaxmem 100g seed0.prism props.props -prop 2
 
-Parsing model file "cmpKWWK.prism"...
+Parsing model file "seed0.prism"...
 
 Parsing properties file "props.props"...
 
@@ -29,42 +29,26 @@ Building model...
 
 Computing reachable states...
 
-Reachability (BFS): 71 iterations in 0.11 seconds (average 0.001592, setup 0.00)
+Reachability (BFS): 5 iterations in 0.01 seconds (average 0.002600, setup 0.00)
 
-Time for model construction: 17.649 seconds.
+Time for model construction: 4.306 seconds.
 
-Warning: Deadlocks detected and fixed in 622 states
+Warning: Deadlocks detected and fixed in 9 states
 
 Type:        MDP
-States:      13878 (1 initial)
-Transitions: 20248
-Choices:     15780
+States:      24 (1 initial)
+Transitions: 36
+Choices:     27
 
-Transition matrix: 3883 nodes (7 terminal), 20248 minterms, vars: 26r/26c/14nd
+Transition matrix: 861 nodes (8 terminal), 36 minterms, vars: 26r/26c/11nd
 
-Prob0A: 39 iterations in 0.07 seconds (average 0.001795, setup 0.00)
+yes = 0, no = 24, maybe = 0
 
-Prob1E: 352 iterations in 0.48 seconds (average 0.001369, setup 0.00)
+Value in the initial state: 0.0
 
-yes = 315, no = 343, maybe = 13220
+Time for model checking: 0.003 seconds.
 
-Computing remaining probabilities...
-Engine: Sparse
-
-Building sparse matrix... [n=13878, nc=15086, nnz=19554, k=4] [257.4 KB]
-Creating vector for yes... [108.4 KB]
-Allocating iteration vectors... [2 x 108.4 KB]
-TOTAL: [582.7 KB]
-
-Starting iterations...
-
-Iterative method: 89 iterations in 0.04 seconds (average 0.000135, setup 0.02)
-
-Value in the initial state: 0.5070488448336724
-
-Time for model checking: 0.631 seconds.
-
-Result: 0.5070488448336724 (value in the initial state)
+Result: 0.0 (value in the initial state)
 
 ---------------------------------------------------------------------
 

@@ -67,7 +67,7 @@ def random_action(a,b,c,d,t):
         states += [[a,b,c,d,"false","true","false","false"]]
     # Generate legal actions for player t in each state
     for decision_state in states:
-        act_start(b)
+        act_start(t)
         print "a_hea =", decision_state[0], "& b_hea =", decision_state[1], "& c_hea =", decision_state[2],
         print "& d_hea = " + str(decision_state[3]) + " & a_stun = " + str(decision_state[4]) + " & b_stun = " + str(decision_state[5]),
         print "& c_stun = " + str(decision_state[6]) + " & d_stun = " + str(decision_state[7]) + " ->"

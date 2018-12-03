@@ -190,17 +190,22 @@ global possible_pairs
 possible_pairs = [["K","A"],["K","W"],["A","W"]]
 best_score = 0.0
 best_pair = None
-chosen_seed_team = possible_pairs[2]                    # Change this value (0-2) for different seed teams
+chosen_seed_team = possible_pairs[0]                    # Change this value (0-2) for different seed teams
 print chosen_seed_team, "chosen as the seed, calculating adversaries..."
 
 # Find adversary of seed strategy:
     # generate file: seed_v_free for all opponents
     # calculate probAdv_2 and find_max() for greatest probAdv and 'best' opponent pair
+sys.stdout=open("random_seed.txt","w")
+random_seed_strat.run(chosen_seed_team+["K","W"],1,"none")
+sys.stdout=sys.__stdout__
 for i in range(len(possible_pairs)):
     sys.stdout=open("seed"+str(i)+".prism","w")
     matchup = chosen_seed_team + possible_pairs[i]
     prefix.run(matchup, "mdp", False)
-    random_seed_strat.run(matchup, 1, "none")           # "none" as no preferred action.
+    sys.stdout = sys.__stdout__
+    os.system("cat random_seed.txt >> seed"+str(i)+".prism")
+    sys.stdout=open("seed"+str(i)+".prism","a")
     free_strat.run(matchup, 2)
     suffix.run(matchup, False)
     sys.stdout=sys.__stdout__
@@ -218,7 +223,9 @@ print best_pair, "found as adversarial team, generating strategy..."
 matchup = chosen_seed_team + best_pair
 sys.stdout = open("seed_v_adv.prism", "w")
 prefix.run(matchup, "mdp", True)
-seed_strat.run(matchup, 1, "none")
+sys.stdout=sys.__stdout__
+os.system("cat random_seed.txt >> seed_v_adv.prism")
+sys.stdout = open("seed_v_adv.prism","a")
 free_strat.run(matchup, 2)
 suffix.run(matchup, True)
 sys.stdout=sys.__stdout__
