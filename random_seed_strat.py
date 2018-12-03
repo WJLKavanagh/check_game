@@ -53,18 +53,18 @@ def reset_stuns(n):
 def random_action(a,b,c,d,t):
     # What states are there (1-9 depending on wizards)
     wizard_placement = ["W" in team_1, "W" in team_2]
-    states = [[a,b,c,d,False,False,False,False]] # no stuns, always reachable.
+    states = [[a,b,c,d,false,false,false,false]] # no stuns, always reachable.
     if wizard_placement[0] and wizard_placement[1]:       # if wizard on either side:
-        states += [[a,b,c,d,True,False,True,False]]
-        states += [[a,b,c,d,True,False,False,True]]
-        states += [[a,b,c,d,False,True,True,False]]
-        states += [[a,b,c,d,False,True,False,True]]
+        states += [[a,b,c,d,true,false,true,false]]
+        states += [[a,b,c,d,true,false,false,true]]
+        states += [[a,b,c,d,false,true,true,false]]
+        states += [[a,b,c,d,false,true,false,true]]
     if wizard_placement[0]:
-        states += [[a,b,c,d,False,False,True,False]]
-        states += [[a,b,c,d,False,False,False,True]]
+        states += [[a,b,c,d,false,false,true,false]]
+        states += [[a,b,c,d,false,false,false,true]]
     if wizard_placement[1]:
-        states += [[a,b,c,d,True,False,False,False]]
-        states += [[a,b,c,d,False,True,False,False]]
+        states += [[a,b,c,d,true,false,false,false]]
+        states += [[a,b,c,d,false,true,false,false]]
     # Generate legal actions for player t in each state
     for decision_state in states:
         act_start(b)
@@ -79,9 +79,9 @@ def random_action(a,b,c,d,t):
             team_pos = ["A","B"]
         for i in range(len(team_chars)):
             pos = (t-1)*2 + i                                                   # index of character in decision_state[]
-            if team_chars[i] == "A" and decision_state[pos] > 0:                # ... and player is alive and an archer
+            if team_chars[i] == "A" and decision_state[pos] > 0 and decision_state[pos+4] == "false":                # ... and player is alive and an archer
                 legal_acts += [(2*(i+1))-1]                                     # Add char_opp to possible actions
-            elif decision_state[pos] > 0:
+            elif decision_state[pos] > 0 and decision_state[pos+4] == "false":
                 if team_chars == team_2:                                    # Add char_t and char_t+1 if valid.
                     if decision_state[0] > 0:
                         legal_acts += [(2*(i+1))-1]
