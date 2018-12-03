@@ -197,7 +197,7 @@ print chosen_seed_team, "chosen as the seed, calculating adversaries..."
     # generate file: seed_v_free for all opponents
     # calculate probAdv_2 and find_max() for greatest probAdv and 'best' opponent pair
 sys.stdout=open("random_seed.txt","w")
-random_seed_strat.run(chosen_seed_team+["K","W"],1,"none")
+random_seed_strat.run(chosen_seed_team+["K","W"], 1, "none")
 sys.stdout=sys.__stdout__
 for i in range(len(possible_pairs)):
     sys.stdout=open("seed"+str(i)+".prism","w")

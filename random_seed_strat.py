@@ -34,7 +34,7 @@ def find_health(C):
     return find_attribute(C, "hea")
 
 def act_start(b):
-    if not b:
+    if b:
         print "\t[team_1_turn] turn_clock = 1 & attack = 0 &",
     else:
         print "\t[team_2_turn] turn_clock = 2 & attack = 0 &",
@@ -67,7 +67,7 @@ def random_action(a,b,c,d,t):
         states += [[a,b,c,d,"false","true","false","false"]]
     # Generate legal actions for player t in each state
     for decision_state in states:
-        act_start(t)
+        act_start(t==1)
         print "a_hea =", decision_state[0], "& b_hea =", decision_state[1], "& c_hea =", decision_state[2],
         print "& d_hea = " + str(decision_state[3]) + " & a_stun = " + str(decision_state[4]) + " & b_stun = " + str(decision_state[5]),
         print "& c_stun = " + str(decision_state[6]) + " & d_stun = " + str(decision_state[7]) + " ->"
@@ -137,10 +137,10 @@ def run(characters, team, pref_move):
     s[states-1] = "gap_fix"
     s[states] = "next_turn"
 
-    for a in range(-2, find_health(characters[0]) + 1):
-        for b in range(-2, find_health(characters[1]) + 1):
-            for c in range(-2, find_health(characters[2]) + 1):
-                for d in range(-2, find_health(characters[3]) + 1):
+    for a in range(-2, 9):
+        for b in range(-2, 9):
+            for c in range(-2, 9):
+                for d in range(-2, 9):
                     if (a > 0 or b > 0) and (c > 0 or d > 0):
                         random_action(a,b,c,d,team)
     print

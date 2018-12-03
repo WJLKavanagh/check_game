@@ -2,12 +2,12 @@ PRISM
 =====
 
 Version: 4.4
-Date: Mon Dec 03 10:35:45 GMT 2018
-Hostname: sand
-Memory limits: cudd=1g, java(heap)=88.9g
-Command line: prism -s -javamaxmem 100g seed0.prism props.props -prop 2
+Date: Mon Dec 03 11:08:17 GMT 2018
+Hostname: william-XPS-15-9570
+Memory limits: cudd=100g, java(heap)=100g
+Command line: prism -cuddmaxmem 100g -javamaxmem 100g seed_v_adv.prism props.props -prop 2 -s -exportadvmdp tmp.tra -exportstates tmp.sta
 
-Parsing model file "seed0.prism"...
+Parsing model file "seed_v_adv.prism"...
 
 Parsing properties file "props.props"...
 
@@ -21,36 +21,9 @@ Type:        MDP
 Modules:     game 
 Variables:   a_hea b_hea c_hea d_hea turn_clock attack a_stun b_stun c_stun d_stun 
 
----------------------------------------------------------------------
-
-Model checking: Pmax=? [ F "team_2_win" ]
-
 Building model...
-
-Computing reachable states...
-
-Reachability (BFS): 5 iterations in 0.01 seconds (average 0.002600, setup 0.00)
-
-Time for model construction: 4.306 seconds.
-
-Warning: Deadlocks detected and fixed in 9 states
-
-Type:        MDP
-States:      24 (1 initial)
-Transitions: 36
-Choices:     27
-
-Transition matrix: 861 nodes (8 terminal), 36 minterms, vars: 26r/26c/11nd
-
-yes = 0, no = 24, maybe = 0
-
-Value in the initial state: 0.0
-
-Time for model checking: 0.003 seconds.
-
-Result: 0.0 (value in the initial state)
-
----------------------------------------------------------------------
-
-Note: There was 1 warning during computation.
-
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Native memory allocation (mmap) failed to map 9965666304 bytes for committing reserved memory.
+# An error report file with more information is saved as:
+# /home/william/Documents/phd/check_game/hs_err_pid10708.log

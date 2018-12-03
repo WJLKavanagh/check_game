@@ -157,3 +157,5 @@ def run(characters, file, team):
     print_wizardExtras(characters, team)
     print
 # USAGE: run(["K", "A", "K", "W"], "tmp", 1)
+
+#run(["K","A","K","W"], "tmp", 2)
