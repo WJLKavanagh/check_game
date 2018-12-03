@@ -1,5 +1,5 @@
 import sys, shutil, os, filecmp                                             # utility imports
-import free_strat, prefix, suffix, seed_strat, educate_strat, smgPrefix       # PRISM-generating files
+import free_strat, prefix, suffix, seed_strat, educate_strat, smgPrefix, random_seed_strat       # PRISM-generating files
 
 # Reads log.txt and returns last found p(win)
 def find_prev_result():
@@ -200,7 +200,7 @@ for i in range(len(possible_pairs)):
     sys.stdout=open("seed"+str(i)+".prism","w")
     matchup = chosen_seed_team + possible_pairs[i]
     prefix.run(matchup, "mdp", False)
-    seed_strat.run(matchup, 1, "none")           # "none" as no preferred action.
+    random_seed_strat.run(matchup, 1, "none")           # "none" as no preferred action.
     free_strat.run(matchup, 2)
     suffix.run(matchup, False)
     sys.stdout=sys.__stdout__

@@ -1,0 +1,31 @@
+A:
+
+Testing if a dominant strategy exists for ['K', 'A'] ...
+comparing strategy for ['K', 'A'] versus ['K', 'W'] - Strategy could be dominant, p = 0.5944911512
+comparing strategy for ['K', 'A'] versus ['W', 'A'] - Strategy could be dominant, p = 0.5462790742
+Two dominant strategy candidates - pair could be dominant.
+Generating optimal strategy for ['K', 'A'] against ['K', 'A'] Optimal strategy generated, calculating adversarial probabilities...
+	Against ['W', 'A'] the strategy is dominant with minimum probabilities of winning = 0.5102987993 and 0.4750104344
+	Against ['K', 'W'] the strategy is not dominant with minimum probabilities of winning = 0.3993643075 and 0.4830999072
+This is not a dominant strategy.
+Generating optimal strategy for ['K', 'A'] against ['K', 'W'] Optimal strategy generated, calculating adversarial probabilities...
+	Against ['W', 'A'] the strategy is dominant with minimum probabilities of winning = 0.4655832092 and 0.5005939907
+	Against ['K', 'A'] the strategy is not dominant with minimum probabilities of winning = 0.4609305218 and 0.3976194629
+This is not a dominant strategy.
+Generating optimal strategy for ['K', 'A'] against ['W', 'A'] Optimal strategy generated, calculating adversarial probabilities...
+	Against ['K', 'W'] the strategy is dominant with minimum probabilities of winning = 0.3835403346 and 0.5870963067
+	Against ['K', 'A'] the strategy is not dominant with minimum probabilities of winning = 0.4687049396 and 0.4225915706
+This is not a dominant strategy.
+Testing if a dominant strategy exists for ['K', 'W'] ...
+comparing strategy for ['K', 'W'] versus ['K', 'A'] - Non-dominant pair, p = 0.4055082015, continuing.
+Testing if a dominant strategy exists for ['W', 'A'] ...
+comparing strategy for ['W', 'A'] versus ['K', 'A'] - Non-dominant pair, p = 0.4537209222, continuing.
+
+
+B:
+
+C:
+
+D:
+
+E:

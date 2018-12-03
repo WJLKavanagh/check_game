@@ -50,8 +50,8 @@ def compare_candidate(plr_pair, ignore_pair, t):
     ret_dict = {}
     print "Optimal strategy generated, calculating adversarial probabilities..."
     for p in pairs:
-        ret_dict[str(p)] = []
         if p != ignore_pair:
+            ret_dict[str(p)] = []
             for i in range(2):
                 if i == 1:                          # Run again with relfected ordering
                     tmp = [p[1],p[0]]

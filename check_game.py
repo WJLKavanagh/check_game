@@ -2,7 +2,7 @@ import sys
 import shutil
 import os
 
-import free_strat, prefix, suffix, seed_strat, nuEducate, smgPrefix
+import free_strat, prefix, suffix, seed_strat, nuEducate, smgPrefix, random_seed_strat
 
 characters = ["K", "A", "K", "W"]
 
