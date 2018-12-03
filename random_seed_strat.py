@@ -53,18 +53,18 @@ def reset_stuns(n):
 def random_action(a,b,c,d,t):
     # What states are there (1-9 depending on wizards)
     wizard_placement = ["W" in team_1, "W" in team_2]
-    states = [[a,b,c,d,false,false,false,false]] # no stuns, always reachable.
+    states = [[a,b,c,d,"false","false","false","false"]] # no stuns, always reachable.
     if wizard_placement[0] and wizard_placement[1]:       # if wizard on either side:
-        states += [[a,b,c,d,true,false,true,false]]
-        states += [[a,b,c,d,true,false,false,true]]
-        states += [[a,b,c,d,false,true,true,false]]
-        states += [[a,b,c,d,false,true,false,true]]
+        states += [[a,b,c,d,"true","false","true","false"]]
+        states += [[a,b,c,d,"true","false","false","true"]]
+        states += [[a,b,c,d,"false","true","true","false"]]
+        states += [[a,b,c,d,"false","true","false","true"]]
     if wizard_placement[0]:
-        states += [[a,b,c,d,false,false,true,false]]
-        states += [[a,b,c,d,false,false,false,true]]
+        states += [[a,b,c,d,"false","false","true","false"]]
+        states += [[a,b,c,d,"false","false","false","true"]]
     if wizard_placement[1]:
-        states += [[a,b,c,d,true,false,false,false]]
-        states += [[a,b,c,d,false,true,false,false]]
+        states += [[a,b,c,d,"true","false","false","false"]]
+        states += [[a,b,c,d,"false","true","false","false"]]
     # Generate legal actions for player t in each state
     for decision_state in states:
         act_start(b)
